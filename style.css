@@ -261,12 +261,7 @@ h1{
 }
 
 .backgroundcolor3{
-    background-color: white;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-radius: 5px;
-    padding: 15px 15px 15px 15px;
-    display: inline-block;
+    background-color: mediumturquoise;
 }
 
 .colorwhite{
@@ -300,3 +295,20 @@ small {
 abbr {
   color: brown;
 }
+
+.backgroundcolor4{
+  background-color: rgba(0, 250, 62, 0.413);
+}
+
+.backgroundcolor5{
+  background-color: beige;
+}
+
+a[href^="mailto"]::before {
+  content: "association.bric.saint.chamond@gmail.com";
+}
+
+a[href^="tel"]::before {
+  content: "06 30 87 05 41";
+}
+
