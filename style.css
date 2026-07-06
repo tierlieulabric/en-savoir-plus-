@@ -43,6 +43,10 @@ display: inline-block;
     margin-top: 40px;
 }
 
+.marginleft2{
+    margin-left: 400px;
+}
+
 /*FLEX BOT*/
 
 /* rendre flexible un parent = aligner ses enfants */
@@ -121,7 +125,11 @@ align-content: flex-start;
     width: 225vh;
 }
 
-.maxwidth{max-width: 100%}
+.maxwidth{
+
+    max-width: 100%
+    
+}
 
 /*HEADER*/
 
@@ -261,8 +269,8 @@ h1{
     display: inline-block;
 }
 
-.colorwhite{
-    color: white;
+.colorwhiteb{
+    color: brown;
 }
 
 .justifycontentflexstart{
