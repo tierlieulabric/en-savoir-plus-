@@ -269,7 +269,7 @@ h1{
     display: inline-block;
 }
 
-.colorwhiteb{
+.colorwhite{
     color: brown;
 }
 
@@ -291,4 +291,12 @@ h1{
 
 .justifycontentflex{
     justify-content: first baseline;
+}
+
+small {
+  font-size: 0.7em;
+}
+
+abbr {
+  color: brown;
 }
