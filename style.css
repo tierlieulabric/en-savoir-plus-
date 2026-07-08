@@ -74,7 +74,7 @@ display: inline-block;
 }
 
 .align-content {
-align-content: flex-start;
+align-content: center;
 } 
 
 /* CLASSE DE DIMENSIONS*/
