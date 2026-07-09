@@ -304,11 +304,41 @@ abbr {
   background-color: beige;
 }
 
-a[href^="mailto"]::before {
+a[href^="mailto1"]::before {
   content: "association.bric.saint.chamond@gmail.com";
 }
 
 a[href^="tel"]::before {
   content: "06 30 87 05 41";
+}
+
+label {
+  padding-right: 10px;
+}
+
+select {
+  padding: 2px 5px;
+}
+
+label {
+  display: block;
+}
+
+input,
+label {
+  margin: 0.4rem 0;
+}
+
+form.form-example {
+  display: table;
+}
+
+div.form-example {
+  display: table-row;
+}
+
+label,
+input {
+  display: table-cell;
 }
 

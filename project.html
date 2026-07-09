@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nos Projects</title>
+    <title>Devis</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="project.html">
+    <link rel="stylesheet" href="scripts.js">
 
     <head>
         <link rel="stylesheet" type="text/css"
@@ -72,35 +73,142 @@
 
         <section>
 
-            <div class="flex justify-center colorwhite">
+            <div class="flex justify-center colorwhite margin-bottom">
 
-                Devis
+                <p>
+                    Devis
+                </p>
+
 
             </div>
 
         </section>
-        
-        <section class="flex marginleft2">
 
-                Nom : 
+        <section class="marginleft2">
+
+            <p class="">
+
+            <form action="" method="get" class="form-example">
+
+                <div class="form-example">
+                    <label for="name">Nom et Prenom &nbsp;: </label>
+                    <input type="text" name="name" id="name" required />
+
+                </div>
+            </form>
+
             <br>
-            <br> Prenom : 
+
+            <form action="">
+
+                <div class="form-example">
+                    <label for="email">e-mail&nbsp;: </label>
+                    <input type="email" name="email" id="email" required />
+
+                </div>
+
+            </form>
+
             <br>
-            <br> Adresse Mail : 
+
+            <form action="">
+
+                <div class="form-example">
+
+                    <label for="email">Téléphone&nbsp;: </label>
+                    <input type="tel" name="tel" id="tel" required />
+
+                </div>
+
+            </form>
+
             <br>
-            <br> Numero de Téléphone : 
+            <form action="">
+
+                <div class="form-example">
+
+                    <label for="email">Adresse du Déménagement&nbsp;: </label>
+                    <input type="tel" name="tel" id="tel" required />
+
+                </div>
+
+            </form>
+
             <br>
-            <br> Adresse du Déménagement : 
             <br>
-            <br> Type de logement : 
+            <label for="pet-select">Choisissez un Type de logement &nbsp;:</label>
+
+            <select name="pets" id="pet-select">
+
+                <option value="">--Veuillez choisir une option--</option>
+                <option value="house">maison</option>
+                <option value="apartment">appartement</option>
+                <option value="studio">studio</option>
+                <option value="villa">villa</option>
+                <option value="accommodation">logement</option>
+                <option value="residence">résidence</option>
+
+            </select>
+
             <br>
-            <br> Etage : 
             <br>
-            <br> Ascenseur : 
+
+            <label for="pet-select">Choisissez un Etage &nbsp;:</label>
+
+            <select name="pets" id="pet-select">
+
+                <option value="">--Veuillez choisir une option--</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="plus de six">plus de six</option>
+
+            </select>
+
             <br>
-            <br> Date du Déménagement : 
             <br>
-            <br> Budjets : 
+
+            <label for="pet-select">Choisissez si il y a un Ascenseur &nbsp;:</label>
+
+            <select name="pets" id="pet-select">
+
+                <option value="">--Veuillez choisir une option--</option>
+                <option value="oui">oui</option>
+                <option value="non">non</option>
+
+            </select>
+
+            <br>
+            <br>
+
+            <label for="">Date du Déménagement&nbsp;:</label>
+
+            <input type="date" id="start" name="trip-start" value="2026-07-09" min="0000-00-01" max="2100-12-31" />
+
+            <br>
+            <br>
+            
+            <form action="">
+
+                <div class="form-example">
+
+                    <label for="">Budget&nbsp;: </label>
+                    <input type="Budget" name="Budget" id="Budget" required />
+
+                </div>
+
+            </form>
+
+            </p>
+
+            <div class="form-example">
+
+                <a href="sms:"><input type="submit" value="enregistrer"></a>
+
+            </div>
 
         </section>
 
