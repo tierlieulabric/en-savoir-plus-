@@ -304,7 +304,7 @@ abbr {
   background-color: beige;
 }
 
-a[href^="mailto1"]::before {
+a[href^="mailto"]::before {
   content: "association.bric.saint.chamond@gmail.com";
 }
 
