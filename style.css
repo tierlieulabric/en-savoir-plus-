@@ -4,23 +4,23 @@
     margin: 0;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-h2{
+h2 {
     font-size: 35px;
 }
 
-.btn{
-background-color: black;
-border-radius: 5px;
-color: white;
-padding: 5px 15px;
-display: inline-block;
+.btn {
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 15px;
+    display: inline-block;
 }
 
-.btn-primary{
+.btn-primary {
     font-size: 25px;
 }
 
@@ -35,31 +35,31 @@ display: inline-block;
     width: 100%;
 }
 
-.margin-top-30{
+.margin-top-30 {
     margin-top: 30px;
 }
 
-.margin-top-40{
+.margin-top-40 {
     margin-top: 40px;
 }
 
-.marginleft2{
+.marginleft2 {
     margin-left: 50px;
 }
 
-.margin-bottom{
+.margin-bottom {
     margin-bottom: 30px;
 }
 
-.marginright{
+.marginright {
     margin-right: 10px;
 }
 
-.marginleft{
+.marginleft {
     margin-left: 20px;
 }
 
-.marginright{
+.marginright {
     margin-right: 80px;
 }
 
@@ -90,16 +90,16 @@ display: inline-block;
 }
 
 .align-content {
-align-content: center;
-} 
+    align-content: center;
+}
 
 /* CLASSE DE DIMENSIONS*/
 
-.w-100{
+.w-100 {
     width: 100%;
 }
 
-.w-85{
+.w-85 {
     width: 85%;
 }
 
@@ -112,7 +112,7 @@ align-content: center;
 
 }
 
-.w40{
+.w40 {
     width: 40%;
 }
 
@@ -124,27 +124,26 @@ align-content: center;
     width: 25%;
 }
 
-.w-10{
+.w-10 {
     width: 10%;
 }
 
-.w-5{
+.w-5 {
     width: 5%;
 }
 
-.height{
+.height {
     height: 50px;
 }
 
-.width{
+.width {
 
     width: 225vh;
 }
 
-.maxwidth{
+.maxwidth {
 
     max-width: 100%
-    
 }
 
 /*HEADER*/
@@ -173,199 +172,213 @@ header {
     background-position: center;
 }
 
-.sectionhero div{
+.sectionhero div {
     text-align: center;
 }
 
-h1{
+h1 {
     margin-bottom: 20px;
     font-size: 45px;
 }
-.sectionhero div p{
+
+.sectionhero div p {
     margin-bottom: 50px;
     font-size: 25px;
 }
 
 /* SECTION SERVICES*/
 
-.card{
+.card {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.699);
     border-radius: 20px;
     padding: 20px;
 }
-.card h3{
+
+.card h3 {
     margin-bottom: 20px;
 }
 
-.card p{
+.card p {
     margin-bottom: 20px;
 }
 
-.font-size{
+.font-size {
     font-size: 30px;
 }
 
-.justify-center{
+.justify-center {
     justify-content: center;
 }
 
-.reverse{
+.reverse {
     flex-direction: row-reverse;
 }
 
-.border-raduis{
+.border-raduis {
     border-radius: 0px 200px 0px 30px;
 }
 
-.btn2{
+.btn2 {
     background-color: blanchedalmond;
 }
 
-.border-raduiscuisine{
+.border-raduiscuisine {
     border-radius: 0px 40px 0px 0px;
 }
 
-.border-raduisentreetgarage{
+.border-raduisentreetgarage {
     border-radius: 40px 0px 0px 0px;
 }
 
-.border-raduisbureauxetchambre{
+.border-raduisbureauxetchambre {
     border-radius: 0px 0px 40px 0px;
 }
 
-.border-raduiscabinetetsalon{
+.border-raduiscabinetetsalon {
     border-radius: 0px 0px 0px 40px;
 }
 
-.text-align-center{
+.text-align-center {
     text-align: center;
 }
 
-.backgroundcolor{
+.backgroundcolor {
     background-color: #292F36;
 }
 
-.justify{
+.justify {
     justify-self: center;
 }
 
-.backgroundcolor2{
+.backgroundcolor2 {
     background-color: #F4F0EC;
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
 }
 
-.border-raduiscall{
+.border-raduiscall {
     border-radius: 10px 10px 10px 10px;
 }
 
-.marginend{
+.marginend {
     justify-content: flex-end;
 }
 
-.backgroundcolor3{
+.backgroundcolor3 {
     background-color: mediumturquoise;
 }
 
-.colorwhite{
+.colorwhite {
     color: brown;
 }
 
-.justifycontentflexstart{
+.justifycontentflexstart {
     align-items: flex-start;
 }
 
-.test{
+.test {
     align-items: flex-start;
 }
 
-.widthtest{
+.widthtest {
     width: 200px;
 }
 
-.justifycontentflex{
+.justifycontentflex {
     justify-content: first baseline;
 }
 
 small {
-  font-size: 0.7em;
+    font-size: 0.7em;
 }
 
 abbr {
-  color: brown;
+    color: brown;
 }
 
-.backgroundcolor4{
-  background-color: rgba(0, 250, 62, 0.413);
+.backgroundcolor4 {
+    background-color: rgba(0, 250, 62, 0.413);
 }
 
-.backgroundcolor5{
-  background-color: beige;
+.backgroundcolor5 {
+    background-color: beige;
 }
 
 a[href^="mailto"]::before {
-  content: "association.bric.saint.chamond@gmail.com";
+    content: "association.bric.saint.chamond@gmail.com";
 }
 
 a[href^="tel"]::before {
-  content: "06 30 87 05 41";
+    content: "06 30 87 05 41";
 }
 
 label {
-  padding-right: 10px;
+    padding-right: 10px;
 }
 
 select {
-  padding: 2px 5px;
+    padding: 2px 5px;
 }
 
 label {
-  display: block;
+    display: block;
 }
 
 input,
 label {
-  margin: 0.4rem 0;
+    margin: 0.4rem 0;
 }
 
 form.form-example {
-  display: table;
+    display: table;
 }
 
 div.form-example {
-  display: table-row;
+    display: table-row;
 }
 
 label,
 input {
-  display: table-cell;
+    display: table-cell;
 }
 
-.colorwhite2{
-    color:red;
+.colorwhite2 {
+    color: red;
 }
 
-.position-absolute1{
-  position: sticky;
-  inset-block-start: 50px;
-  inset-inline-start: 30px;
+.position-absolute1 {
+    position: relative;
+    top: 100px;
+    bottom: 100px;
+    right: 100px;
+    left: 100px;
+    z-index: 0;
 }
 
-.position-absolute2{
-  position: sticky;
-  inset-block-start: 550px;
-  inset-inline-start: 955px;
+.position-absolute2 {
+    position: relative;
+    top: 0px;
+    bottom: 100px;
+    right: 100px;
+    left: 650px;
+    z-index: 0;
 }
 
-.position-absolute3{
-  position: sticky;
-  inset-block-start: 965px;
-  inset-inline-start: 750px;
+.position-absolute3 {
+    position: relative;
+    top: 100px;
+    bottom: 100px;
+    right: 100px;
+    left: 100px;
+    z-index: 0;
 }
 
-.position-absolute4{
-  position: sticky;
-  inset-block-start: 1235px;
-  inset-inline-start: 575px;
+.position-absolute4 {
+    position: relative;
+    top: 100px;
+    bottom: 100px;
+    right: 100px;
+    left: 100px;
+    z-index: 0;
 }
