@@ -47,6 +47,22 @@ display: inline-block;
     margin-left: 50px;
 }
 
+.margin-bottom{
+    margin-bottom: 30px;
+}
+
+.marginright{
+    margin-right: 10px;
+}
+
+.marginleft{
+    margin-left: 20px;
+}
+
+.marginright{
+    margin-right: 80px;
+}
+
 /*FLEX BOT*/
 
 /* rendre flexible un parent = aligner ses enfants */
@@ -185,20 +201,12 @@ h1{
     margin-bottom: 20px;
 }
 
-.margin-bottom{
-    margin-bottom: 30px;
-}
-
 .font-size{
     font-size: 30px;
 }
 
 .justify-center{
     justify-content: center;
-}
-
-.marginright{
-    margin-right: 10px;
 }
 
 .reverse{
@@ -237,10 +245,6 @@ h1{
     background-color: #292F36;
 }
 
-.marginleft{
-    margin-left: 20px;
-}
-
 .justify{
     justify-self: center;
 }
@@ -274,10 +278,6 @@ h1{
 
 .test{
     align-items: flex-start;
-}
-
-.marginright{
-    margin-right: 80px;
 }
 
 .widthtest{
