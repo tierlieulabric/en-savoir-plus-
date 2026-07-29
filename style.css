@@ -345,3 +345,27 @@ input {
 .colorwhite2{
     color:red;
 }
+
+.position-absolute1{
+  position: absolute;
+  inset-block-start: 550px;
+  inset-inline-start: 30px;
+}
+
+.position-absolute2{
+  position: absolute;
+  inset-block-start: 550px;
+  inset-inline-start: 955px;
+}
+
+.position-absolute3{
+  position: absolute;
+  inset-block-start: 965px;
+  inset-inline-start: 750px;
+}
+
+.position-absolute4{
+  position: absolute;
+  inset-block-start: 1235px;
+  inset-inline-start: 575px;
+}
