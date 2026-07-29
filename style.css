@@ -43,16 +43,20 @@ h2 {
     margin-top: 40px;
 }
 
+.margin-top-50{
+    margin-top: 130px;
+}
+
 .marginleft2 {
     margin-left: 50px;
 }
 
-.margin-bottom {
-    margin-bottom: 30px;
+.marginleft3{
+    margin-left: 160px;
 }
 
-.marginright {
-    margin-right: 10px;
+.margin-bottom {
+    margin-bottom: 30px;
 }
 
 .marginleft {
@@ -61,6 +65,10 @@ h2 {
 
 .marginright {
     margin-right: 80px;
+}
+
+.marginleft4{
+    margin-left: 650px;
 }
 
 /*FLEX BOT*/
@@ -345,40 +353,4 @@ input {
 
 .colorwhite2 {
     color: red;
-}
-
-.position-absolute1 {
-    position: relative;
-    top: 100px;
-    bottom: 100px;
-    right: 100px;
-    left: 100px;
-    z-index: 0;
-}
-
-.position-absolute2 {
-    position: relative;
-    top: 0px;
-    bottom: 100px;
-    right: 100px;
-    left: 650px;
-    z-index: 0;
-}
-
-.position-absolute3 {
-    position: relative;
-    top: 100px;
-    bottom: 100px;
-    right: 100px;
-    left: 100px;
-    z-index: 0;
-}
-
-.position-absolute4 {
-    position: relative;
-    top: 100px;
-    bottom: 100px;
-    right: 100px;
-    left: 100px;
-    z-index: 0;
 }
