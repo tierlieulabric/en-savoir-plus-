@@ -52,15 +52,15 @@ h2 {
 }
 
 .marginleft1 {
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 .marginleft2 {
-    margin-left: 20px;
+    margin-left: 100px;
 }
 
 .marginleft3{
-    margin-left: 70px;
+    margin-left: 80px;
 }
 
 .marginleft4{
@@ -68,7 +68,7 @@ h2 {
 }
 
 .marginleft5{
-    margin-left: 120px;
+    margin-left: 80px;
 }
 
 .marginleft6{
@@ -84,7 +84,7 @@ h2 {
 }
 
 .marginright1 {
-    margin-right: 0px;
+    margin-right: 30px;
 }
 
 .marginright2 {
@@ -92,8 +92,13 @@ h2 {
 }
 
 .marginright3 {
-    margin-right: 50px;
+    margin-right: 0px;
 }
+
+.marginright4 {
+    margin-right:10px;
+}
+
 /*FLEX BOT*/
 
 /* rendre flexible un parent = aligner ses enfants */
