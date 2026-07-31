@@ -82,72 +82,47 @@
                     Devis
                 </p>
 
-
             </div>
 
         </section>
 
-        <section class="marginleft2">
+        <form action="mailto:votre-adresse@email.com" method="POST" enctype="text/plain">
 
-            <p class="flex">
-
-                <input type="radio" required name="title" id="r1" value="Mr"><label for="r1">M.</label>
-
-                <input type="radio" required name="title" id="r2" value="Ms"><label for="r2">Mme.</label>
-                <br>
-
-            <form action="" method="get" class="form-example">
-
-                <div class="form-example">
-                    <label for="name">Nom et Prenom &nbsp;: </label>
-                    <input type="text" name="name" id="name" required />
-
-                </div>
-
-            </form>
+            <input type="radio" name="title" id="r1" value="Mr"><label for="r1">Mr.</label>
 
             <br>
 
-            <form action="">
-
-                <div class="form-example">
-                    <label for="email">e-mail&nbsp;: </label>
-                    <input type="email" name="email" id="email" required />
-
-                </div>
-
-            </form>
+            <input type="radio" name="title" id="r2" value="Ms"><label for="r2">Mme.</label>
 
             <br>
 
-            <form action="">
+            <label for="nom">Nom et prénom:</label>
 
-                <div class="form-example">
-
-                    <label for="email">Téléphone&nbsp;: </label>
-                    <input type="tel" name="tel" id="tel" required />
-
-                </div>
-
-            </form>
+            <input type="text" id="nom" name="nom">
 
             <br>
-            <form action="">
 
-                <div class="form-example">
+            <label for="email">E-mail:</label>
 
-                    <label for="email">Adresse du Déménagement&nbsp;: </label>
-                    <input type="email" name="email" id="email" required />
-
-                </div>
-
-            </form>
+            <input type="email" id="email" name="email">
 
             <br>
-            <br>
-            <label for="pet-select">Choisissez un Type de logement &nbsp;:</label>
 
-            <select name="pets" id="pet-select">
+            <label for="tel"> Téléphone:</label>
+
+            <input type="tel" name="tel" id="tel">
+
+            <br>
+
+            <label for="Adresse">Adresse du Déménagement:</label>
+
+            <input type="Adresse" name="Adresse" id="Adresse" />
+
+            <br>
+
+            <label for="type">Choisissez un Type de logement:</label>
+
+            <select name="type" id="type">
 
                 <option value="">--Veuillez choisir une option--</option>
                 <option value="house">maison</option>
@@ -162,9 +137,9 @@
             <br>
             <br>
 
-            <label for="pet-select">Choisissez un Etage &nbsp;:</label>
+            <label for="Etage">Choisissez un Etage:</label>
 
-            <select name="pets" id="pet-select">
+            <select name="Etage" id="Etage">
 
                 <option value="">--Veuillez choisir une option--</option>
                 <option value="1">1</option>
@@ -180,9 +155,9 @@
             <br>
             <br>
 
-            <label for="pet-select">Choisissez si il y a un Ascenseur &nbsp;:</label>
+            <label for="Ascenseur">Choisissez si il y a un Ascenseur:</label>
 
-            <select name="pets" id="pet-select">
+            <select name="Ascenseur" id="Ascenseur">
 
                 <option value="">--Veuillez choisir une option--</option>
                 <option value="oui">oui</option>
@@ -193,47 +168,21 @@
             <br>
             <br>
 
-            <label for="">Date du Déménagement&nbsp;:</label>
+            <label for="date">Date du Déménagement:</label>
 
-            <input type="date" id="start" name="trip-start" value="" min="0000-00-00" max="" />
-
-            <br>
-            <br>
-
-            <form action="">
-
-                <div class="form-example">
-
-                    <label for="">Budget&nbsp;: </label>
-                    <input type="Budget" name="Budget" id="Budget" required />
-
-                </div>
-
-            </form>
-
-            </p>
+            <input type="date" id="start" name="date" value="" min="0000-00-00" max="" />
 
             <br>
 
-            <p class="colorwhite2 margin-bottom">
+            <label for="">Budget: </label>
 
-                <u> ne cliquer pas a droite du bouton enregistrer,
-                    avant d'enregistrer copier le formulaire que vous aurez préalablement rempli,
-                    enregistrer et ensuite coller le formulaire dans votre mail</u>
+            <input type="Budget" name="Budget" id="Budget" />
 
-            </p>
+            <br>
 
-            <a href="">
+            <button type="submit">Envoyer le message</button>
 
-                <form action=mailto:>
-
-                    <input type="submit" value="enregistrer">
-
-                </form>
-
-            </a>
-
-        </section>
+        </form>
 
     </main>
 
