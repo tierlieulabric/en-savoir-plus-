@@ -60,7 +60,7 @@ h2 {
 }
 
 .marginleft3{
-    margin-left: 100px;
+    margin-left: 110px;
 }
 
 .marginleft4{
@@ -182,7 +182,7 @@ h2 {
 
 .width {
 
-    width: 225vh;
+    width: 100%;
 }
 
 .maxwidth {
@@ -326,7 +326,9 @@ h1 {
 }
 
 .widthtest {
-    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .justifycontentflex {
