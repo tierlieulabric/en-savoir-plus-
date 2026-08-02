@@ -308,9 +308,6 @@ h1 {
     justify-content: flex-end;
 }
 
-.backgroundcolor3 {
-    background-color: mediumturquoise;
-}
 
 .colorwhite {
     color: brown;
@@ -389,5 +386,13 @@ input {
 }
 
 .colorwhite2 {
+    color: black;
+}
+
+.backgroundcolor3 {
+    background-color: yellow;
+}
+
+.colorwhite3 {
     color: red;
 }
