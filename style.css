@@ -60,7 +60,7 @@ h2 {
 }
 
 .marginleft3{
-    margin-left: 80px;
+    margin-left: 100px;
 }
 
 .marginleft4{
@@ -68,15 +68,19 @@ h2 {
 }
 
 .marginleft5{
-    margin-left: 80px;
+    margin-left: 300px;
 }
 
 .marginleft6{
-    margin-left: 100px;
+    margin-left: 150px;
 }
 
 .margin-bottom {
     margin-bottom: 30px;
+}
+
+.margin-bottom1{
+    margin-bottom: 100px;
 }
 
 .marginright {
@@ -97,6 +101,10 @@ h2 {
 
 .marginright4 {
     margin-right: 10px;
+}
+
+.marginright5{
+    margin-right: 80px;
 }
 
 /*FLEX BOT*/
@@ -282,7 +290,7 @@ h1 {
     background-color: #292F36;
 }
 
-.justify {
+.justify1 {
     justify-self: center;
 }
 
