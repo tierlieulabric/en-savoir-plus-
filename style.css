@@ -68,11 +68,19 @@ h2 {
 }
 
 .marginleft5{
-    margin-left: 100px;
+    margin-left: 240px;
 }
 
 .marginleft6{
     margin-left: 50px;
+}
+
+.marginleft7{
+    margin-left: 260px;
+}
+
+.marginleft8{
+    margin-left: 450px;
 }
 
 .margin-bottom {
@@ -311,6 +319,10 @@ h1 {
 
 .colorwhite {
     color: brown;
+}
+
+.colorwhite1{
+    color: orange;
 }
 
 .justifycontentflexstart {
