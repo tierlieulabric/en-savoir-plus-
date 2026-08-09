@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partager avec QR Code</title>
+</head>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="script.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+</head>
+
+<body>
+
+    <section class="flex margin-top-30 margin-bottom gap marginleft">
+
+        <button id="btn">Appuyer pour Générer un QR code</button>
+
+        <a href="index.html">Appuyer sur ce texte pour revenir à la page d'accueil.</a>
+
+    </section>
+
+    <div class="marginleft7" id="qrcode-container"></div>
+
+    <script>
+        document.getElementById('btn').addEventListener('click', createQRCode);
+        function createQRCode() {
+            const QRContainer = document.getElementById("qrcode-container");
+            QRContainer.innerHTML = "";
+            new QRCode(QRContainer, 'https://tierlieulabric.github.io/en-savoir-plus-/');
+        }
+    </script>
+
+</body>
+
+</html>

@@ -35,6 +35,10 @@ h2 {
     width: 100%;
 }
 
+.margin-top-20{
+    margin-top: 20px;
+}
+
 .margin-top-30 {
     margin-top: 30px;
 }
@@ -76,7 +80,7 @@ h2 {
 }
 
 .marginleft7{
-    margin-left: 70px;
+    margin-left: 50px;
 }
 
 .marginleft8{
@@ -407,4 +411,8 @@ input {
 
 .colorwhite3 {
     color: red;
+}
+
+.gap{
+    gap: 30px;
 }
