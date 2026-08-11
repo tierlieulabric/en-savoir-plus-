@@ -100,7 +100,7 @@ h2 {
 }
 
 .marginright {
-    margin-right: 60px;
+    margin-right: 20px;
 }
 
 .marginright1 {
@@ -419,4 +419,13 @@ input {
 
 .gap{
     gap: 30px;
+}
+
+.gap2{
+    gap: 30px;
+}
+
+.textadapter{
+    text-size-adjust: auto;
+    width: 350px;
 }
