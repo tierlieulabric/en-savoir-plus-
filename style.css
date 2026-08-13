@@ -96,7 +96,7 @@ h2 {
 }
 
 .margin-bottom1{
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 }
 
 .marginright {
@@ -428,4 +428,8 @@ input {
 .textadapter{
     text-size-adjust: auto;
     width: 350px;
+}
+
+.gap3{
+    gap: 55px;
 }
