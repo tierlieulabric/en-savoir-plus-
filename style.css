@@ -433,3 +433,17 @@ input {
 .gap3{
     gap: 55px;
 }
+
+/*le compteur*/
+
+body {
+  counter-reset: "ph ph-hand-heart"; /* Initialise le compteur "section" à 0 */
+}
+
+.aime-beaucoup{
+  counter-increment: "ph ph-hand-heart"; /* Augmente de 1 à chaque  */
+}
+.aime-beaucoup::before{
+  content: "ph ph-hand-heart" counter(ph ph-hand-heart) " : "; /* Affiche le texte et la valeur */
+}
+
