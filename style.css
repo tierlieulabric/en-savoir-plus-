@@ -35,11 +35,11 @@ h2 {
     width: 100%;
 }
 
-.margin-top-10{
+.margin-top-10 {
     margin-top: 10px;
 }
 
-.margin-top-20{
+.margin-top-20 {
     margin-top: 20px;
 }
 
@@ -51,7 +51,7 @@ h2 {
     margin-top: 40px;
 }
 
-.margin-top-50{
+.margin-top-50 {
     margin-top: 120px;
 }
 
@@ -67,27 +67,27 @@ h2 {
     margin-left: 10px;
 }
 
-.marginleft3{
+.marginleft3 {
     margin-left: 110px;
 }
 
-.marginleft4{
+.marginleft4 {
     margin-left: 10px;
 }
 
-.marginleft5{
+.marginleft5 {
     margin-left: 70px;
 }
 
-.marginleft6{
+.marginleft6 {
     margin-left: 20px;
 }
 
-.marginleft7{
+.marginleft7 {
     margin-left: 50px;
 }
 
-.marginleft8{
+.marginleft8 {
     margin-left: 450px;
 }
 
@@ -95,7 +95,7 @@ h2 {
     margin-bottom: 30px;
 }
 
-.margin-bottom1{
+.margin-bottom1 {
     margin-bottom: 20px;
 }
 
@@ -119,7 +119,7 @@ h2 {
     margin-right: 10px;
 }
 
-.marginright5{
+.marginright5 {
     margin-right: 80px;
 }
 
@@ -197,7 +197,7 @@ h2 {
 }
 
 .width {
-   width: 235vh;
+    width: 235vh;
 }
 
 .maxwidth {
@@ -329,7 +329,7 @@ h1 {
     color: brown;
 }
 
-.colorwhite1{
+.colorwhite1 {
     color: orange;
 }
 
@@ -417,33 +417,26 @@ input {
     color: red;
 }
 
-.gap{
+.gap {
     gap: 30px;
 }
 
-.gap2{
+.gap2 {
     gap: 50px;
 }
 
-.textadapter{
+.textadapter {
     text-size-adjust: auto;
     width: 350px;
 }
 
-.gap3{
+.gap3 {
     gap: 55px;
 }
 
-/*le compteur*/
+.btn3{
+    width: 50px;
+    height: 50px;
 
-body {
-  counter-reset: "ph ph-hand-heart"; /* Initialise le compteur "section" à 0 */
-}
-
-.aime-beaucoup{
-  counter-increment: "ph ph-hand-heart"; /* Augmente de 1 à chaque  */
-}
-.aime-beaucoup::before{
-  content: "ph ph-hand-heart" counter(ph ph-hand-heart) " : "; /* Affiche le texte et la valeur */
 }
 

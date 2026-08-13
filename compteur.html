@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compteur</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="project.html">
+    <link rel="stylesheet" href="script.js">
+
+    <head>
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+    </head>
+
+</head>
+
+<body>
+
+    <header class="flex space-between align-center margin">
+
+        <div class="flex marginright">
+
+            <a href="index.html">
+
+                <img src="asset/fleche a gauche.jpg" alt="">
+
+            </a>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li>
+
+                    <div>
+
+                        <a href="https://www.facebook.com/profile.php?id=100093607410689&locale=fr_FR">
+
+                            <img src="asset/facebook.png" alt="logo" class="marginright">
+
+                        </a>
+
+
+                        <a href="https://www.instagram.com/tierslieubric/">
+
+                            <img src="asset/rkinqdib 3.png" alt="" class="marginleft">
+
+                        </a>
+
+                    </div>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <section>
+
+        <div class="flex margin-bottom">
+
+            <img src="asset/la bric banner.jpg" alt="" class="width maxwidth">
+
+        </div>
+
+    </section>
+
+    <!--<div id="app" class="flex gap">
+
+        <div class="">
+
+            <h3>J'adore</h3>
+            <span id="val-0">0</span><br><br>
+            <button class="btn3" onclick="modifier(0, 1)"><i class="ph ph-hand-heart"></i></button>
+            <button class="btn3" onclick="modifier(0, -1)">-</button>
+
+        </div>
+
+        <div>
+
+            <h3>J'aime</h3>
+            <span id="val-1">0</span><br><br>
+            <button class="btn3" onclick="modifier(1, 1)"><i class="ph ph-heart"></i></button>
+            <button class="btn3" onclick="modifier(1, -1)">-</button>
+
+        </div>
+
+        <div>
+
+            <h3>J'aime pas</h3>
+            <span id="val-2">0</span><br><br>
+            <button class="btn3" onclick="modifier(2, 1)"><i class="ph ph-heart-straight-break"></i></button>
+            <button class="btn3" onclick="modifier(2, -1)">-</button>
+
+        </div>
+
+    </div>-->
+
+    <style>
+
+    </style>
+
+    <script>
+
+    </script>
+
+    <!--<script>
+
+        // Charger les valeurs ou initialiser à [0, 0, 0]
+        let compteurs = JSON.parse(localStorage.getItem('mesCompteurs')) || [0, 0, 0];
+
+        // Afficher les valeurs initiales
+        function afficher() {
+            for (let i = 0; i < compteurs.length; i++) {
+                document.getElementById(`val-${i}`).innerText = compteurs[i];
+            }
+        }
+
+        // Modifier un compteur, sauvegarder et réafficher
+        function modifier(index, valeur) {
+            compteurs[index] += valeur;
+            localStorage.setItem('mesCompteurs', JSON.stringify(compteurs));
+            afficher();
+        }
+
+        // Lancer l'affichage au démarrage
+        afficher();
+
+        function reinitialiser() {
+            // Remet les trois valeurs du tableau à 0
+            compteurs = 0;
+            // Écrase l'ancienne sauvegarde avec les zéros
+            localStorage.setItem('mesCompteurs', JSON.stringify(compteurs));
+            // Rafraîchit l'affichage
+            afficher();
+        }
+
+    </script>-->
+
+</body>
+
+</html>
