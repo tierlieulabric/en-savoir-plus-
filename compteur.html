@@ -140,12 +140,12 @@
 
     <section>
 
-        <div class="flex justify-center colorwhite3 margin-top-10 margin-bottom">
+        <div class="flex justify-center colorwhite3 margin-top-10 margin-bottom margin-left">
 
             <h2>
 
                 <u>
-                    Ne pas décocher la case merci sinon vous voter deux fois 
+                    Ne pas décocher la case merci sinon vous voter deux fois
                 </u>
 
             </h2>
@@ -154,7 +154,7 @@
 
     </section>
 
-    <section class="flex margin-left">
+    <section class="">
 
         <div class="layout-centre">
 
@@ -176,7 +176,7 @@
                 (J'Aime pas : <span id="count3">0</span>)
             </label><br><br>
 
-            <button id="btnReset">Réinitialiser tous les compteurs</button>
+            <button class="margin-bottom" id="btnReset">Réinitialiser tous les compteurs</button>
 
         </div>
 
@@ -221,6 +221,68 @@
             });
 
         </script>
+
+
+
+
+
+
+
+        <!-- Vos trois compteurs HTML -->
+        <input type="number" id="c1" value="0">
+        <input type="number" id="c2" value="0">
+        <input type="number" id="c3" value="0">
+
+        <!-- L'affichage du résultat -->
+        <h3>Total : <span id="total">0</span></h3>
+
+        <script>
+            const inputs = [
+                document.getElementById('c1'),
+                document.getElementById('c2'),
+                document.getElementById('c3')
+            ];
+            const totalDisplay = document.getElementById('total');
+
+            // 1. Charger les valeurs sauvegardées au démarrage
+            function chargerDonnees() {
+                inputs.forEach(input => {
+                    // Récupère la valeur stockée (ex: 'compteur_c1')
+                    const valeurSauvegardee = localStorage.getItem(`compteur_${input.id}`);
+
+                    if (valeurSauvegardee !== null) {
+                        input.value = valeurSauvegardee;
+                    }
+                });
+                mettreAJourTotal(); // Calcule le total initial
+            }
+
+            // 2. Calculer le total et sauvegarder les valeurs
+            function mettreAJourTotal() {
+                let somme = 0;
+
+                inputs.forEach(input => {
+                    const valeur = parseFloat(input.value) || 0;
+                    somme += valeur;
+
+                    // Sauvegarde la valeur actuelle de cet input dans le navigateur
+                    localStorage.setItem(`compteur_${input.id}`, input.value);
+                });
+
+                totalDisplay.innerText = somme;
+            }
+
+            // 3. Écouter les changements en temps réel
+            inputs.forEach(input => {
+                input.addEventListener('input', mettreAJourTotal);
+            });
+
+            // 4. Lancer le chargement dès que la page est prête
+            document.addEventListener('DOMContentLoaded', chargerDonnees);
+        </script>
+
+
+
 
     </section>
 
