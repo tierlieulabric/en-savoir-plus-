@@ -292,10 +292,13 @@
 
             // Charger les données dès que la page est prête
             document.addEventListener('DOMContentLoaded', chargerDonnees);
+
         </script>
 
 
 
+
+        <!--le vrai en bas-->
 
 
         <script type="module">
@@ -370,6 +373,37 @@
             inputs.forEach(input => {
                 input.addEventListener('input', sauvegarderVersFirebase);
             });
+        </script>
+
+
+
+
+
+
+
+        <button onclick="ajouter(1)">Compteur 1 : <span id="c1">0</span></button>
+        <button onclick="ajouter(2)">Compteur 2 : <span id="c2">0</span></button>
+        <button onclick="ajouter(3)">Compteur 3 : <span id="c3">0</span></button>
+
+        <script>
+            let vals =;
+            function ajouter(index) {
+                vals[index - 1]++;
+                document.getElementById('c' + index).innerText = vals[index - 1];
+                localStorage.setItem('compteur' + index, vals[index - 1]);
+            }
+        </script>
+
+
+        <p>Total des trois : <span id="total">0</span></p>
+
+        <script>
+            let val1 = Number(localStorage.getItem('compteur1')) || 0;
+            let val2 = Number(localStorage.getItem('compteur2')) || 0;
+            let val3 = Number(localStorage.getItem('compteur3')) || 0;
+
+            let total = val1 + val2 + val3;
+            document.getElementById('total').innerText = total;
         </script>
 
 
