@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="project.html">
     <link rel="stylesheet" href="script.js">
     <link rel="stylesheet" href="index.html">
+    <script src="https://gstatic.com"></script>
+    <script src="https://gstatic.com"></script>
 
     <head>
         <link rel="stylesheet" type="text/css"
@@ -228,182 +230,153 @@
 
 
 
-        <!-- Vos trois compteurs sources -->
-        <input type="number" id="c1" value="0">
-        <input type="number" id="c2" value="0">
-        <input type="number" id="c3" value="0">
 
-        <!-- Le compteur unique global -->
-        <div>
-            <label for="totalCompteur">Compteur Global :</label>
-            <input type="number" id="totalCompteur" value="0" readonly>
+
+
+
+        <!-- Compteur 1 -->
+        <div id="c1">
+            Compteur 1 : <span id="val1">0</span>
+            <button onclick="modifier(1, 1)">+</button>
+            <button onclick="modifier(1, -1)">-</button>
+
         </div>
 
-        <button id="btn-reset">Réinitialiser</button>
+        <!-- Compteur 2 -->
+        <div id="c2">
+            Compteur 2 : <span id="val2">0</span>
+            <button onclick="modifier(2, 1)">+</button>
+            <button onclick="modifier(2, -1)">-</button>
 
-        <script>
-            const inputs = [
-                document.getElementById('c1'),
-                document.getElementById('c2'),
-                document.getElementById('c3')
-            ];
-            // Le sélecteur cible maintenant le quatrième input
-            const totalCompteur = document.getElementById('totalCompteur');
-            const resetBtn = document.getElementById('btn-reset');
+        </div>
 
-            // 1. Charger les valeurs sauvegardées au démarrage
-            function chargerDonnees() {
-                inputs.forEach(input => {
-                    const valeurSauvegardee = localStorage.getItem(`compteur_${input.id}`);
-                    if (valeurSauvegardee !== null) {
-                        input.value = valeurSauvegardee;
-                    }
-                });
-                mettreAJourTotal();
+        <!-- Compteur 3 -->
+        <div id="c3">
+            Compteur 3 : <span id="val3">0</span>
+            <button onclick="modifier(3, 1)">+</button>
+            <button onclick="modifier(3, -1)">-</button>
+
+        </div>
+
+        <!-- Bouton pour tout réinitialiser -->
+        <br>
+        <button onclick="resetGlobal()" style="font-weight: bold; color: red;">Tout réinitialiser</button>
+
+        <!--<script>
+            // Stockage des valeurs des compteurs
+            const compteurs = { 1: 0, 2: 0, 3: 0 };
+
+            // Modifier la valeur (+1 ou -1)
+            function modifier(id, pas) {
+                compteurs[id] += pas;
+                mettreAJourAffichage(id);
             }
 
-            // 2. Calculer le total et mettre à jour le compteur unique
-            function mettreAJourTotal() {
-                let somme = 0;
-                inputs.forEach(input => {
-                    const valeur = parseFloat(input.value) || 0;
-                    somme += valeur;
-                    localStorage.setItem(`compteur_${input.id}`, input.value);
-                });
-                // On met à jour la propriété .value du quatrième compteur
-                totalCompteur.value = somme;
+            // Réinitialiser tous les compteurs d'un coup
+            function resetGlobal() {
+                for (let id in compteurs) {
+                    compteurs[id] = 0;
+                    mettreAJourAffichage(id);
+                }
             }
 
-            // 3. Fonction pour tout remettre à zéro
-            function reinitialiser() {
-                inputs.forEach(input => {
-                    input.value = 0;
-                    localStorage.removeItem(`compteur_${input.id}`);
-                });
-                mettreAJourTotal();
+            // Mettre à jour le texte dans la page HTML
+            function mettreAJourAffichage(id) {
+                document.getElementById('val' + id).innerText = compteurs[id];
             }
 
-            // 4. Écouteurs d'événements
-            inputs.forEach(input => {
-                input.addEventListener('input', mettreAJourTotal);
-            });
-
-            resetBtn.addEventListener('click', reinitialiser);
-
-            // Charger les données dès que la page est prête
-            document.addEventListener('DOMContentLoaded', chargerDonnees);
-
-        </script>
+        </script>-->
 
 
 
 
-        <!--le vrai en bas-->
 
+
+
+        <!-- Compteur 1 -->
+        <div id="c1">
+            Compteur 1 : <span id="val1">0</span>
+            <button onclick="modifier(1, 1)">+</button>
+            <button onclick="modifier(1, -1)">-</button>
+            <button onclick="reset(1)">Reset</button>
+        </div>
+
+        <!-- Compteur 2 -->
+        <div id="c2">
+            Compteur 2 : <span id="val2">0</span>
+            <button onclick="modifier(2, 1)">+</button>
+            <button onclick="modifier(2, -1)">-</button>
+            <button onclick="reset(2)">Reset</button>
+        </div>
+
+        <!-- Compteur 3 -->
+        <div id="c3">
+            Compteur 3 : <span id="val3">0</span>
+            <button onclick="modifier(3, 1)">+</button>
+            <button onclick="modifier(3, -1)">-</button>
+            <button onclick="reset(3)">Reset</button>
+        </div>
+
+        <br>
+        <button onclick="resetGlobal()" style="font-weight: bold; color: red;">Tout réinitialiser</button>
 
         <script type="module">
-            import { initializeApp } from "https://gstatic.com";
-            import { getDatabase, ref, set, onValue } from "https://gstatic.com";
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
 
             // Your web app's Firebase configuration
             const firebaseConfig = {
-                apiKey: "AIzaSyDESTPy5RYefs283tnt_qynpQWLFG8nX4s",
-                authDomain: "projet-1-ea7e5.firebaseapp.com",
-                projectId: "projet-1-ea7e5",
-                storageBucket: "projet-1-ea7e5.firebasestorage.app",
-                messagingSenderId: "856780196636",
-                appId: "1:856780196636:web:46cb7cd9c0a95fd3d688d9"
+                apiKey: "AIzaSyAngCIn8HM7LXh1-SlcKe-CkBOpA0rRGmU",
+                authDomain: "compteurs-52ca2.firebaseapp.com",
+                databaseURL: "https://compteurs-52ca2-default-rtdb.europe-west1.firebasedatabase.app",
+                projectId: "compteurs-52ca2",
+                storageBucket: "compteurs-52ca2.firebasestorage.app",
+                messagingSenderId: "64604129167",
+                appId: "1:64604129167:web:6f7f13167ef93f0bc6adfa"
             };
 
             // Initialize Firebase
             const app = initializeApp(firebaseConfig);
-            const db = getDatabase(app);
-            const dbRef = ref(db, 'compteurs');
+        </script>
+        <script>
+            // Initialisation de Firebase
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.database();
 
-            // Sélection des éléments HTML
-            const inputs = [
-                document.getElementById('c1'),
-                document.getElementById('c2'),
-                document.getElementById('c3')
-            ];
-            const totalCompteur = document.getElementById('totalCompteur');
-            const resetBtn = document.getElementById('btn-reset');
+            // Référence locale des compteurs (valeurs par défaut)
+            let compteurs = { 1: 0, 2: 0, 3: 0 };
 
-            // Variable de verrouillage pour éviter les boucles infinies de mise à jour
-            let enTrainDeMettreAJour = false;
-
-            // 2. ENVOYER les données au Cloud quand l'utilisateur tape un chiffre
-            function sauvegarderVersFirebase() {
-                if (enTrainDeMettreAJour) return;
-
-                const donnees = {
-                    c1: parseFloat(inputs[0].value) || 0,
-                    c2: parseFloat(inputs[1].value) || 0,
-                    c3: parseFloat(inputs[2].value) || 0
-                };
-
-                // Envoie l'objet entier sur Firebase
-                set(dbRef, donnees);
-            }
-
-            // 3. RECEVOIR les données du Cloud en temps réel (sur PC et Téléphone simultanément)
-            onValue(dbRef, (snapshot) => {
+            // 2. ÉCOUTER LA BASE DE DONNÉES (En temps réel)
+            // Dès qu'une valeur change sur le serveur (depuis le PC ou le mobile), cette fonction s'exécute automatiquement
+            partout
+            db.ref('mesCompteurs').on('value', (snapshot) => {
                 const data = snapshot.val();
                 if (data) {
-                    enTrainDeMettreAJour = true;
-
-                    // Met à jour les champs de saisie avec les valeurs du cloud
-                    inputs[0].value = data.c1 || 0;
-                    inputs[1].value = data.c2 || 0;
-                    inputs[2].value = data.c3 || 0;
-
-                    // Calcule et affiche le compteur global
-                    totalCompteur.value = (data.c1 || 0) + (data.c2 || 0) + (data.c3 || 0);
-
-                    enTrainDeMettreAJour = false;
+                    compteurs = data;
+                    // Mettre à jour l'affichage de tous les compteurs sur l'écran
+                    for (let id in compteurs) {
+                        document.getElementById('val' + id).innerText = compteurs[id];
+                    }
                 }
             });
 
-            // 4. Bouton Réinitialiser (écrase les valeurs sur le cloud)
-            resetBtn.addEventListener('click', () => {
-                set(dbRef, { c1: 0, c2: 0, c3: 0 });
-            });
-
-            // Écouteurs d'événements sur les inputs
-            inputs.forEach(input => {
-                input.addEventListener('input', sauvegarderVersFirebase);
-            });
-        </script>
-
-
-
-
-
-
-
-        <button onclick="ajouter(1)">Compteur 1 : <span id="c1">0</span></button>
-        <button onclick="ajouter(2)">Compteur 2 : <span id="c2">0</span></button>
-        <button onclick="ajouter(3)">Compteur 3 : <span id="c3">0</span></button>
-
-        <script>
-            let vals =;
-            function ajouter(index) {
-                vals[index - 1]++;
-                document.getElementById('c' + index).innerText = vals[index - 1];
-                localStorage.setItem('compteur' + index, vals[index - 1]);
+            // 3. ACTIONS (Envoient les données vers Firebase)
+            function modifier(id, pas) {
+                compteurs[id] += pas;
+                db.ref('mesCompteurs').set(compteurs);
             }
-        </script>
 
+            function reset(id) {
+                compteurs[id] = 0;
+                db.ref('mesCompteurs').set(compteurs);
+            }
 
-        <p>Total des trois : <span id="total">0</span></p>
-
-        <script>
-            let val1 = Number(localStorage.getItem('compteur1')) || 0;
-            let val2 = Number(localStorage.getItem('compteur2')) || 0;
-            let val3 = Number(localStorage.getItem('compteur3')) || 0;
-
-            let total = val1 + val2 + val3;
-            document.getElementById('total').innerText = total;
+            function resetGlobal() {
+                const resetData = { 1: 0, 2: 0, 3: 0 };
+                db.ref('mesCompteurs').set(resetData);
+            }
         </script>
 
 
