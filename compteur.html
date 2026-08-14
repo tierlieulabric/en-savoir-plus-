@@ -262,7 +262,7 @@
         <br>
         <button onclick="resetGlobal()" style="font-weight: bold; color: red;">Tout réinitialiser</button>
 
-        <!--<script>
+        <script>
             // Stockage des valeurs des compteurs
             const compteurs = { 1: 0, 2: 0, 3: 0 };
 
@@ -285,98 +285,6 @@
                 document.getElementById('val' + id).innerText = compteurs[id];
             }
 
-        </script>-->
-
-
-
-
-
-
-
-        <!-- Compteur 1 -->
-        <div id="c1">
-            Compteur 1 : <span id="val1">0</span>
-            <button onclick="modifier(1, 1)">+</button>
-            <button onclick="modifier(1, -1)">-</button>
-            <button onclick="reset(1)">Reset</button>
-        </div>
-
-        <!-- Compteur 2 -->
-        <div id="c2">
-            Compteur 2 : <span id="val2">0</span>
-            <button onclick="modifier(2, 1)">+</button>
-            <button onclick="modifier(2, -1)">-</button>
-            <button onclick="reset(2)">Reset</button>
-        </div>
-
-        <!-- Compteur 3 -->
-        <div id="c3">
-            Compteur 3 : <span id="val3">0</span>
-            <button onclick="modifier(3, 1)">+</button>
-            <button onclick="modifier(3, -1)">-</button>
-            <button onclick="reset(3)">Reset</button>
-        </div>
-
-        <br>
-        <button onclick="resetGlobal()" style="font-weight: bold; color: red;">Tout réinitialiser</button>
-
-        <script type="module">
-            // Import the functions you need from the SDKs you need
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-            // TODO: Add SDKs for Firebase products that you want to use
-            // https://firebase.google.com/docs/web/setup#available-libraries
-
-            // Your web app's Firebase configuration
-            const firebaseConfig = {
-                apiKey: "AIzaSyAngCIn8HM7LXh1-SlcKe-CkBOpA0rRGmU",
-                authDomain: "compteurs-52ca2.firebaseapp.com",
-                databaseURL: "https://compteurs-52ca2-default-rtdb.europe-west1.firebasedatabase.app",
-                projectId: "compteurs-52ca2",
-                storageBucket: "compteurs-52ca2.firebasestorage.app",
-                messagingSenderId: "64604129167",
-                appId: "1:64604129167:web:6f7f13167ef93f0bc6adfa"
-            };
-
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-        </script>
-        <script>
-            // Initialisation de Firebase
-            firebase.initializeApp(firebaseConfig);
-            const db = firebase.database();
-
-            // Référence locale des compteurs (valeurs par défaut)
-            let compteurs = { 1: 0, 2: 0, 3: 0 };
-
-            // 2. ÉCOUTER LA BASE DE DONNÉES (En temps réel)
-            // Dès qu'une valeur change sur le serveur (depuis le PC ou le mobile), cette fonction s'exécute automatiquement
-            partout
-            db.ref('mesCompteurs').on('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    compteurs = data;
-                    // Mettre à jour l'affichage de tous les compteurs sur l'écran
-                    for (let id in compteurs) {
-                        document.getElementById('val' + id).innerText = compteurs[id];
-                    }
-                }
-            });
-
-            // 3. ACTIONS (Envoient les données vers Firebase)
-            function modifier(id, pas) {
-                compteurs[id] += pas;
-                db.ref('mesCompteurs').set(compteurs);
-            }
-
-            function reset(id) {
-                compteurs[id] = 0;
-                db.ref('mesCompteurs').set(compteurs);
-            }
-
-            function resetGlobal() {
-                const resetData = { 1: 0, 2: 0, 3: 0 };
-                db.ref('mesCompteurs').set(resetData);
-            }
         </script>
 
 
