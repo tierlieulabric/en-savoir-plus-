@@ -228,15 +228,18 @@
 
 
 
-        <!-- Vos trois compteurs HTML -->
+        <!-- Vos trois compteurs sources -->
         <input type="number" id="c1" value="0">
         <input type="number" id="c2" value="0">
         <input type="number" id="c3" value="0">
 
-        <!-- L'affichage du résultat -->
-        <h3>Total : <span id="total">0</span></h3>
+        <!-- Le compteur unique qui recueille le total (bloqué en lecture seule) -->
+        <div>
+            <label for="totalCompteur">Compteur Global :</label>
+            <input type="number" id="totalCompteur" value="0" readonly>
+        </div>
 
-        <!-- Le nouveau bouton de réinitialisation -->
+        <!-- Le bouton de réinitialisation -->
         <button id="btn-reset">Réinitialiser</button>
 
         <script>
@@ -245,7 +248,8 @@
                 document.getElementById('c2'),
                 document.getElementById('c3')
             ];
-            const totalDisplay = document.getElementById('total');
+            // Le sélecteur cible maintenant le quatrième input
+            const totalCompteur = document.getElementById('totalCompteur');
             const resetBtn = document.getElementById('btn-reset');
 
             // 1. Charger les valeurs sauvegardées au démarrage
@@ -259,7 +263,7 @@
                 mettreAJourTotal();
             }
 
-            // 2. Calculer le total et sauvegarder les valeurs
+            // 2. Calculer le total et mettre à jour le compteur unique
             function mettreAJourTotal() {
                 let somme = 0;
                 inputs.forEach(input => {
@@ -267,16 +271,17 @@
                     somme += valeur;
                     localStorage.setItem(`compteur_${input.id}`, input.value);
                 });
-                totalDisplay.innerText = somme;
+                // On met à jour la propriété .value du quatrième compteur
+                totalCompteur.value = somme;
             }
 
             // 3. Fonction pour tout remettre à zéro
             function reinitialiser() {
                 inputs.forEach(input => {
-                    input.value = 0; // Remet l'input graphique à 0
-                    localStorage.removeItem(`compteur_${input.id}`); // Efface la sauvegarde locale
+                    input.value = 0;
+                    localStorage.removeItem(`compteur_${input.id}`);
                 });
-                mettreAJourTotal(); // Force la mise à jour du total à 0
+                mettreAJourTotal();
             }
 
             // 4. Écouteurs d'événements
