@@ -434,9 +434,21 @@ input {
     gap: 55px;
 }
 
-.btn3{
+.btn3 {
     width: 50px;
     height: 50px;
 
 }
 
+.layout-centre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Aligne tout le contenu au centre horizontalement */
+    gap: 10px;
+    /* Espace de 10px entre chaque ligne */
+    text-align: center;
+    /* Centre le texte à l'intérieur des éléments */
+    width: 100%;
+    /* Prend toute la largeur disponible */
+}
