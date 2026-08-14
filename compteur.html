@@ -158,7 +158,7 @@
 
         <div class="layout-centre">
 
-            <!-- Case 1 -->
+            <!--Case 1 -->
             <label class="justify-center">
                 <input type="checkbox" id="check1"> <i class="ph ph-hand-heart"></i>
                 (J'Adore : <span id="count1">0</span>)
@@ -236,6 +236,9 @@
         <!-- L'affichage du résultat -->
         <h3>Total : <span id="total">0</span></h3>
 
+        <!-- Le nouveau bouton de réinitialisation -->
+        <button id="btn-reset">Réinitialiser</button>
+
         <script>
             const inputs = [
                 document.getElementById('c1'),
@@ -243,46 +246,49 @@
                 document.getElementById('c3')
             ];
             const totalDisplay = document.getElementById('total');
+            const resetBtn = document.getElementById('btn-reset');
 
             // 1. Charger les valeurs sauvegardées au démarrage
             function chargerDonnees() {
                 inputs.forEach(input => {
-                    // Récupère la valeur stockée (ex: 'compteur_c1')
                     const valeurSauvegardee = localStorage.getItem(`compteur_${input.id}`);
-
                     if (valeurSauvegardee !== null) {
                         input.value = valeurSauvegardee;
                     }
                 });
-                mettreAJourTotal(); // Calcule le total initial
+                mettreAJourTotal();
             }
 
             // 2. Calculer le total et sauvegarder les valeurs
             function mettreAJourTotal() {
                 let somme = 0;
-
                 inputs.forEach(input => {
                     const valeur = parseFloat(input.value) || 0;
                     somme += valeur;
-
-                    // Sauvegarde la valeur actuelle de cet input dans le navigateur
                     localStorage.setItem(`compteur_${input.id}`, input.value);
                 });
-
                 totalDisplay.innerText = somme;
             }
 
-            // 3. Écouter les changements en temps réel
+            // 3. Fonction pour tout remettre à zéro
+            function reinitialiser() {
+                inputs.forEach(input => {
+                    input.value = 0; // Remet l'input graphique à 0
+                    localStorage.removeItem(`compteur_${input.id}`); // Efface la sauvegarde locale
+                });
+                mettreAJourTotal(); // Force la mise à jour du total à 0
+            }
+
+            // 4. Écouteurs d'événements
             inputs.forEach(input => {
                 input.addEventListener('input', mettreAJourTotal);
             });
 
-            // 4. Lancer le chargement dès que la page est prête
+            resetBtn.addEventListener('click', reinitialiser);
+
+            // Charger les données dès que la page est prête
             document.addEventListener('DOMContentLoaded', chargerDonnees);
         </script>
-
-
-
 
     </section>
 
