@@ -233,13 +233,12 @@
         <input type="number" id="c2" value="0">
         <input type="number" id="c3" value="0">
 
-        <!-- Le compteur unique qui recueille le total (bloqué en lecture seule) -->
+        <!-- Le compteur unique global -->
         <div>
             <label for="totalCompteur">Compteur Global :</label>
             <input type="number" id="totalCompteur" value="0" readonly>
         </div>
 
-        <!-- Le bouton de réinitialisation -->
         <button id="btn-reset">Réinitialiser</button>
 
         <script>
@@ -294,6 +293,85 @@
             // Charger les données dès que la page est prête
             document.addEventListener('DOMContentLoaded', chargerDonnees);
         </script>
+
+
+
+
+
+        <script type="module">
+            import { initializeApp } from "https://gstatic.com";
+            import { getDatabase, ref, set, onValue } from "https://gstatic.com";
+
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyDESTPy5RYefs283tnt_qynpQWLFG8nX4s",
+                authDomain: "projet-1-ea7e5.firebaseapp.com",
+                projectId: "projet-1-ea7e5",
+                storageBucket: "projet-1-ea7e5.firebasestorage.app",
+                messagingSenderId: "856780196636",
+                appId: "1:856780196636:web:46cb7cd9c0a95fd3d688d9"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+            const dbRef = ref(db, 'compteurs');
+
+            // Sélection des éléments HTML
+            const inputs = [
+                document.getElementById('c1'),
+                document.getElementById('c2'),
+                document.getElementById('c3')
+            ];
+            const totalCompteur = document.getElementById('totalCompteur');
+            const resetBtn = document.getElementById('btn-reset');
+
+            // Variable de verrouillage pour éviter les boucles infinies de mise à jour
+            let enTrainDeMettreAJour = false;
+
+            // 2. ENVOYER les données au Cloud quand l'utilisateur tape un chiffre
+            function sauvegarderVersFirebase() {
+                if (enTrainDeMettreAJour) return;
+
+                const donnees = {
+                    c1: parseFloat(inputs[0].value) || 0,
+                    c2: parseFloat(inputs[1].value) || 0,
+                    c3: parseFloat(inputs[2].value) || 0
+                };
+
+                // Envoie l'objet entier sur Firebase
+                set(dbRef, donnees);
+            }
+
+            // 3. RECEVOIR les données du Cloud en temps réel (sur PC et Téléphone simultanément)
+            onValue(dbRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    enTrainDeMettreAJour = true;
+
+                    // Met à jour les champs de saisie avec les valeurs du cloud
+                    inputs[0].value = data.c1 || 0;
+                    inputs[1].value = data.c2 || 0;
+                    inputs[2].value = data.c3 || 0;
+
+                    // Calcule et affiche le compteur global
+                    totalCompteur.value = (data.c1 || 0) + (data.c2 || 0) + (data.c3 || 0);
+
+                    enTrainDeMettreAJour = false;
+                }
+            });
+
+            // 4. Bouton Réinitialiser (écrase les valeurs sur le cloud)
+            resetBtn.addEventListener('click', () => {
+                set(dbRef, { c1: 0, c2: 0, c3: 0 });
+            });
+
+            // Écouteurs d'événements sur les inputs
+            inputs.forEach(input => {
+                input.addEventListener('input', sauvegarderVersFirebase);
+            });
+        </script>
+
 
     </section>
 
