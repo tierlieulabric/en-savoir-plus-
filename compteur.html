@@ -118,7 +118,7 @@
 
         </div>
 
-        <script>
+        <!--<script>
 
             // Tableau pour stocker les fonctions de mise à jour de chaque compteur
             const listeReset = [];
@@ -158,7 +158,7 @@
                 listeReset.forEach(resetFonction => resetFonction());
             });
 
-        </script>
+        </script>-->
 
 
 
@@ -167,34 +167,10 @@
 
 
 
-        <div>
-            <h2>Compteur 1 : <span id="val1">0</span></h2>
-            <button onclick="ajouter(1)">+1</button>
-        </div>
-        <div>
-            <h2>Compteur 2 : <span id="val2">0</span></h2>
-            <button onclick="ajouter(2)">+1</button>
-        </div>
-        <div>
-            <h2>Compteur 3 : <span id="val3">0</span></h2>
-            <button onclick="ajouter(3)">+1</button>
-        </div>
-
-        <script>
-            function ajouter(numero) {
-                let champ = document.getElementById("val" + numero);
-                let valeur = parseInt(champ.innerText) + 1;
-                champ.innerText = valeur;
-                // Ici, il faut envoyer la nouvelle valeur sur un serveur
-            }
-        </script>
 
 
 
-
-
-
-
+        
 
     </section>
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Suivi des Compteurs</h1>
+
+    {% for id, val in compteurs.items() %}
+        <div style="margin: 20px; padding: 15px; border: 1px solid #ccc; background: white; border-radius: 8px; display: inline-block; min-width: 200px;">
+            <h2>{{ id.upper() }} : <span id="{{ id }}">{{ val }}</span></h2>
+            <button onclick="modifier('{{ id }}', 1)" style="padding: 5px 10px;">+1</button>
+            <button onclick="modifier('{{ id }}', -1)" style="padding: 5px 10px;">-1</button>
+            <button onclick="raz('{{ id }}')" style="padding: 5px 10px; background-color: #ffcccc; border-radius: 4px;">RAZ</button>
+        </div>
+    {% endfor %}
+
+    <div style="margin-top: 40px;">
+            <button onclick="razTout()"
+                style="padding: 10px 20px; font-size: 16px; background-color: #ff4d4d; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Tout remettre à zéro
+            </button>
+        </div>
+
+        <script>
+            function modifier(id, val) {
+                envoyerRequete({ id: id, action: 'add', val: val });
+            }
+
+            function raz(id) {
+                let nom = document.getElementById('nom_' + id).innerText;
+                if (confirm("Confirmer la remise à zéro de '" + nom + "' ?")) {
+                    envoyerRequete({ id: id, action: 'reset' });
+                }
+            }
+
+            function razTout() {
+                if (confirm("Voulez-vous vraiment TOUT remettre à zéro ?")) {
+                    envoyerRequete({ action: 'reset_all' });
+                }
+            }
+
+            function renommer(id) {
+                let elementNom = document.getElementById('nom_' + id);
+                let ancienNom = elementNom.innerText;
+                let nouveauNom = prompt("Entrez le nouveau nom :", b64DecodeUnicode(elementNom.dataset.raw || b64EncodeUnicode(ancienNom)));
+
+                if (nouveauNom && nouveauNom.trim() !== "") {
+                    envoyerRequete({ id: id, action: 'rename', nouveau_nom: nouveauNom.trim() });
+                }
+            }
+
+            function envoyerRequete(data) {
+                fetch('/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                })
+                    .then(res => res.json())
+                    .then(data => updateAffichage(data));
+            }
+
+            function updateAffichage(data) {
+                for (let id in data) {
+                    let elVal = document.getElementById('val_' + id);
+                    let elNom = document.getElementById('nom_' + id);
+                    if (elVal) elVal.innerText = data[id].valeur;
+                    if (elNom) {
+                        elNom.innerText = data[id].nom;
+                        elNom.dataset.raw = b64EncodeUnicode(data[id].nom);
+                    }
+                }
+            }
+
+            function b64EncodeUnicode(str) {
+                return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function (match, p1) {
+                    return String.fromCharCode('0x' + p1);
+                }));
+            }
+
+            function b64DecodeUnicode(str) {
+                return decodeURIComponent(atob(str).split('').map(function (c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+            }
+        </script>
+        
+    </div>
+
+</body>
+</html>
