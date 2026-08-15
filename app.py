@@ -11,30 +11,75 @@ compteurs = {"c1": 0, "c2": 0, "c3": 0}
 page_html = """
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Mes Compteurs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="font-family: Arial; text-align: center; margin-top: 50px;">
-    <h1>Suivi des Compteurs</h1>
-    {% for id, val in compteurs.items() %}
-        <div style="margin: 20px;">
-            <h2>{{ id.upper() }} : <span id="{{ id }}">{{ val }}</span></h2>
-            <button onclick="modifier('{{ id }}', 1)">Ajouter 1</button>
+
+<body style="font-family: Arial; text-align: center; margin-top: 30px; background-color: #f4f4f9;">
+
+    <!-- 1. L'affichage des compteurs sur votre site -->
+    <div style="font-family: Arial; text-align: center; max-width: 400px; margin: auto;">
+        <h3>Tableau de Bord</h3>
+
+        <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <h4 id="site_nom_c1">Chargement...</h4>
+            <h2><span id="site_val_c1">0</span></h2>
+            <button onclick="modifierSite('c1', 1)">+1</button>
+            <button onclick="modifierSite('c1', -1)">-1</button>
         </div>
-    {% endfor %}
+
+        <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <h4 id="site_nom_c2">Chargement...</h4>
+            <h2><span id="site_val_c2">0</span></h2>
+            <button onclick="modifierSite('c2', 1)">+1</button>
+            <button onclick="modifierSite('c2', -1)">-1</button>
+        </div>
+
+        <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <h4 id="site_nom_c3">Chargement...</h4>
+            <h2><span id="site_val_c3">0</span></h2>
+            <button onclick="modifierSite('c3', 1)">+1</button>
+            <button onclick="modifierSite('c3', -1)">-1</button>
+        </div>
+    </div>
+
+    <!-- 2. Le script qui communique avec votre Python -->
     <script>
-        function modifier(id, val) {
-            fetch('/update', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({id: id, val: val})
-            })
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById(id).innerText = data[id];
-            });
+        // URL de votre serveur Python hébergé (sans le slash à la fin)
+        const API_URL = "https://onrender.com";
+
+        // Charger les données dès l'ouverture de la page du site
+        function chargerDonneesDuSite() {
+            fetch(API_URL + "/data")
+                .then(res => res.json())
+                .then(data => actualiserDesign(data));
         }
+
+        // Envoyer un +1 ou -1 depuis le site
+        function modifierSite(id, val) {
+            fetch(API_URL + "/update", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id, action: 'add', val: val })
+            })
+                .then(res => res.json())
+                .then(data => actualiserDesign(data));
+        }
+
+        // Mettre à jour le texte et les chiffres sur votre page
+        function actualiserDesign(data) {
+            for (let id in data) {
+                let elVal = document.getElementById('site_val_' + id);
+                let elNom = document.getElementById('site_nom_' + id);
+                if (elVal) elVal.innerText = data[id].valeur;
+                if (elNom) elNom.innerText = data[id].nom;
+            }
+        }
+
+        // Lancement automatique au chargement de la page
+        chargerDonneesDuSite();
     </script>
 </body>
 </html>

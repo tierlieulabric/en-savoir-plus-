@@ -7,97 +7,68 @@
 </head>
 
 <body style="font-family: Arial; text-align: center; margin-top: 30px; background-color: #f4f4f9;">
-    <h1>Suivi des Compteurs</h1>
 
-    {% for id, info in compteurs.items() %}
-    <div
-        style="margin: 20px; padding: 15px; border: 1px solid #ccc; background: white; border-radius: 8px; display: inline-block; min-width: 250px;">
-        <!-- Zone du nom modifiable -->
-        <div style="margin-bottom: 10px;">
-            <span id="nom_{{ id }}"
-                style="font-size: 20px; font-weight: bold; cursor: pointer; border-bottom: 1px dashed #666;"
-                onclick="renommer('{{ id }}')">
-                {{ info.nom }}
-            </span>
+    <!-- 1. L'affichage des compteurs sur votre site -->
+    <div style="font-family: Arial; text-align: center; max-width: 400px; margin: auto;">
+        <h3>Tableau de Bord</h3>
+
+        <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <h4 id="site_nom_c1">Chargement...</h4>
+            <h2><span id="site_val_c1">0</span></h2>
+            <button onclick="modifierSite('c1', 1)">+1</button>
+            <button onclick="modifierSite('c1', -1)">-1</button>
         </div>
 
-        <h2><span id="val_{{ id }}">{{ info.valeur }}</span></h2>
+        <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <h4 id="site_nom_c2">Chargement...</h4>
+            <h2><span id="site_val_c2">0</span></h2>
+            <button onclick="modifierSite('c2', 1)">+1</button>
+            <button onclick="modifierSite('c2', -1)">-1</button>
+        </div>
 
-        <button onclick="modifier('{{ id }}', 1)" style="padding: 8px 12px; font-size: 16px;">+1</button>
-        <button onclick="modifier('{{ id }}', -1)" style="padding: 8px 12px; font-size: 16px;">-1</button>
-        <button onclick="raz('{{ id }}')"
-            style="padding: 8px 12px; font-size: 14px; background-color: #ffcccc; border-radius: 4px;">RAZ</button>
+        <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <h4 id="site_nom_c3">Chargement...</h4>
+            <h2><span id="site_val_c3">0</span></h2>
+            <button onclick="modifierSite('c3', 1)">+1</button>
+            <button onclick="modifierSite('c3', -1)">-1</button>
+        </div>
     </div>
-    {% endfor %}
 
-    <div style="margin-top: 40px;">
-        <button onclick="razTout()"
-            style="padding: 10px 20px; font-size: 16px; background-color: #ff4d4d; color: white; border: none; border-radius: 5px; cursor: pointer;">
-            Tout remettre à zéro
-        </button>
-    </div>
-
+    <!-- 2. Le script qui communique avec votre Python -->
     <script>
-        function modifier(id, val) {
-            envoyerRequete({ id: id, action: 'add', val: val });
+        // URL de votre serveur Python hébergé (sans le slash à la fin)
+        const API_URL = "https://onrender.com";
+
+        // Charger les données dès l'ouverture de la page du site
+        function chargerDonneesDuSite() {
+            fetch(API_URL + "/data")
+                .then(res => res.json())
+                .then(data => actualiserDesign(data));
         }
 
-        function raz(id) {
-            let nom = document.getElementById('nom_' + id).innerText;
-            if (confirm("Confirmer la remise à zéro de '" + nom + "' ?")) {
-                envoyerRequete({ id: id, action: 'reset' });
-            }
-        }
-
-        function razTout() {
-            if (confirm("Voulez-vous vraiment TOUT remettre à zéro ?")) {
-                envoyerRequete({ action: 'reset_all' });
-            }
-        }
-
-        function renommer(id) {
-            let elementNom = document.getElementById('nom_' + id);
-            let ancienNom = elementNom.innerText;
-            let nouveauNom = prompt("Entrez le nouveau nom :", b64DecodeUnicode(elementNom.dataset.raw || b64EncodeUnicode(ancienNom)));
-
-            if (nouveauNom && nouveauNom.trim() !== "") {
-                envoyerRequete({ id: id, action: 'rename', nouveau_nom: nouveauNom.trim() });
-            }
-        }
-
-        function envoyerRequete(data) {
-            fetch('/update', {
+        // Envoyer un +1 ou -1 depuis le site
+        function modifierSite(id, val) {
+            fetch(API_URL + "/update", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify({ id: id, action: 'add', val: val })
             })
                 .then(res => res.json())
-                .then(data => updateAffichage(data));
+                .then(data => actualiserDesign(data));
         }
 
-        function updateAffichage(data) {
+        // Mettre à jour le texte et les chiffres sur votre page
+        function actualiserDesign(data) {
             for (let id in data) {
-                let elVal = document.getElementById('val_' + id);
-                let elNom = document.getElementById('nom_' + id);
+                let elVal = document.getElementById('site_val_' + id);
+                let elNom = document.getElementById('site_nom_' + id);
                 if (elVal) elVal.innerText = data[id].valeur;
-                if (elNom) {
-                    elNom.innerText = data[id].nom;
-                    elNom.dataset.raw = b64EncodeUnicode(data[id].nom);
-                }
+                if (elNom) elNom.innerText = data[id].nom;
             }
         }
 
-        function b64EncodeUnicode(str) {
-            return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function (match, p1) {
-                return String.fromCharCode('0x' + p1);
-            }));
-        }
-
-        function b64DecodeUnicode(str) {
-            return decodeURIComponent(atob(str).split('').map(function (c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-        }
+        // Lancement automatique au chargement de la page
+        chargerDonneesDuSite();
     </script>
 </body>
 
