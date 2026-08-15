@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 try:
-    from flask_cors import CORS  # <-- OBLIGATOIRE POUR AUTORISER LA SAUVEGARDE VIA INTERNET
+    from flask_cors import CORS  # type: ignore  # <-- OBLIGATOIRE POUR AUTORISER LA SAUVEGARDE VIA INTERNET
 except ImportError:
     CORS = None
 
