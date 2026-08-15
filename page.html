@@ -12,41 +12,42 @@
     <div style="font-family: Arial; text-align: center; max-width: 400px; margin: auto;">
         <h3>Tableau de Bord</h3>
 
+        <!-- PREMIER COMPTEUR -->
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-            <h4 id="site_nom_c1">J'adore</h4>
+            <!-- J'AI RETIRÉ L'ID ICI POUR QUE LE JAVASCRIPT NE PUISSE PAS EFFACER LE TITRE -->
+            <h4>J'adore</h4> 
             <h2><span id="site_val_c1">0</span></h2>
-            <button onclick="modifierSite('c1', 1)">+1</button>
-            <button onclick="modifierSite('c1', -1)">-1</button>
+            <button onclick="modifierSite('Jadore', 1)">+1</button>
+            <button onclick="modifierSite('Jadore', -1)">-1</button>
         </div>
 
+        <!-- DEUXIÈME COMPTEUR -->
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-            <h4 id="site_nom_c2">J'aime</h4>
+            <h4>Vos Ventes</h4>
             <h2><span id="site_val_c2">0</span></h2>
-            <button onclick="modifierSite('c2', 1)">+1</button>
-            <button onclick="modifierSite('c2', -1)">-1</button>
+            <button onclick="modifierSite('Jaime', 1)">+1</button>
+            <button onclick="modifierSite('Jaime', -1)">-1</button>
         </div>
 
+        <!-- TROISIÈME COMPTEUR -->
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-            <h4 id="site_nom_c3">J'aime pas</h4>
+            <h4>Vos Avis</h4>
             <h2><span id="site_val_c3">0</span></h2>
-            <button onclick="modifierSite('c3', 1)">+1</button>
-            <button onclick="modifierSite('c3', -1)">-1</button>
+            <button onclick="modifierSite('Jaime pas', 1)">+1</button>
+            <button onclick="modifierSite('Jaime pas', -1)">-1</button>
         </div>
     </div>
 
-    <!-- 2. Le script qui communique avec votre Python -->
+    <!-- 2. Le script de communication corrigé -->
     <script>
-        // URL de votre serveur Python hébergé (sans le slash à la fin)
-        const API_URL = "https://en-savoir-plus-2.onrender.com";
+        const API_URL = "https://onrender.com";
 
-        // Charger les données dès l'ouverture de la page du site
         function chargerDonneesDuSite() {
             fetch(API_URL + "/data")
                 .then(res => res.json())
                 .then(data => actualiserDesign(data));
         }
 
-        // Envoyer un +1 ou -1 depuis le site
         function modifierSite(id, val) {
             fetch(API_URL + "/update", {
                 method: 'POST',
@@ -57,17 +58,16 @@
                 .then(data => actualiserDesign(data));
         }
 
-        // Mettre à jour le texte et les chiffres sur votre page
+        // CORRECTION ICI : Le script ne met à jour QUE les chiffres et ignore les noms !
         function actualiserDesign(data) {
             for (let id in data) {
                 let elVal = document.getElementById('site_val_' + id);
-                let elNom = document.getElementById('site_nom_' + id);
-                if (elVal) elVal.innerText = data[id].valeur;
-                if (elNom) elNom.innerText = data[id].nom;
+                if (elVal && data[id]) {
+                    elVal.innerText = data[id].valeur;
+                }
             }
         }
 
-        // Lancement automatique au chargement de la page
         chargerDonneesDuSite();
     </script>
 </body>

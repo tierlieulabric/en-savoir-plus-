@@ -1,171 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
+    <title>Mes Compteurs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compteur</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="project.html">
-    <link rel="stylesheet" href="script.js">
-    <link rel="stylesheet" href="app.py">
-    <link rel="stylesheet" href="compteur.html">
-    <link rel="stylesheet" href="page.html">
-    <link rel="stylesheet" href="QR Code.html">
-    <link rel="stylesheet" href="server.py">
-    <script src="https://gstatic.com"></script>
-    <script src="https://gstatic.com"></script>
-
-    <head>
-        <link rel="stylesheet" type="text/css"
-            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-        <link rel="stylesheet" type="text/css"
-            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
-    </head>
-
 </head>
 
-<body>
+<body style="font-family: Arial; text-align: center; margin-top: 30px; background-color: #f4f4f9;">
 
-    <header class="flex space-between align-center margin">
+    <!-- 1. L'affichage des compteurs sur votre site -->
+    <div style="font-family: Arial; text-align: center; max-width: 400px; margin: auto;">
+        <h3>Tableau de Bord</h3>
 
-        <div class="flex marginright">
-
-            <a href="index.html">
-
-                <img src="asset/fleche a gauche.jpg" alt="">
-
-            </a>
-
+        <!-- COMPTEUR 1 -->
+        <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <h4>Vos Abonnés</h4> 
+            <h2><span id="site_val_c1">0</span></h2>
+            <button onclick="modifierSite('c1', 1)">+1</button>
+            <button onclick="modifierSite('c1', -1)">-1</button>
         </div>
 
-        <nav>
-
-            <ul>
-
-                <li>
-
-                    <div>
-
-                        <a href="https://www.facebook.com/profile.php?id=100093607410689&locale=fr_FR">
-
-                            <img src="asset/facebook.png" alt="logo" class="marginright">
-
-                        </a>
-
-
-                        <a href="https://www.instagram.com/tierslieubric/">
-
-                            <img src="asset/rkinqdib 3.png" alt="" class="marginleft">
-
-                        </a>
-
-                    </div>
-
-                </li>
-
-            </ul>
-
-        </nav>
-
-    </header>
-
-    <section>
-
-        <div class="flex margin-bottom">
-
-            <img src="asset/la bric banner.jpg" alt="" class="width maxwidth">
-
+        <!-- COMPTEUR 2 -->
+        <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <h4>Vos Ventes</h4>
+            <h2><span id="site_val_c2">0</span></h2>
+            <button onclick="modifierSite('c2', 1)">+1</button>
+            <button onclick="modifierSite('c2', -1)">-1</button>
         </div>
 
-    </section>
-
-    <section>
-
-        <div class="flex justify-center colorwhite3 margin-top-10 margin-bottom margin-left">
-
-            <h2>
-
-                <u>
-                    Ne pas décocher la case merci sinon vous voter deux fois
-                </u>
-
-            </h2>
-
+        <!-- COMPTEUR 3 -->
+        <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <h4>Vos Avis</h4>
+            <h2><span id="site_val_c3">0</span></h2>
+            <button onclick="modifierSite('c3', 1)">+1</button>
+            <button onclick="modifierSite('c3', -1)">-1</button>
         </div>
+    </div>
 
-    </section>
+    <!-- 2. Le script de communication ultra-sécurisé -->
+    <script>
+        const API_URL = "https://onrender.com";
 
-    <section class="">
+        // Boîte de secours locale : si Python ne répond pas, le site utilise ces chiffres
+        let donneesLocales = {
+            "c1": { valeur: 0 },
+            "c2": { valeur: 0 },
+            "c3": { valeur: 0 }
+        };
 
-        <div class="layout-centre">
-            
-            <!-- 1. L'affichage des compteurs sur votre site -->
-            <div style="font-family: Arial; text-align: center; max-width: 400px; margin: auto;">
-                <h3>Tableau de Bord</h3>
-
-                <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-                    <h4 id="site_nom_c1">J'adore</h4>
-                    <h2><span id="site_val_c1">0</span></h2>
-                    <button onclick="modifierSite('c1', 1)">+1</button>
-                    <button onclick="modifierSite('c1', -1)">-1</button>
-                </div>
-
-                <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-                    <h4 id="site_nom_c2">J'aime</h4>
-                    <h2><span id="site_val_c2">0</span></h2>
-                    <button onclick="modifierSite('c2', 1)">+1</button>
-                    <button onclick="modifierSite('c2', -1)">-1</button>
-                </div>
-
-                <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-                    <h4 id="site_nom_c3">J'aime pas</h4>
-                    <h2><span id="site_val_c3">0</span></h2>
-                    <button onclick="modifierSite('c3', 1)">+1</button>
-                    <button onclick="modifierSite('c3', -1)">-1</button>
-                </div>
-            </div>
-
-            <!-- 2. Le script qui communique avec votre Python -->
-            <script>
-                // URL de votre serveur Python hébergé (sans le slash à la fin)
-                const API_URL = "https://en-savoir-plus-2.onrender.com";
-
-                // Charger les données dès l'ouverture de la page du site
-                function chargerDonneesDuSite() {
-                    fetch(API_URL + "/data")
-                        .then(res => res.json())
-                        .then(data => actualiserDesign(data));
-                }
-
-                // Envoyer un +1 ou -1 depuis le site
-                function modifierSite(id, val) {
-                    fetch(API_URL + "/update", {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ id: id, action: 'add', val: val })
-                    })
-                        .then(res => res.json())
-                        .then(data => actualiserDesign(data));
-                }
-
-                // Mettre à jour le texte et les chiffres sur votre page
-                function actualiserDesign(data) {
-                    for (let id in data) {
-                        let elVal = document.getElementById('site_val_' + id);
-                        let elNom = document.getElementById('site_nom_' + id);
-                        if (elVal) elVal.innerText = data[id].valeur;
-                        if (elNom) elNom.innerText = data[id].nom;
+        // Charger les données de départ
+        function chargerDonneesDuSite() {
+            fetch(API_URL + "/data")
+                .then(res => res.json())
+                .then(data => {
+                    // Si Python répond correctement, on prend ses chiffres
+                    if (data) {
+                        for (let id in data) {
+                            if (donneesLocales[id]) donneesLocales[id].valeur = data[id].valeur || 0;
+                        }
                     }
+                    actualiserDesign();
+                })
+                .catch(err => {
+                    console.log("Le serveur Python ne répond pas, utilisation du mode local.");
+                    actualiserDesign();
+                });
+        }
+
+        // Action de clic (+1 ou -1)
+        function modifierSite(id, val) {
+            // ÉTAPE ULTRA-IMPORTANTE : On fait l'addition immédiatement à l'écran !
+            if (donneesLocales[id]) {
+                donneesLocales[id].valeur += val;
+                actualiserDesign();
+            }
+
+            // On essaie d'envoyer l'info à Python en arrière-plan
+            fetch(API_URL + "/update", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id, action: 'add', val: val })
+            }).catch(err => console.log("Impossible de sauvegarder sur le serveur Python."));
+        }
+
+        // Mettre à jour l'affichage des chiffres
+        function actualiserDesign() {
+            for (let id in donneesLocales) {
+                let elVal = document.getElementById('site_val_' + id);
+                if (elVal) {
+                    elVal.innerText = donneesLocales[id].valeur;
                 }
+            }
+        }
 
-                // Lancement automatique au chargement de la page
-                chargerDonneesDuSite();
-
-            </script>
-
-    </section>
-
+        // Lancement automatique
+        chargerDonneesDuSite();
+    </script>
 </body>
 
 </html>

@@ -26,22 +26,22 @@ page_html = """
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
             <h4 id="site_nom_c1">J'adore</h4>
             <h2><span id="site_val_c1">0</span></h2>
-            <button onclick="modifierSite('c1', 1)">+1</button>
-            <button onclick="modifierSite('c1', -1)">-1</button>
+            <button onclick="modifierSite('Jadore', 1)">+1</button>
+            <button onclick="modifierSite('Jadore', -1)">-1</button>
         </div>
 
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
             <h4 id="site_nom_c2">J'aime</h4>
             <h2><span id="site_val_c2">0</span></h2>
-            <button onclick="modifierSite('c2', 1)">+1</button>
-            <button onclick="modifierSite('c2', -1)">-1</button>
+            <button onclick="modifierSite('Jaime', 1)">+1</button>
+            <button onclick="modifierSite('Jaime', -1)">-1</button>
         </div>
 
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
             <h4 id="site_nom_c3">J'aime pas</h4>
             <h2><span id="site_val_c3">0</span></h2>
-            <button onclick="modifierSite('c3', 1)">+1</button>
-            <button onclick="modifierSite('c3', -1)">-1</button>
+            <button onclick="modifierSite('Jaime pas', 1)">+1</button>
+            <button onclick="modifierSite('Jaime pas', -1)">-1</button>
         </div>
     </div>
 
@@ -86,26 +86,39 @@ page_html = """
 """
 
 
+# Structure exacte que votre JavaScript attend
+compteurs_data = {
+    "c1": {"nom": "J'adore", "valeur": 0},
+    "c2": {"nom": "J'aime", "valeur": 0},
+    "c3": {"nom": "J'aime pas", "valeur": 0}
+}
+
+
 @app.route("/")
 def index():
-  return render_template_string(page_html, compteurs=compteurs)
+    return render_template_string(page_html)
+
+
+@app.route("/data", methods=["GET"])
+def data():
+    return jsonify(compteurs_data)
 
 
 @app.route("/update", methods=["POST"])
 def update():
-  data = request.json
-  cid = data.get("id")
-  if cid in compteurs:
-    compteurs[cid] += data.get("val", 0)
-  return jsonify(compteurs)
-
-
-@app.route("/data")
-def data():
-  return jsonify(compteurs)  # Pour récupérer les données en JSON
+    req = request.get_json()
+    id_compteur = req.get('id')
+    valeur_a_ajouter = req.get('val', 0)
+    
+    # Correspondance entre le bouton HTML et la clé (c1, c2, c3)
+    cle_map = {'Jadore': 'c1', 'Jaime': 'c2', 'Jaime pas': 'c3'}
+    cle = cle_map.get(id_compteur)
+    
+    if cle in compteurs_data:
+        compteurs_data[cle]['valeur'] += valeur_a_ajouter
+    
+    return jsonify(compteurs_data)
 
 
 if __name__ == "__main__":
-  app.run(host="0.0.0.0", port=5000)
-
-
+    app.run(host="0.0.0.0", port=5000, debug=True)

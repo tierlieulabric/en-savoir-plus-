@@ -8,9 +8,9 @@ FICHIER_SAVE = "sauvegarde.json"
 
 # Structure par défaut avec ID, Nom et Valeur
 STRUCTURE_DEFAUT = {
-    "c1": {"nom": "J'adore", "valeur": 0},
-    "c2": {"nom": "J'aime", "valeur": 0},
-    "c3": {"nom": "J'aime pas", "valeur": 0}
+    "c1": {"nom": "Mon Compteur 1", "valeur": 0},
+    "c2": {"nom": "Mon Compteur 2", "valeur": 0},
+    "c3": {"nom": "Mon Compteur 3", "valeur": 0}
 }
 
 def charger_donnees():
@@ -49,22 +49,22 @@ page_html = """
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
             <h4 id="site_nom_c1">J'adore</h4>
             <h2><span id="site_val_c1">0</span></h2>
-            <button onclick="modifierSite('c1', 1)">+1</button>
-            <button onclick="modifierSite('c1', -1)">-1</button>
+            <button onclick="modifierSite('Jadore', 1)">+1</button>
+            <button onclick="modifierSite('Jadore', -1)">-1</button>
         </div>
 
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
             <h4 id="site_nom_c2">J'aime</h4>
             <h2><span id="site_val_c2">0</span></h2>
-            <button onclick="modifierSite('c2', 1)">+1</button>
-            <button onclick="modifierSite('c2', -1)">-1</button>
+            <button onclick="modifierSite('Jaime', 1)">+1</button>
+            <button onclick="modifierSite('Jaime', -1)">-1</button>
         </div>
 
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
             <h4 id="site_nom_c3">J'aime pas</h4>
             <h2><span id="site_val_c3">0</span></h2>
-            <button onclick="modifierSite('c3', 1)">+1</button>
-            <button onclick="modifierSite('c3', -1)">-1</button>
+            <button onclick="modifierSite('Jaime pas', 1)">+1</button>
+            <button onclick="modifierSite('Jaime pas', -1)">-1</button>
         </div>
     </div>
 
