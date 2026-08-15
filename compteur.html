@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="project.html">
     <link rel="stylesheet" href="script.js">
-    <link rel="stylesheet" href="index.html">
+    <link rel="stylesheet" href="app.py">
+    <link rel="stylesheet" href="compteur.html">
+    <link rel="stylesheet" href="page.html">
+    <link rel="stylesheet" href="QR Code.html">
+    <link rel="stylesheet" href="server.py">
     <script src="https://gstatic.com"></script>
     <script src="https://gstatic.com"></script>
 
@@ -96,81 +100,69 @@
 
         <div class="layout-centre">
 
-            <!--Case 1 -->
-            <label class="justify-center">
-                <input type="checkbox" id="check1"> <i class="ph ph-hand-heart"></i>
-                (J'Adore : <span id="count1">0</span>)
-            </label><br>
+            ```html
+            <!-- 1. L'affichage des compteurs sur votre site -->
+            <div style="font-family: Arial; text-align: center; max-width: 400px; margin: auto;">
+                <h3>Tableau de Bord</h3>
 
-            <!-- Case 2 -->
-            <label>
-                <input type="checkbox" id="check2"> <i class="ph ph-heart"></i>
-                (J'Aime : <span id="count2">0</span>)
-            </label><br>
+                <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                    <h4 id="site_nom_c1">Chargement...</h4>
+                    <h2><span id="site_val_c1">0</span></h2>
+                    <button onclick="modifierSite('c1', 1)">+1</button>
+                    <button onclick="modifierSite('c1', -1)">-1</button>
+                </div>
 
-            <!-- Case 3 -->
-            <label>
-                <input type="checkbox" id="check3"> <i class="ph ph-heart-straight-break"></i>
-                (J'Aime pas : <span id="count3">0</span>)
-            </label><br><br>
+                <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                    <h4 id="site_nom_c2">Chargement...</h4>
+                    <h2><span id="site_val_c2">0</span></h2>
+                    <button onclick="modifierSite('c2', 1)">+1</button>
+                    <button onclick="modifierSite('c2', -1)">-1</button>
+                </div>
 
-            <button class="margin-bottom" id="btnReset">Réinitialiser tous les compteurs</button>
+                <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                    <h4 id="site_nom_c3">Chargement...</h4>
+                    <h2><span id="site_val_c3">0</span></h2>
+                    <button onclick="modifierSite('c3', 1)">+1</button>
+                    <button onclick="modifierSite('c3', -1)">-1</button>
+                </div>
+            </div>
 
-        </div>
+            <!-- 2. Le script qui communique avec votre Python -->
+            <script>
+                // URL de votre serveur Python hébergé (sans le slash à la fin)
+                const API_URL = "https://onrender.com";
 
-        <script>
+                // Charger les données dès l'ouverture de la page du site
+                function chargerDonneesDuSite() {
+                    fetch(API_URL + "/data")
+                        .then(res => res.json())
+                        .then(data => actualiserDesign(data));
+                }
 
-            // Tableau pour stocker les fonctions de mise à jour de chaque compteur
-            const listeReset = [];
+                // Envoyer un +1 ou -1 depuis le site
+                function modifierSite(id, val) {
+                    fetch(API_URL + "/update", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: id, action: 'add', val: val })
+                    })
+                        .then(res => res.json())
+                        .then(data => actualiserDesign(data));
+                }
 
-            function lierCompteur(checkboxId, compteurId) {
-                const cb = document.getElementById(checkboxId);
-                const counter = document.getElementById(compteurId);
+                // Mettre à jour le texte et les chiffres sur votre page
+                function actualiserDesign(data) {
+                    for (let id in data) {
+                        let elVal = document.getElementById('site_val_' + id);
+                        let elNom = document.getElementById('site_nom_' + id);
+                        if (elVal) elVal.innerText = data[id].valeur;
+                        if (elNom) elNom.innerText = data[id].nom;
+                    }
+                }
 
-                let valeur = parseInt(localStorage.getItem(compteurId)) || 0;
-                counter.textContent = valeur;
-
-                cb.addEventListener('click', () => {
-                    valeur += 1;
-                    counter.textContent = valeur;
-                    localStorage.setItem(compteurId, valeur);
-                });
-
-                // On enregistre une fonction pour pouvoir remettre à zéro ce compteur plus tard
-                listeReset.push(() => {
-                    valeur = 0;
-                    counter.textContent = 0;
-                    cb.checked = false; // Décoche aussi la case par précaution
-                });
-            }
-
-            // Initialisation des trois compteurs
-            lierCompteur('check1', 'count1');
-            lierCompteur('check2', 'count2');
-            lierCompteur('check3', 'count3');
-
-            // Gestion du clic sur le bouton de réinitialisation
-            document.getElementById('btnReset').addEventListener('click', () => {
-                // 1. Efface toutes les données stockées dans le localStorage
-                localStorage.clear();
-
-                // 2. Exécute la remise à zéro visuelle pour chaque compteur
-                listeReset.forEach(resetFonction => resetFonction());
-            });
-
-        </script>
-
-
-
-
-
-
-
-
-
-
-
-
+                // Lancement automatique au chargement de la page
+                chargerDonneesDuSite();
+            </script>
 
     </section>
 

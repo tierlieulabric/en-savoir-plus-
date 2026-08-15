@@ -8,9 +8,9 @@ FICHIER_SAVE = "sauvegarde.json"
 
 # Structure par défaut avec ID, Nom et Valeur
 STRUCTURE_DEFAUT = {
-    "c1": {"nom": "J'Adore", "valeur": 0},
-    "c2": {"nom": "J'Aime", "valeur": 0},
-    "c3": {"nom": "J'Aime pas", "valeur": 0}
+    "c1": {"nom": "Compteur 1", "valeur": 0},
+    "c2": {"nom": "Compteur 2", "valeur": 0},
+    "c3": {"nom": "Compteur 3", "valeur": 0}
 }
 
 def charger_donnees():
