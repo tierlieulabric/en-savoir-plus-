@@ -8,13 +8,13 @@
 
 <body style="font-family: Arial; text-align: center; margin-top: 30px; background-color: #f4f4f9;">
 
-    <!-- 1. L'affichage des compteurs sur votre site -->
+    <!-- 1. L'affichage de vos compteurs -->
     <div style="font-family: Arial; text-align: center; max-width: 400px; margin: auto;">
         <h3>Tableau de Bord</h3>
 
         <!-- COMPTEUR 1 -->
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-            <h4>Vos Abonnés</h4> 
+            <h4>J'adore</h4> 
             <h2><span id="site_val_c1">0</span></h2>
             <button onclick="modifierSite('c1', 1)">+1</button>
             <button onclick="modifierSite('c1', -1)">-1</button>
@@ -22,7 +22,7 @@
 
         <!-- COMPTEUR 2 -->
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-            <h4>Vos Ventes</h4>
+            <h4>J'aime</h4>
             <h2><span id="site_val_c2">0</span></h2>
             <button onclick="modifierSite('c2', 1)">+1</button>
             <button onclick="modifierSite('c2', -1)">-1</button>
@@ -30,71 +30,57 @@
 
         <!-- COMPTEUR 3 -->
         <div style="margin: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-            <h4>Vos Avis</h4>
+            <h4>J'aime pas</h4>
             <h2><span id="site_val_c3">0</span></h2>
             <button onclick="modifierSite('c3', 1)">+1</button>
             <button onclick="modifierSite('c3', -1)">-1</button>
         </div>
     </div>
 
-    <!-- 2. Le script de communication ultra-sécurisé -->
+    <!-- 2. Le script de sauvegarde automatique locale -->
     <script>
-        const API_URL = "https://onrender.com";
-
-        // Boîte de secours locale : si Python ne répond pas, le site utilise ces chiffres
+        // Le site crée sa propre mémoire interne cachée dans le navigateur
         let donneesLocales = {
-            "c1": { valeur: 0 },
-            "c2": { valeur: 0 },
-            "c3": { valeur: 0 }
+            "c1": 0,
+            "c2": 0,
+            "c3": 0
         };
 
-        // Charger les données de départ
-        function chargerDonneesDuSite() {
-            fetch(API_URL + "/data")
-                .then(res => res.json())
-                .then(data => {
-                    // Si Python répond correctement, on prend ses chiffres
-                    if (data) {
-                        for (let id in data) {
-                            if (donneesLocales[id]) donneesLocales[id].valeur = data[id].valeur || 0;
-                        }
-                    }
-                    actualiserDesign();
-                })
-                .catch(err => {
-                    console.log("Le serveur Python ne répond pas, utilisation du mode local.");
-                    actualiserDesign();
-                });
+        // Fonction qui charge les chiffres enregistrés sur l'appareil
+        function chargerDonneesSauvegardees() {
+            let memoireDuSite = localStorage.getItem("mes_compteurs_sauvegarde");
+            
+            // Si l'appareil contient des chiffres déjà sauvegardés, on les récupère
+            if (memoireDuSite) {
+                donneesLocales = JSON.parse(memoireDuSite);
+            }
+            actualiserDesign();
         }
 
         // Action de clic (+1 ou -1)
         function modifierSite(id, val) {
-            // ÉTAPE ULTRA-IMPORTANTE : On fait l'addition immédiatement à l'écran !
-            if (donneesLocales[id]) {
-                donneesLocales[id].valeur += val;
-                actualiserDesign();
-            }
-
-            // On essaie d'envoyer l'info à Python en arrière-plan
-            fetch(API_URL + "/update", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: id, action: 'add', val: val })
-            }).catch(err => console.log("Impossible de sauvegarder sur le serveur Python."));
+            // 1. On fait le calcul mathématique
+            donneesLocales[id] += val;
+            
+            // 2. ÉTAPE MAGIQUE : On enregistre définitivement le résultat dans l'appareil !
+            localStorage.setItem("mes_compteurs_sauvegarde", JSON.stringify(donneesLocales));
+            
+            // 3. On met à jour l'écran
+            actualiserDesign();
         }
 
-        // Mettre à jour l'affichage des chiffres
+        // Mettre à jour l'affichage des chiffres à l'écran
         function actualiserDesign() {
             for (let id in donneesLocales) {
                 let elVal = document.getElementById('site_val_' + id);
                 if (elVal) {
-                    elVal.innerText = donneesLocales[id].valeur;
+                    elVal.innerText = donneesLocales[id];
                 }
             }
         }
 
-        // Lancement automatique
-        chargerDonneesDuSite();
+        // Lancer la récupération des données dès le démarrage de la page
+        chargerDonneesSauvegardees();
     </script>
 </body>
 
