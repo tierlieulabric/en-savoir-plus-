@@ -1,4 +1,8 @@
-from flask import Flask, jsonify, request
+try:
+    from flask import Flask, jsonify, request  # type: ignore
+except ImportError:
+    raise ImportError("Flask is not installed. Please run: pip install flask")
+
 try:
     from flask_cors import CORS  # type: ignore  # <-- OBLIGATOIRE POUR AUTORISER LA SAUVEGARDE VIA INTERNET
 except ImportError:
@@ -33,3 +37,6 @@ def update_data():
         compteurs_data['c3']['valeur'] += valeur_a_ajouter
         
     return jsonify(compteurs_data)
+
+if __name__ == "__main__":
+    app.run(debug=True)
