@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Mes Compteurs Côte à Côte</title>
+  <title>Mes Compteurs avec Bouton Nom</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,35 +11,61 @@
       margin: 0;
     }
     
-    h2 {
+    h2, .instruction {
       text-align: center;
     }
-    
-    .instruction {
-      text-align: center;
-      color: #555;
-    }
+    .instruction { color: #555; }
 
-    /* Le conteneur magique qui aligne les compteurs côte à côte */
+    /* Grille pour mettre les compteurs côte à côte */
     .compteurs-groupe {
       display: flex;
-      flex-wrap: wrap; /* Permet de revenir à la ligne sur petit écran */
+      flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
       margin-top: 30px;
     }
 
-    /* Style pour chaque bloc de compteur individuel */
+    /* Carte de chaque compteur */
     .compteur-card {
       background: white;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       display: flex;
-      flex-direction: column; /* Aligne le titre, les boutons et le score de haut en bas */
+      flex-direction: column;
       align-items: center;
       gap: 15px;
-      width: 200px; /* Largeur fixe pour chaque colonne */
+      width: 220px;
+    }
+
+    /* Zone du titre avec son bouton d'édition */
+    .zone-titre {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    .titre-texte {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+
+    /* Petit bouton discret pour le crayon */
+    .btn-edit {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 2px;
     }
 
     /* Zone des boutons de calcul */
@@ -49,24 +75,6 @@
       gap: 10px;
     }
 
-    /* Style pour la zone du titre modifiable */
-    .input-nom {
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      border-bottom: 2px dashed #ccc;
-      background: transparent;
-      padding: 5px;
-      width: 100%;
-      text-align: center;
-    }
-    .input-nom:focus {
-      outline: none;
-      border-bottom: 2px solid #4caf50;
-      background: #fafafa;
-    }
-
-    /* Style pour le chiffre du compteur */
     .input-score {
       width: 60px;
       text-align: center;
@@ -89,7 +97,7 @@
     .btn-plus { background-color: #4caf50; color: white; }
     .btn-reset { background-color: #777; color: white; width: 100%; }
     
-    /* Style pour la zone du Total */
+    /* Barre du Total */
     .total-card {
       background: #333;
       color: white;
@@ -99,7 +107,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 30px auto 0 auto; /* Centre la barre de total au milieu */
+      margin: 30px auto 0 auto;
       font-size: 22px;
       font-weight: bold;
     }
@@ -113,14 +121,16 @@
 <body>
 
   <h2>Mon Tableau de Bord</h2>
-  <p class="instruction">💡 <em>Clique sur les textes soulignés pour les renommer.</em></p>
+  <p class="instruction">💡 <em>Clique sur le crayon ✏️ pour changer le nom d'un compteur !</em></p>
 
-  <!-- ZONE CONTENANT LES 3 COMPTEURS ALIGNÉS -->
   <div class="compteurs-groupe">
   
     <!-- COMPTEUR 1 -->
     <div class="compteur-card">
-      <input type="text" class="input-nom" id="nom-1" value="Compteur A" oninput="sauvegarderNom(1)">
+      <div class="zone-titre">
+        <p class="titre-texte" id="nom-1">Compteur A</p>
+        <button class="btn-edit" onclick="changerNom(1)">✏️</button>
+      </div>
       <div class="boutons-actions">
         <button class="btn-moins" onclick="modifier(1, -1)">-</button>
         <input type="number" class="input-score" id="input-1" value="0" readonly>
@@ -131,7 +141,10 @@
 
     <!-- COMPTEUR 2 -->
     <div class="compteur-card">
-      <input type="text" class="input-nom" id="nom-2" value="Compteur B" oninput="sauvegarderNom(2)">
+      <div class="zone-titre">
+        <p class="titre-texte" id="nom-2">Compteur B</p>
+        <button class="btn-edit" onclick="changerNom(2)">✏️</button>
+      </div>
       <div class="boutons-actions">
         <button class="btn-moins" onclick="modifier(2, -1)">-</button>
         <input type="number" class="input-score" id="input-2" value="0" readonly>
@@ -142,9 +155,12 @@
 
     <!-- COMPTEUR 3 -->
     <div class="compteur-card">
-      <input type="text" class="input-nom" id="nom-3" value="Compteur C" oninput="sauvegarderNom(3)">
+      <div class="zone-titre">
+        <p class="titre-texte" id="nom-3">Compteur C</p>
+        <button class="btn-edit" onclick="changerNom(3)">✏️</button>
+      </div>
       <div class="boutons-actions">
-        <button class="btn-moins" onclick="modifier(3, -1)">-</button>
+        <button class="btn-moins" onclick="modifier(2, -1)">-</button>
         <input type="number" class="input-score" id="input-3" value="0" readonly>
         <button class="btn-plus" onclick="modifier(3, 1)">+</button>
       </div>
@@ -153,7 +169,6 @@
 
   </div>
 
-  <!-- ZONE DU TOTAL GENERAL -->
   <div class="total-card">
     <span>TOTAL GÉNÉRAL :</span>
     <span id="total-affichage">0</span>
@@ -169,11 +184,24 @@
         
         const nomSauvegarde = localStorage.getItem('nom-compteur-' + i);
         if (nomSauvegarde !== null) {
-          document.getElementById('nom-' + i).value = nomSauvegarde;
+          document.getElementById('nom-' + i).textContent = nomSauvegarde;
         }
       }
       calculerTotal();
     };
+
+    // Nouvelle fonction qui ouvre une petite boîte pour taper le nom
+    function changerNom(numero) {
+      const elementTitre = document.getElementById('nom-' + numero);
+      // On demande poliment le nouveau nom à l'utilisateur
+      const nouveauNom = prompt("Quel nom veux-tu donner à ce compteur ?", elementTitre.textContent);
+      
+      // Si l'utilisateur a écrit quelque chose et n'a pas cliqué sur "Annuler"
+      if (nouveauNom !== null && nouveauNom.trim() !== "") {
+        elementTitre.textContent = nouveauNom; // On change le nom à l'écran
+        localStorage.setItem('nom-compteur-' + numero, nouveauNom); // On le sauvegarde
+      }
+    }
 
     function calculerTotal() {
       let score1 = parseInt(document.getElementById('input-1').value);
@@ -181,11 +209,6 @@
       let score3 = parseInt(document.getElementById('input-3').value);
       let somme = score1 + score2 + score3;
       document.getElementById('total-affichage').textContent = somme;
-    }
-
-    function sauvegarderNom(numero) {
-      const nouveauNom = document.getElementById('nom-' + numero).value;
-      localStorage.setItem('nom-compteur-' + numero, nouveauNom);
     }
 
     function modifier(numero, changement) {
@@ -210,4 +233,5 @@
 
 </body>
 </html>
+
 
