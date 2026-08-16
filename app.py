@@ -7,7 +7,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_compteur_123!'
 
 # Configuration stable pour Render avec Eventlet
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
+# Laissez Flask-SocketIO choisir automatiquement le meilleur mode
+socketio = SocketIO(app, cors_allowed_origins="*")
+
 
 FICHIER_SAUVEGARDE = "/tmp/sauvegarde.json"
 
