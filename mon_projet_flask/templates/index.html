@@ -115,122 +115,44 @@
 
     <p> Vous pouvez voter pour une option :</p>
 
-    <div class="conteneur">
-        <!-- Compteur 1 -->
-        <div class="carte">
-            <div class="titre-fixe">J'adore</div>
-            <div class="chiffre" id="valeur-1">0</div>
-            <div class="groupe-boutons">
-                <button class="btn-moins" onclick="clicMoins('1')">- 1</button>
-                <button class="btn-plus" onclick="clicPlus('1')">+ 1</button>
-            </div>
-        </div>
+    <div class="compteur-container">
+  <!-- Bouton pour diminuer -->
+  <button id="btnMoins">-</button>
+  
+  <!-- Zone de saisie qui affiche le score -->
+  <input type="number" id="champCompteur" value="0" readonly>
+  
+  <!-- Bouton pour augmenter -->
+  <button id="btnPlus">+</button>
+  
+  <!-- Nouveau bouton pour remettre à zéro -->
+  <button id="btnReset">Remettre à zéro</button>
+</div>
 
-        <!-- Compteur 2 -->
-        <div class="carte">
-            <div class="titre-fixe">J'aime</div>
-            <div class="chiffre" id="valeur-2">0</div>
-            <div class="groupe-boutons">
-                <button class="btn-moins" onclick="clicMoins('2')">- 1</button>
-                <button class="btn-plus" onclick="clicPlus('2')">+ 1</button>
-            </div>
-        </div>
+<script>
+  // 1. On récupère tous les éléments de la page
+  const champ = document.getElementById('champCompteur');
+  const btnMoins = document.getElementById('btnMoins');
+  const btnPlus = document.getElementById('btnPlus');
+  const btnReset = document.getElementById('btnReset');
 
-        <!-- Compteur 3 -->
-        <div class="carte">
-            <div class="titre-fixe">J'aime pas</div>
-            <div class="chiffre" id="valeur-3">0</div>
-            <div class="groupe-boutons">
-                <button class="btn-moins" onclick="clicMoins('3')">- 1</button>
-                <button class="btn-plus" onclick="clicPlus('3')">+ 1</button>
-            </div>
-        </div>
-    </div>
+  // 2. Action quand on clique sur Plus
+  btnPlus.addEventListener('click', function() {
+    let valeurActuelle = parseInt(champ.value);
+    champ.value = valeurActuelle + 1;
+  });
 
-    <!--<button class="btn-reset" onclick="clicReset()">🔄 Remettre à zéro</button>-->
+  // 3. Action quand on clique sur Moins
+  btnMoins.addEventListener('click', function() {
+    let valeurActuelle = parseInt(champ.value);
+    // On vérifie si le nombre est plus grand que 0 avant d'enlever 1
+    if (valeurActuelle > 0) {
+      champ.value = valeurActuelle - 1;
+    }
+  });
 
-    <script>
-        // 🚨 METTEZ LE MÊME SALON UNIQUE QUE LA DERNIÈRE FOIS
-        const NOM_SALON_SECRET = "salon_compteurs_github_perso_123456";
-
-        let valeurs = { "1": 0, "2": 0, "3": 0 };
-
-        function chargerMemoireLocale() {
-            const memoire = localStorage.getItem('sauvegarde_compteurs_locaux');
-            if (memoire) {
-                valeurs = JSON.parse(memoire);
-                mettreAJourAffichage();
-            }
-        }
-
-        async function chargerHistoriqueInternet() {
-            try {
-                let reponse = await fetch(`https://ntfy.sh{NOM_SALON_SECRET}/json?poll=1`);
-                let texte = await reponse.text();
-                let lignes = texte.trim().split('\n');
-                if (lignes.length > 0 && lignes[lignes.length - 1]) {
-                    let dernierMessage = JSON.parse(lignes[lignes.length - 1]);
-                    if (dernierMessage.message) {
-                        valeurs = JSON.parse(dernierMessage.message);
-                        localStorage.setItem('sauvegarde_compteurs_locaux', JSON.stringify(valeurs));
-                        mettreAJourAffichage();
-                    }
-                }
-            } catch (e) { }
-        }
-
-        const source = new EventSource(`https://ntfy.sh{NOM_SALON_SECRET}/sse`);
-        source.onmessage = function (event) {
-            try {
-                const data = JSON.parse(event.data);
-                if (data.message) {
-                    valeurs = JSON.parse(data.message);
-                    localStorage.setItem('sauvegarde_compteurs_locaux', JSON.stringify(valeurs));
-                    mettreAJourAffichage();
-                }
-            } catch (e) { }
-        };
-
-        function mettreAJourAffichage() {
-            document.getElementById('valeur-1').innerText = valeurs["1"];
-            document.getElementById('valeur-2').innerText = valeurs["2"];
-            document.getElementById('valeur-3').innerText = valeurs["3"];
-        }
-
-        function envoyerAuCloud() {
-            localStorage.setItem('sauvegarde_compteurs_locaux', JSON.stringify(valeurs));
-            fetch(`https://ntfy.sh{NOM_SALON_SECRET}`, {
-                method: 'POST',
-                body: JSON.stringify(valeurs)
-            });
-        }
-
-        function clicPlus(id) {
-            valeurs[id] += 1;
-            mettreAJourAffichage();
-            envoyerAuCloud();
-        }
-
-        // 🆕 Nouvelle fonction pour retirer 1 point (bloqué à un minimum de 0)
-        function clicMoins(id) {
-            if (valeurs[id] > 0) {
-                valeurs[id] -= 1;
-                mettreAJourAffichage();
-                envoyerAuCloud();
-            }
-        }
-
-        function clicReset() {
-            if (confirm("Voulez-vous vraiment TOUT remettre à zéro ?")) {
-                valeurs = { "1": 0, "2": 0, "3": 0 };
-                mettreAJourAffichage();
-                envoyerAuCloud();
-            }
-        }
-
-        chargerMemoireLocale();
-        chargerHistoriqueInternet();
-    </script>
-</body>
-
-</html>
+  // 4. Action quand on clique sur Remettre à zéro
+  btnReset.addEventListener('click', function() {
+    champ.value = 0; // On force la valeur à redevenir 0
+  });
+</script>
