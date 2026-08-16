@@ -1,116 +1,123 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <title>Mes Compteurs</title>
+
+  <script>
+     // Si l'écran est plus petit que 768 pixels (taille d'un smartphone/tablette)
+  if (window.innerWidth < 768) { // JavaScript redirige le téléphone vers la page mobile
+    window.location.href="page-mobile.html" ; }
+  </script>
   
   <style>
 
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f4f4f9;
-      margin: 0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f9;
+    margin: 0;
     }
-    
+
     h2, .instruction {
-      text-align: center;
+    text-align: center;
     }
 
     .instruction { color: #555; }
 
     /* Grille pour mettre les compteurs côte à côte */
     .compteurs-groupe {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
     }
 
     /* Carte de chaque compteur */
     .compteur-card {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      width: 220px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 220px;
     }
 
     /* Zone du titre avec son bouton d'édition */
     .zone-titre {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
     }
 
     .titre-texte {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
     }
 
     /* Zone des boutons de calcul */
     .boutons-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     }
 
     .input-score {
-      width: 60px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+    width: 60px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     }
 
     button {
-      padding: 8px 15px;
-      font-size: 16px;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
+    padding: 8px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
     }
     .btn-moins { background-color: #ff4d4d; color: white; }
     .btn-plus { background-color: #4caf50; color: white; }
     .btn-reset { background-color: #777; color: white; width: 100%; }
-    
+
     /* Barre du Total */
     .total-card {
-      background: #333;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 8px;
-      max-width: 640px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 30px auto 0 auto;
-      font-size: 22px;
-      font-weight: bold;
+    background: #333;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    max-width: 640px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px auto 0 auto;
+    font-size: 22px;
+    font-weight: bold;
     }
     #total-affichage {
-      background: #4caf50;
-      padding: 5px 15px;
-      border-radius: 4px;
+    background: #4caf50;
+    padding: 5px 15px;
+    border-radius: 4px;
     }
-  </style>
+    </style>
 
 </head>
 
@@ -119,7 +126,7 @@
   <p class="instruction"><em>cliquer sur les boutons verts pour voter</em></p>
 
   <div class="compteurs-groupe">
-  
+
     <!-- COMPTEUR 1 -->
     <div class="compteur-card">
       <div class="zone-titre">
@@ -163,62 +170,63 @@
     <span id="total-affichage">0</span>
   </div>
 
-<script>
+  <script>
     // Étape 1 : On charge les scores et on calcule le total dès que la page s'ouvre
-    window.onload = function() {
-        for (let i = 1; i <= 3; i++) {
-            // On cherche s'il y a un score enregistré pour ce compteur
-            let scoreSauvegarde = localStorage.getItem('score_input_' + i);
-            
-            // Si on trouve une sauvegarde, on l'affiche dans la boîte
-            if (scoreSauvegarde !== null) {
-                document.getElementById('input-' + i).value = scoreSauvegarde;
-            }
+    window.onload = function () {
+      for (let i = 1; i <= 3; i++) {
+        // On cherche s'il y a un score enregistré pour ce compteur
+        let scoreSauvegarde = localStorage.getItem('score_input_' + i);
+
+        // Si on trouve une sauvegarde, on l'affiche dans la boîte
+        if (scoreSauvegarde !== null) {
+          document.getElementById('input-' + i).value = scoreSauvegarde;
         }
-        // On calcule le total de départ
-        mettreAJourTotal();
+      }
+      // On calcule le total de départ
+      mettreAJourTotal();
     };
 
     // Étape 2 : La fonction qui s'active quand on clique sur + ou -
     function modifier(idCompteur, changement) {
-        // On cible la boîte de saisie (l'input) du compteur cliqué
-        let inputEl = document.getElementById('input-' + idCompteur);
-        
-        // On transforme son texte en vrai nombre entier (si c'est vide, on prend 0)
-        let scoreActuel = parseInt(inputEl.value) || 0;
-        
-        // On fait le calcul (+1 ou -1)
-        let nouveauScore = scoreActuel + changement;
-        
-        // Optionnel : Si vous voulez bloquer le compteur pour qu'il ne descende pas sous 0, 
-        // enlevez les deux barres "//" devant la ligne suivante :
-        // if (nouveauScore < 0) nouveauScore = 0;
+      // On cible la boîte de saisie (l'input) du compteur cliqué
+      let inputEl = document.getElementById('input-' + idCompteur);
 
-        // On affiche le nouveau score dans la boîte
-        inputEl.value = nouveauScore;
-        
-        // On enregistre ce nouveau score dans la mémoire du navigateur
-        localStorage.setItem('score_input_' + idCompteur, nouveauScore);
-        
-        // On recalcule immédiatement le total général
-        mettreAJourTotal();
+      // On transforme son texte en vrai nombre entier (si c'est vide, on prend 0)
+      let scoreActuel = parseInt(inputEl.value) || 0;
+
+      // On fait le calcul (+1 ou -1)
+      let nouveauScore = scoreActuel + changement;
+
+      // Optionnel : Si vous voulez bloquer le compteur pour qu'il ne descende pas sous 0, 
+      // enlevez les deux barres "//" devant la ligne suivante :
+      // if (nouveauScore < 0) nouveauScore = 0;
+
+      // On affiche le nouveau score dans la boîte
+      inputEl.value = nouveauScore;
+
+      // On enregistre ce nouveau score dans la mémoire du navigateur
+      localStorage.setItem('score_input_' + idCompteur, nouveauScore);
+
+      // On recalcule immédiatement le total général
+      mettreAJourTotal();
     }
 
     // Étape 3 : La fonction qui calcule et affiche le TOTAL GÉNÉRAL
     function mettreAJourTotal() {
-        let total = 0;
-        
-        // On fait une boucle pour lire la valeur actuelle des 3 compteurs
-        for (let i = 1; i <= 3; i++) {
-            let valeurInput = document.getElementById('input-' + i).value;
-            total += parseInt(valeurInput) || 0;
-        }
-        
-        // On affiche la somme finale dans la zone du total général
-        document.getElementById('total-affichage').textContent = total;
+      let total = 0;
+
+      // On fait une boucle pour lire la valeur actuelle des 3 compteurs
+      for (let i = 1; i <= 3; i++) {
+        let valeurInput = document.getElementById('input-' + i).value;
+        total += parseInt(valeurInput) || 0;
+      }
+
+      // On affiche la somme finale dans la zone du total général
+      document.getElementById('total-affichage').textContent = total;
     }
-    
-</script>
+
+  </script>
 
 </body>
+
 </html>
