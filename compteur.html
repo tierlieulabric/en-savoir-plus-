@@ -163,49 +163,7 @@
     <span id="total-affichage">0</span>
   </div>
 
-  <script>
-    window.onload = function() {
-      for (let i = 1; i <= 3; i++) {
-        const scoreSauvegarde = localStorage.getItem('compteur-' + i);
-        if (scoreSauvegarde !== null) {
-          document.getElementById('input-' + i).value = scoreSauvegarde;
-        }
-        
-        const nomSauvegarde = localStorage.getItem('nom-compteur-' + i);
-        if (nomSauvegarde !== null) {
-          document.getElementById('nom-' + i).textContent = nomSauvegarde;
-        }
-      }
-      calculerTotal();
-    };
 
-    function calculerTotal() {
-      let score1 = parseInt(document.getElementById('input-1').value);
-      let score2 = parseInt(document.getElementById('input-2').value);
-      let score3 = parseInt(document.getElementById('input-3').value);
-      let somme = score1 + score2 + score3;
-      document.getElementById('total-affichage').textContent = somme;
-    }
-
-    function modifier(numero, changement) {
-      const champ = document.getElementById('input-' + numero);
-      let valeurActuelle = parseInt(champ.value);
-      let nouvelleValeur = valeurActuelle + changement;
-      
-      if (nouvelleValeur < 0) { nouvelleValeur = 0; }
-      
-      champ.value = nouvelleValeur;
-      localStorage.setItem('compteur-' + numero, nouvelleValeur);
-      calculerTotal();
-    }
-
-    function reset(numero) {
-      const champ = document.getElementById('input-' + numero);
-      champ.value = 0;
-      localStorage.setItem('compteur-' + numero, 0);
-      calculerTotal();
-    }
-  </script>
 
 </body>
 </html>
