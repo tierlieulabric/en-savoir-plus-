@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Mes Compteurs avec Bouton Nom</title>
+  <title>Mes Compteurs</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -120,51 +120,47 @@
 </head>
 <body>
 
-  <h2>Mon Tableau de Bord</h2>
-  <p class="instruction">💡 <em>Clique sur le crayon ✏️ pour changer le nom d'un compteur !</em></p>
+  <p class="instruction"><em>cliquer sur les boutons pour voter</em></p>
 
   <div class="compteurs-groupe">
   
     <!-- COMPTEUR 1 -->
     <div class="compteur-card">
       <div class="zone-titre">
-        <p class="titre-texte" id="nom-1">Compteur A</p>
-        <button class="btn-edit" onclick="changerNom(1)">✏️</button>
+        <p class="titre-texte" id="nom-1">🥰</p>
+        <button class="btn-edit" onclick="changerNom(1)"></button>
       </div>
       <div class="boutons-actions">
         <button class="btn-moins" onclick="modifier(1, -1)">-</button>
         <input type="number" class="input-score" id="input-1" value="0" readonly>
         <button class="btn-plus" onclick="modifier(1, 1)">+</button>
       </div>
-      <button class="btn-reset" onclick="reset(1)">RAZ</button>
     </div>
 
     <!-- COMPTEUR 2 -->
     <div class="compteur-card">
       <div class="zone-titre">
-        <p class="titre-texte" id="nom-2">Compteur B</p>
-        <button class="btn-edit" onclick="changerNom(2)">✏️</button>
+        <p class="titre-texte" id="nom-2">❤️</p>
+        <button class="btn-edit" onclick="changerNom(2)"></button>
       </div>
       <div class="boutons-actions">
         <button class="btn-moins" onclick="modifier(2, -1)">-</button>
         <input type="number" class="input-score" id="input-2" value="0" readonly>
         <button class="btn-plus" onclick="modifier(2, 1)">+</button>
       </div>
-      <button class="btn-reset" onclick="reset(2)">RAZ</button>
     </div>
 
     <!-- COMPTEUR 3 -->
     <div class="compteur-card">
       <div class="zone-titre">
-        <p class="titre-texte" id="nom-3">Compteur C</p>
-        <button class="btn-edit" onclick="changerNom(3)">✏️</button>
+        <p class="titre-texte" id="nom-3">😡</p>
+        <button class="btn-edit" onclick="changerNom(3)"></button>
       </div>
       <div class="boutons-actions">
         <button class="btn-moins" onclick="modifier(2, -1)">-</button>
         <input type="number" class="input-score" id="input-3" value="0" readonly>
         <button class="btn-plus" onclick="modifier(3, 1)">+</button>
       </div>
-      <button class="btn-reset" onclick="reset(3)">RAZ</button>
     </div>
 
   </div>
@@ -189,19 +185,6 @@
       }
       calculerTotal();
     };
-
-    // Nouvelle fonction qui ouvre une petite boîte pour taper le nom
-    function changerNom(numero) {
-      const elementTitre = document.getElementById('nom-' + numero);
-      // On demande poliment le nouveau nom à l'utilisateur
-      const nouveauNom = prompt("Quel nom veux-tu donner à ce compteur ?", elementTitre.textContent);
-      
-      // Si l'utilisateur a écrit quelque chose et n'a pas cliqué sur "Annuler"
-      if (nouveauNom !== null && nouveauNom.trim() !== "") {
-        elementTitre.textContent = nouveauNom; // On change le nom à l'écran
-        localStorage.setItem('nom-compteur-' + numero, nouveauNom); // On le sauvegarde
-      }
-    }
 
     function calculerTotal() {
       let score1 = parseInt(document.getElementById('input-1').value);
