@@ -6,10 +6,9 @@ from flask_socketio import SocketIO, emit
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_compteur_123!'
 
-# On autorise TOUTES les connexions (PC, Téléphones 4G/5G, etc.)
-socketio = SocketIO(app, cors_allowed_origins="*")
+# Configuration stable pour Render avec Eventlet
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
-# Sur Render, le fichier de sauvegarde doit être mis dans le dossier /tmp pour avoir le droit d'écrire
 FICHIER_SAUVEGARDE = "/tmp/sauvegarde.json"
 
 def donnees_par_defaut():
@@ -52,13 +51,6 @@ def au_incrementer(id_compteur):
         sauvegarder_donnees()
         emit('mise_a_jour', compteurs, broadcast=True)
 
-@socketio.on('diminuer')
-def au_diminuer(id_compteur):
-    if id_compteur in compteurs and compteurs[id_compteur]['valeur'] > 0:
-        compteurs[id_compteur]['valeur'] -= 1
-        sauvegarder_donnees()
-        emit('mise_a_jour', compteurs, broadcast=True)
-
 @socketio.on('changer_nom')
 def au_changer_nom(donnees):
     id_compteur = donnees.get('id')
@@ -76,6 +68,5 @@ def au_remettre_a_zero():
     emit('mise_a_jour', compteurs, broadcast=True)
 
 if __name__ == '__main__':
-    # Configuration automatique du port pour l'hébergeur
     port = int(os.environ.get('PORT', 5000))
     socketio.run(app, host='0.0.0.0', port=port, debug=False)

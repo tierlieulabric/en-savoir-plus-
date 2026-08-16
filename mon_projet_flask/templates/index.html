@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compteurs Partagés 4G</title>
+    <title>Compteurs Partagés Simple</title>
     <script src="https://socket.io"></script>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f9; padding: 20px; }
@@ -12,58 +12,48 @@
         .carte { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 180px; }
         .champ-nom { font-size: 1.2rem; font-weight: bold; color: #333; border: none; background: transparent; text-align: center; width: 100%; border-bottom: 2px dashed #ccc; padding: 5px 0; }
         .champ-nom:focus { border-bottom: 2px solid #007bff; outline: none; background: #f0f7ff; }
-        .chiffre { font-size: 3rem; font-weight: bold; color: #333; margin: 10px 0; }
-        .groupe-boutons { display: flex; gap: 10px; justify-content: center; }
-        button { border: none; padding: 10px; font-size: 1.1rem; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .btn-plus { background-color: #007bff; color: white; flex: 2; }
+        .chiffre { font-size: 3.5rem; font-weight: bold; color: #333; margin: 15px 0; }
+        
+        /* Bouton +1 Unique et Large */
+        button { border: none; padding: 12px; font-size: 1.2rem; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
+        .btn-plus { background-color: #007bff; color: white; }
         .btn-plus:active { background-color: #0056b3; }
-        .btn-moins { background-color: #ffc107; color: #212529; flex: 1; }
-        .btn-moins:active { background-color: #d39e00; }
-        .btn-reset { background-color: #dc3545; color: white; padding: 12px 30px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        .btn-reset { background-color: #dc3545; color: white; padding: 12px 30px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: auto; }
         .btn-reset:active { background-color: #bd2130; }
     </style>
 </head>
 <body>
 
-    <h1>📊 Votes en direct (Mobiles & PC)</h1>
-    <p>Fonctionne partout avec vos données mobiles !</p>
+    <h1>📊 Système de Vote Facile</h1>
+    <p>Cliquez sur + 1 pour voter. Tout se synchronise instantanément en 4G !</p>
 
     <div class="conteneur">
         <!-- Compteur 1 -->
         <div class="carte">
             <input type="text" class="champ-nom" id="nom-compteur1" value="{{ compteurs_initiaux.compteur1.nom }}" onchange="changerNom('compteur1')">
             <div class="chiffre" id="valeur-compteur1">{{ compteurs_initiaux.compteur1.valeur }}</div>
-            <div class="groupe-boutons">
-                <button class="btn-moins" onclick="clicMoins('compteur1')">-</button>
-                <button class="btn-plus" onclick="clicPlus('compteur1')">+</button>
-            </div>
+            <button class="btn-plus" onclick="clicPlus('compteur1')">+ 1</button>
         </div>
 
         <!-- Compteur 2 -->
         <div class="carte">
             <input type="text" class="champ-nom" id="nom-compteur2" value="{{ compteurs_initiaux.compteur2.nom }}" onchange="changerNom('compteur2')">
             <div class="chiffre" id="valeur-compteur2">{{ compteurs_initiaux.compteur2.valeur }}</div>
-            <div class="groupe-boutons">
-                <button class="btn-moins" onclick="clicMoins('compteur2')">-</button>
-                <button class="btn-plus" onclick="clicPlus('compteur2')">+</button>
-            </div>
+            <button class="btn-plus" onclick="clicPlus('compteur2')">+ 1</button>
         </div>
 
         <!-- Compteur 3 -->
         <div class="carte">
             <input type="text" class="champ-nom" id="nom-compteur3" value="{{ compteurs_initiaux.compteur3.nom }}" onchange="changerNom('compteur3')">
             <div class="chiffre" id="valeur-compteur3">{{ compteurs_initiaux.compteur3.valeur }}</div>
-            <div class="groupe-boutons">
-                <button class="btn-moins" onclick="clicMoins('compteur3')">-</button>
-                <button class="btn-plus" onclick="clicPlus('compteur3')">+</button>
-            </div>
+            <button class="btn-plus" onclick="clicPlus('compteur3')">+ 1</button>
         </div>
     </div>
 
     <button class="btn-reset" onclick="clicReset()">🔄 Remettre à zéro</button>
 
     <script>
-        // On laisse io() vide, il détecte automatiquement l'adresse internet du serveur Render
         const socket = io();
 
         socket.on('mise_a_jour', function(donnees) {
@@ -87,8 +77,8 @@
             socket.emit('changer_nom', { id: idCompteur, nom: nouveauNom });
         }
 
+        // Un seul clic envoie l'information de +1
         function clicPlus(idCompteur) { socket.emit('incrementer', idCompteur); }
-        function clicMoins(idCompteur) { socket.emit('diminuer', idCompteur); }
         function clicReset() { if (confirm("Tout effacer ?")) { socket.emit('remettre_a_zero'); } }
     </script>
 </body>
