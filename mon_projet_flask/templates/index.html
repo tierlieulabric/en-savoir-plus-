@@ -32,7 +32,7 @@
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
       gap: 15px;
       width: 220px;
@@ -120,7 +120,7 @@
 </head>
 <body>
 
-  <p class="instruction"><em>cliquer sur les boutons pour voter</em></p>
+  <p class="instruction"><em>cliquer sur les boutons verts pour voter</em></p>
 
   <div class="compteurs-groupe">
   
@@ -157,7 +157,7 @@
         <button class="btn-edit" onclick="changerNom(3)"></button>
       </div>
       <div class="boutons-actions">
-        <button class="btn-moins" onclick="modifier(2, -1)">-</button>
+        <button class="btn-moins" onclick="modifier(3, -1)">-</button>
         <input type="number" class="input-score" id="input-3" value="0" readonly>
         <button class="btn-plus" onclick="modifier(3, 1)">+</button>
       </div>
