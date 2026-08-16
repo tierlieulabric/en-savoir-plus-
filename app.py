@@ -15,9 +15,9 @@ FICHIER_SAUVEGARDE = "/tmp/sauvegarde.json"
 
 def donnees_par_defaut():
     return {
-        'compteur1': {'nom': 'Compteur A', 'valeur': 0},
-        'compteur2': {'nom': 'Compteur B', 'valeur': 0},
-        'compteur3': {'nom': 'Compteur C', 'valeur': 0}
+        'compteur1': {'nom': 'Jadore', 'valeur': 0},
+        'compteur2': {'nom': 'J aime', 'valeur': 0},
+        'compteur3': {'nom': 'Jaime pas', 'valeur': 0}
     }
 
 def charger_donnees():
