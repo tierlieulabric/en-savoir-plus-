@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compteurs Partagés GitHub</title>
+    <title>Compteurs Partagés avec Bouton Moins</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f9; padding: 20px; }
         .conteneur { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 30px; margin-bottom: 40px; }
@@ -11,38 +11,56 @@
         .carte { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 180px; }
         .titre-fixe { font-size: 1.2rem; font-weight: bold; color: #333; margin-bottom: 10px; }
         .chiffre { font-size: 3.5rem; font-weight: bold; color: #333; margin: 15px 0; }
-        button { border: none; padding: 12px; font-size: 1.2rem; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
-        .btn-plus { background-color: #007bff; color: white; }
+        
+        /* 🆕 Organisation des boutons côte à côte */
+        .groupe-boutons { display: flex; gap: 10px; justify-content: center; }
+        button { border: none; padding: 12px; font-size: 1.1rem; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        
+        .btn-plus { background-color: #007bff; color: white; flex: 2; }
         .btn-plus:active { background-color: #0056b3; }
+        
+        /* 🆕 Style du nouveau bouton moins */
+        .btn-moins { background-color: #ffc107; color: #212529; flex: 1; }
+        .btn-moins:active { background-color: #d39e00; }
+        
         .btn-reset { background-color: #dc3545; color: white; padding: 12px 30px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: auto; }
         .btn-reset:active { background-color: #bd2130; }
     </style>
 </head>
 <body>
 
-    <h1>📊 Système de Vote Partagé (Sauvegarde Active)</h1>
-    <p>Hébergé sur GitHub. Vos scores restent enregistrés en mémoire !</p>
+    <h1>📊 Système de Vote Partagé</h1>
+    <p>Votez en direct ! Vos scores restent enregistrés en mémoire.</p>
 
     <div class="conteneur">
         <!-- Compteur 1 -->
         <div class="carte">
             <div class="titre-fixe">Compteur A</div>
             <div class="chiffre" id="valeur-1">0</div>
-            <button class="btn-plus" onclick="clicPlus('1')">+ 1</button>
+            <div class="groupe-boutons">
+                <button class="btn-moins" onclick="clicMoins('1')">- 1</button>
+                <button class="btn-plus" onclick="clicPlus('1')">+ 1</button>
+            </div>
         </div>
 
         <!-- Compteur 2 -->
         <div class="carte">
             <div class="titre-fixe">Compteur B</div>
             <div class="chiffre" id="valeur-2">0</div>
-            <button class="btn-plus" onclick="clicPlus('2')">+ 1</button>
+            <div class="groupe-boutons">
+                <button class="btn-moins" onclick="clicMoins('2')">- 1</button>
+                <button class="btn-plus" onclick="clicPlus('2')">+ 1</button>
+            </div>
         </div>
 
         <!-- Compteur 3 -->
         <div class="carte">
             <div class="titre-fixe">Compteur C</div>
             <div class="chiffre" id="valeur-3">0</div>
-            <button class="btn-plus" onclick="clicPlus('3')">+ 1</button>
+            <div class="groupe-boutons">
+                <button class="btn-moins" onclick="clicMoins('3')">- 1</button>
+                <button class="btn-plus" onclick="clicPlus('3')">+ 1</button>
+            </div>
         </div>
     </div>
 
@@ -52,10 +70,8 @@
         // 🚨 METTEZ LE MÊME SALON UNIQUE QUE LA DERNIÈRE FOIS
         const NOM_SALON_SECRET = "salon_compteurs_github_perso_123456"; 
 
-        // Structure par défaut si tout est vide
         let valeurs = { "1": 0, "2": 0, "3": 0 };
 
-        // 💾 1. Charger la mémoire locale de l'appareil tout de suite
         function chargerMemoireLocale() {
             const memoire = localStorage.getItem('sauvegarde_compteurs_locaux');
             if (memoire) {
@@ -64,14 +80,10 @@
             }
         }
 
-        // 📡 2. Aller chercher le tout dernier score envoyé sur Internet (Historique Cloud)
         async function chargerHistoriqueInternet() {
             try {
-                // On demande à ntfy de nous donner les derniers messages envoyés (poll)
                 let reponse = await fetch(`https://ntfy.sh{NOM_SALON_SECRET}/json?poll=1`);
                 let texte = await reponse.text();
-                
-                // On découpe les lignes pour trouver le tout dernier message
                 let lignes = texte.trim().split('\n');
                 if (lignes.length > 0 && lignes[lignes.length - 1]) {
                     let dernierMessage = JSON.parse(lignes[lignes.length - 1]);
@@ -81,12 +93,9 @@
                         mettreAJourAffichage();
                     }
                 }
-            } catch (e) {
-                console.log("Impossible de récupérer l'historique internet pour le moment.");
-            }
+            } catch (e) {}
         }
 
-        // 3. Écouter les clics en temps réel des autres téléphones
         const source = new EventSource(`https://ntfy.sh{NOM_SALON_SECRET}/sse`);
         source.onmessage = function (event) {
             try {
@@ -106,7 +115,6 @@
         }
 
         function envoyerAuCloud() {
-            // Sauvegarde locale + Envoi sur Internet
             localStorage.setItem('sauvegarde_compteurs_locaux', JSON.stringify(valeurs));
             fetch(`https://ntfy.sh{NOM_SALON_SECRET}`, {
                 method: 'POST',
@@ -120,6 +128,15 @@
             envoyerAuCloud();
         }
 
+        // 🆕 Nouvelle fonction pour retirer 1 point (bloqué à un minimum de 0)
+        function clicMoins(id) {
+            if (valeurs[id] > 0) {
+                valeurs[id] -= 1;
+                mettreAJourAffichage();
+                envoyerAuCloud();
+            }
+        }
+
         function clicReset() {
             if (confirm("Voulez-vous vraiment TOUT remettre à zéro ?")) {
                 valeurs = { "1": 0, "2": 0, "3": 0 };
@@ -128,7 +145,6 @@
             }
         }
 
-        // 🚀 DÉMARRAGE AUTOMATIQUE : On charge d'abord l'appareil, puis on cherche sur Internet
         chargerMemoireLocale();
         chargerHistoriqueInternet();
     </script>
