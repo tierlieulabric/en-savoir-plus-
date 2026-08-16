@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes 3 Compteurs</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,14 +14,16 @@
             color: #ffffff;
             padding: 20px;
         }
+
         .container {
             max-width: 500px;
             margin: 20px auto;
             background: #1e1e1e;
             padding: 25px;
             border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         }
+
         .compteur-bloc {
             background: #2a2a2a;
             margin: 15px 0;
@@ -27,18 +31,25 @@
             border-radius: 12px;
             border-left: 5px solid #00ff88;
         }
-        h2 { margin: 0 0 10px 0; font-size: 20px; }
+
+        h2 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+        }
+
         .valeur {
             font-size: 50px;
             font-weight: bold;
             color: #00ff88;
             margin: 10px 0;
         }
+
         .buttons {
             display: flex;
             justify-content: center;
             gap: 15px;
         }
+
         button {
             font-size: 24px;
             width: 55px;
@@ -50,8 +61,17 @@
             cursor: pointer;
             font-weight: bold;
         }
-        button:disabled { opacity: 0.3; cursor: not-allowed; }
-        button.moins { background-color: #ff3b30; color: white; }
+
+        button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        button.moins {
+            background-color: #ff3b30;
+            color: white;
+        }
+
         .btn-refresh {
             width: 100%;
             margin-top: 15px;
@@ -63,115 +83,134 @@
             font-size: 16px;
             cursor: pointer;
         }
-        .status { margin-top: 15px; font-size: 13px; color: #aaa; }
+
+        .status {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #aaa;
+        }
     </style>
+
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Compteurs de la bric</h1>
-    
-    <!-- COMPTEUR 1 -->
-    <div class="compteur-bloc">
-        <h2>J'adore</h2>
-        <div class="valeur" id="score1">...</div>
-        <div class="buttons">
-            <button class="moins btn-clic" onclick="changerCompteur('compteur1', -1)">-</button>
-            <button class="btn-clic" onclick="changerCompteur('compteur1', 1)">+</button>
+    <div class="container">
+        <h1>Compteurs de la bric</h1>
+
+        <!-- COMPTEUR 1 -->
+        <div class="compteur-bloc">
+            <h2>J'adore</h2>
+            <div class="valeur" id="score1">0</div>
+            <div class="buttons">
+                <button class="moins btn-clic" onclick="changerCompteur('compteur1', -1)">-</button>
+                <button class="btn-clic" onclick="changerCompteur('compteur1', 1)">+</button>
+            </div>
         </div>
+
+        <!-- COMPTEUR 2 -->
+        <div class="compteur-bloc">
+            <h2> J'aime </h2>
+            <div class="valeur" id="score2">0</div>
+            <div class="buttons">
+                <button class="moins btn-clic" onclick="changerCompteur('compteur2', -1)">-</button>
+                <button class="btn-clic" onclick="changerCompteur('compteur2', 1)">+</button>
+            </div>
+        </div>
+
+        <!-- COMPTEUR 3 -->
+        <div class="compteur-bloc">
+            <h2> Je n'aime pas </h2>
+            <div class="valeur" id="score3">0</div>
+            <div class="buttons">
+                <button class="moins btn-clic" onclick="changerCompteur('compteur3', -1)">-</button>
+                <button class="btn-clic" onclick="changerCompteur('compteur3', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="status" id="status">Connexion...</div>
     </div>
 
-    <!-- COMPTEUR 2 -->
-    <div class="compteur-bloc">
-        <h2> J'aime </h2>
-        <div class="valeur" id="score2">...</div>
-        <div class="buttons">
-            <button class="moins btn-clic" onclick="changerCompteur('compteur2', -1)">-</button>
-            <button class="btn-clic" onclick="changerCompteur('compteur2', 1)">+</button>
-        </div>
-    </div>
+    <script>
+        // ⚠️ REMPLACEZ CETTE ADRESSE PAR VOTRE LIEN UNIQUE NPOINT
+        const BIN_URL = "https://api.npoint.io/5ae1c7d743734f5db6df";
 
-    <!-- COMPTEUR 3 -->
-    <div class="compteur-bloc" >
-        <h2> Je n'aime pas </h2>
-        <div class="valeur" id="score3">...</div>
-        <div class="buttons">
-            <button class="moins btn-clic" onclick="changerCompteur('compteur3', -1)">-</button>
-            <button class="btn-clic" onclick="changerCompteur('compteur3', 1)">+</button>
-        </div>
-    </div>
+        let scores = { compteur1: 0, compteur2: 0, compteur3: 0 };
+        let enCours = false;
 
-    <button class="btn-refresh" onclick="recupererCompteurs()">🔄 Actualiser tous les scores</button>
-    <div class="status" id="status">Connexion...</div>
-</div>
+        function figerInterface(etat) {
+            const boutons = document.querySelectorAll('.btn-clic');
+            boutons.forEach(b => b.disabled = etat);
+        }
 
-<script>
-    // ⚠️ REMPLACEZ CETTE ADRESSE PAR VOTRE LIEN UNIQUE NPOINT
-    const BIN_URL = "https://api.npoint.io/5ae1c7d743734f5db6df"; 
-    
-    let scores = { compteur1: 0, compteur2: 0, compteur3: 0 };
-    let enCours = false;
+        // Récupère les 3 scores en ligne d’un coup
+        async function recupererCompteurs() {
+            document.getElementById('status').innerText = "Vérification des scores...";
+            try {
+                const reponse = await fetch(BIN_URL);
+                const donnees = await reponse.json();
+                if (donnees) {
+                    // Si la base utilise une structure imbriquée (comme JSONBin), on s'adapte
+                    scores = donnees.record || donnees;
 
-    function figerInterface(etat) {
-        const boutons = document.querySelectorAll('.btn-clic');
-        boutons.forEach(b => b.disabled = etat);
-    }
-
-    // Récupère les 3 scores en ligne d'un coup
-    async function recupererCompteurs() {
-        if (enCours) return;
-        document.getElementById('status').innerText = "Vérification des scores...";
-        try {
-            const reponse = await fetch(BIN_URL);
-            const donnees = await reponse.json();
-            if (donnees) {
-                scores = donnees;
-                document.getElementById('score1').innerText = scores.compteur1 ?? 0;
-                document.getElementById('score2').innerText = scores.compteur2 ?? 0;
-                document.getElementById('score3').innerText = scores.compteur3 ?? 0;
-                document.getElementById('status').innerText = "Tous les scores sont à jour !";
+                    // Mise à jour de l'affichage
+                    document.getElementById('score1').innerText = scores.compteur1 ?? 0;
+                    document.getElementById('score2').innerText = scores.compteur2 ?? 0;
+                    document.getElementById('score3').innerText = scores.compteur3 ?? 0;
+                    document.getElementById('status').innerText = "Tous les scores sont à jour !";
+                }
+            } catch (erreur) {
+                document.getElementById('status').innerText = "Erreur de réseau. Réessayez.";
             }
-        } catch (erreur) {
-            document.getElementById('status').innerText = "Erreur de réseau. Réessayez.";
         }
-    }
 
-    // Sauvegarde l'ensemble des scores
-    async function sauvegarderCompteurs() {
-        enCours = true;
-        figerInterface(true);
-        document.getElementById('status').innerText = "Mise à jour en cours...";
-        try {
-            await fetch(BIN_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(scores)
-            });
-            document.getElementById('status').innerText = "Pris en compte !";
-        } catch (erreur) {
-            document.getElementById('status').innerText = "Échec de l'envoi.";
-            recupererCompteurs(); // Annule le faux clic en cas de bug réseau
-        } finally {
-            enCours = false;
-            figerInterface(false);
+        // Fonction pour incrémenter un compteur de manière sécurisée
+        async function incrementerCompteur(nomCompteur) {
+            if (enCours) return; // Empêche le double-clic frénétique
+
+            enCours = true;
+            figerInterface(true);
+            document.getElementById('status').innerText = "Mise à jour en cours...";
+
+            try {
+                // 1. On récupère d'abord les scores les plus frais sur le serveur
+                const reponseLecture = await fetch(BIN_URL);
+                const donnees = await reponseLecture.json();
+                scores = donnees.record || donnees;
+
+                // 2. On ajoute le point sur le score le plus récent
+                scores[nomCompteur] = (scores[nomCompteur] || 0) + 1;
+
+                // 3. On sauvegarde la totalité sur le serveur
+                // Note : Si tu utilises JSONBin, la méthode est souvent PUT pour modifier
+                const reponseSauvegarde = await fetch(BIN_URL, {
+                    method: "PUT", // PUT remplace les données existantes, POST en crée souvent de nouvelles
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Master-Key": "$2b$10..." // Ajoute ta clé API ici si nécessaire
+                    },
+                    body: JSON.stringify(scores)
+                });
+
+                if (reponseSauvegarde.ok) {
+                    // 4. On met à jour l'écran de l'utilisateur
+                    document.getElementById(`score${nomCompteur.slice(-1)}`).innerText = scores[nomCompteur];
+                    document.getElementById('status').innerText = "Pris en compte !";
+                } else {
+                    throw new Error("Erreur de sauvegarde");
+                }
+
+            } catch (erreur) {
+                document.getElementById('status').innerText = "Échec de l'envoi. Re-synchronisation...";
+                await recupererCompteurs(); // En cas de bug, on recharge les vrais scores
+            } finally {
+                enCours = false;
+                figerInterface(false); // Réactive les boutons (Ligne qui était coupée)
+            }
         }
-    }
-
-    // Modifie le bon compteur précisément
-    function changerCompteur(nomDuCompteur, action) {
-        scores[nomDuCompteur] += action;
         
-        // Met à jour l'affichage directement pour l'utilisateur
-        if(nomDuCompteur === 'compteur1') document.getElementById('score1').innerText = scores.compteur1;
-        if(nomDuCompteur === 'compteur2') document.getElementById('score2').innerText = scores.compteur2;
-        if(nomDuCompteur === 'compteur3') document.getElementById('score3').innerText = scores.compteur3;
-        
-        sauvegarderCompteurs();
-    }
-
-    // Chargement au démarrage
-    recupererCompteurs();
-</script>
+    </script>
 
 </body>
+
 </html>
