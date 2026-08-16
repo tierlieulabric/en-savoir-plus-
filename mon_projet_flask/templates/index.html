@@ -20,8 +20,8 @@
 </head>
 <body>
 
-    <h1>📊 Système de Vote Partagé</h1>
-    <p>Hébergé sur GitHub. Les clics se synchronisent en direct partout sur la planète !</p>
+    <h1>📊 Système de Vote Partagé (Sauvegarde Active)</h1>
+    <p>Hébergé sur GitHub. Vos scores restent enregistrés en mémoire !</p>
 
     <div class="conteneur">
         <!-- Compteur 1 -->
@@ -49,19 +49,51 @@
     <button class="btn-reset" onclick="clicReset()">🔄 Remettre à zéro</button>
 
     <script>
-        // 🚨 METTEZ UN NOM DE SALON UNIQUE ICI POUR NE PAS CORRESPONDRE AVEC UN AUTRE PROJET
-        // Exemple : "salon_vote_votre_prenom_99"
+        // 🚨 METTEZ LE MÊME SALON UNIQUE QUE LA DERNIÈRE FOIS
         const NOM_SALON_SECRET = "salon_compteurs_github_perso_123456"; 
 
+        // Structure par défaut si tout est vide
         let valeurs = { "1": 0, "2": 0, "3": 0 };
 
-        // Connexion radio instantanée avec le réseau Ntfy
+        // 💾 1. Charger la mémoire locale de l'appareil tout de suite
+        function chargerMemoireLocale() {
+            const memoire = localStorage.getItem('sauvegarde_compteurs_locaux');
+            if (memoire) {
+                valeurs = JSON.parse(memoire);
+                mettreAJourAffichage();
+            }
+        }
+
+        // 📡 2. Aller chercher le tout dernier score envoyé sur Internet (Historique Cloud)
+        async function chargerHistoriqueInternet() {
+            try {
+                // On demande à ntfy de nous donner les derniers messages envoyés (poll)
+                let reponse = await fetch(`https://ntfy.sh{NOM_SALON_SECRET}/json?poll=1`);
+                let texte = await reponse.text();
+                
+                // On découpe les lignes pour trouver le tout dernier message
+                let lignes = texte.trim().split('\n');
+                if (lignes.length > 0 && lignes[lignes.length - 1]) {
+                    let dernierMessage = JSON.parse(lignes[lignes.length - 1]);
+                    if (dernierMessage.message) {
+                        valeurs = JSON.parse(dernierMessage.message);
+                        localStorage.setItem('sauvegarde_compteurs_locaux', JSON.stringify(valeurs));
+                        mettreAJourAffichage();
+                    }
+                }
+            } catch (e) {
+                console.log("Impossible de récupérer l'historique internet pour le moment.");
+            }
+        }
+
+        // 3. Écouter les clics en temps réel des autres téléphones
         const source = new EventSource(`https://ntfy.sh{NOM_SALON_SECRET}/sse`);
         source.onmessage = function (event) {
             try {
                 const data = JSON.parse(event.data);
                 if (data.message) {
                     valeurs = JSON.parse(data.message);
+                    localStorage.setItem('sauvegarde_compteurs_locaux', JSON.stringify(valeurs));
                     mettreAJourAffichage();
                 }
             } catch (e) {}
@@ -74,6 +106,8 @@
         }
 
         function envoyerAuCloud() {
+            // Sauvegarde locale + Envoi sur Internet
+            localStorage.setItem('sauvegarde_compteurs_locaux', JSON.stringify(valeurs));
             fetch(`https://ntfy.sh{NOM_SALON_SECRET}`, {
                 method: 'POST',
                 body: JSON.stringify(valeurs)
@@ -87,13 +121,16 @@
         }
 
         function clicReset() {
-            if (confirm("Remettre à zéro pour tout le monde ?")) {
+            if (confirm("Voulez-vous vraiment TOUT remettre à zéro ?")) {
                 valeurs = { "1": 0, "2": 0, "3": 0 };
                 mettreAJourAffichage();
                 envoyerAuCloud();
             }
         }
+
+        // 🚀 DÉMARRAGE AUTOMATIQUE : On charge d'abord l'appareil, puis on cherche sur Internet
+        chargerMemoireLocale();
+        chargerHistoriqueInternet();
     </script>
 </body>
 </html>
-
