@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compteurs Partagés Simple</title>
+    <!-- Chargement propre de Socket.io -->
     <script src="https://socket.io"></script>
     <style>
         body {
@@ -63,7 +64,6 @@
             margin: 15px 0;
         }
 
-        /* Bouton +1 Unique et Large */
         button {
             border: none;
             padding: 12px;
@@ -99,8 +99,9 @@
 </head>
 
 <body>
-    
-    <p>Cliquez sur + 1 pour voter.</p>
+
+    <h1>📊 Système de Vote Facile</h1>
+    <p>Cliquez sur + 1 pour voter. Tout se synchronise instantanément en 4G !</p>
 
     <div class="conteneur">
         <!-- Compteur 1 -->
@@ -131,8 +132,12 @@
     <button class="btn-reset" onclick="clicReset()">🔄 Remettre à zéro</button>
 
     <script>
-        const socket = io({ transports: ['websocket', 'polling'] });
-
+        // 🆕 CORRECTION CRITIQUE ICI : On force une connexion multiniveau (polling d'abord)
+        // Cela évite que les navigateurs mobiles ne bloquent le clic.
+        const socket = io({
+            transports: ['polling', 'websocket'],
+            upgrade: true
+        });
 
         socket.on('mise_a_jour', function (donnees) {
             document.getElementById('valeur-compteur1').innerText = donnees.compteur1.valeur;
@@ -155,9 +160,15 @@
             socket.emit('changer_nom', { id: idCompteur, nom: nouveauNom });
         }
 
-        // Un seul clic envoie l'information de +1
-        function clicPlus(idCompteur) { socket.emit('incrementer', idCompteur); }
-        function clicReset() { if (confirm("Tout effacer ?")) { socket.emit('remettre_a_zero'); } }
+        function clicPlus(idCompteur) {
+            socket.emit('incrementer', idCompteur);
+        }
+
+        function clicReset() {
+            if (confirm("Tout effacer ?")) {
+                socket.emit('remettre_a_zero');
+            }
+        }
     </script>
 </body>
 
