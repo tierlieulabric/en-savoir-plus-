@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compteur Public Grand Public</title>
+    <title>Compteur de la bric</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,26 +13,30 @@
             color: #ffffff;
             padding: 20px;
         }
+
         .container {
             max-width: 450px;
             margin: 40px auto;
             background: #1e1e1e;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         }
+
         #nombre {
             font-size: 90px;
             font-weight: bold;
             color: #00ff88;
             margin: 15px 0;
         }
+
         .buttons {
             display: flex;
             justify-content: center;
             gap: 25px;
             margin-bottom: 20px;
         }
+
         button {
             font-size: 32px;
             width: 80px;
@@ -44,11 +49,17 @@
             font-weight: bold;
             transition: transform 0.1s, opacity 0.2s;
         }
+
         button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
-        button.moins { background-color: #ff3b30; color: white; }
+
+        button.moins {
+            background-color: #ff3b30;
+            color: white;
+        }
+
         .btn-action {
             width: auto;
             height: auto;
@@ -58,86 +69,103 @@
             background-color: #333;
             color: #fff;
         }
-        .status { margin-top: 20px; font-size: 13px; color: #aaa; }
+
+        .status {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #aaa;
+        }
     </style>
+
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Compteur Public (Grand Groupe)</h1>
-    <div id="nombre">...</div>
-    
-    <div class="buttons">
-        <button class="moins" id="btnMoins" onclick="changerCompteur(-1)">-</button>
-        <button id="btnPlus" onclick="changerCompteur(1)">+</button>
+    <div class="container">
+        <h1>Compteur de la bric </h1>
+        <div id="nombre">...</div>
+
+        <div class="buttons">
+            <button class="moins" id="btnMoins" onclick="changerCompteur(-1)">-</button>
+            <button id="btnPlus" onclick="changerCompteur(1)">+</button>
+        </div>
+
+        <div class="buttons">
+            <button class="moins" id="btnMoins" onclick="changerCompteur(-1)">-</button>
+            <button id="btnPlus" onclick="changerCompteur(1)">+</button>
+        </div>
+
+        <div class="buttons">
+            <button class="moins" id="btnMoins" onclick="changerCompteur(-1)">-</button>
+            <button id="btnPlus" onclick="changerCompteur(1)">+</button>
+        </div>
+
+        <button class="btn-action" onclick="recupererCompteur()">🔄 Actualiser le score</button>
+
+        <div class="status" id="status">Connexion au réseau mobile...</div>
     </div>
 
-    <button class="btn-action" onclick="recupererCompteur()">🔄 Actualiser le score</button>
+    <script>
+        // URL publique haute performance pour l'exemple
+        const BIN_URL = "https://api.npoint.io/9dae80da8b4ec4137403";
 
-    <div class="status" id="status">Connexion au réseau mobile...</div>
-</div>
+        let valeurActuelle = 0;
+        let enCours = false;
 
-<script>
-    // URL publique haute performance pour l'exemple
-    const BIN_URL = "https://api.npoint.io/9dae80da8b4ec4137403"; 
-    
-    let valeurActuelle = 0;
-    let enCours = false;
+        // Bloque ou débloque l'écran pour éviter les conflits de clics rapides
+        function figerInterface(etat) {
+            document.getElementById('btnPlus').disabled = etat;
+            document.getElementById('btnMoins').disabled = etat;
+        }
 
-    // Bloque ou débloque l'écran pour éviter les conflits de clics rapides
-    function figerInterface(etat) {
-        document.getElementById('btnPlus').disabled = etat;
-        document.getElementById('btnMoins').disabled = etat;
-    }
-
-    // Récupère la valeur en ligne
-    async function recupererCompteur() {
-        if (enCours) return;
-        document.getElementById('status').innerText = "Vérification du score...";
-        try {
-            const reponse = await fetch(BIN_URL);
-            const donnees = await reponse.json();
-            if (donnees && typeof donnees.valeur !== 'undefined') {
-                valeurActuelle = donnees.valeur;
-                document.getElementById('nombre').innerText = valeurActuelle;
-                document.getElementById('status').innerText = "À jour !";
+        // Récupère la valeur en ligne
+        async function recupererCompteur() {
+            if (enCours) return;
+            document.getElementById('status').innerText = "Vérification du score...";
+            try {
+                const reponse = await fetch(BIN_URL);
+                const donnees = await reponse.json();
+                if (donnees && typeof donnees.valeur !== 'undefined') {
+                    valeurActuelle = donnees.valeur;
+                    document.getElementById('nombre').innerText = valeurActuelle;
+                    document.getElementById('status').innerText = "À jour !";
+                }
+            } catch (erreur) {
+                document.getElementById('status').innerText = "Réseau saturé. Réessayez.";
             }
-        } catch (erreur) {
-            document.getElementById('status').innerText = "Réseau saturé. Réessayez.";
         }
-    }
 
-    // Envoie le nouveau chiffre de manière sécurisée
-    async function sauvegarderCompteur(nouvelleValeur) {
-        enCours = true;
-        figerInterface(true);
-        document.getElementById('status').innerText = "Envoi du clic...";
-        try {
-            await fetch(BIN_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ valeur: nouvelleValeur })
-            });
-            document.getElementById('status').innerText = "Pris en compte !";
-        } catch (erreur) {
-            document.getElementById('status').innerText = "Échec de l'envoi. Réessayez.";
-            // Annule le faux clic en cas de coupure de réseau mobile
-            valeurActuelle = parseInt(document.getElementById('nombre').innerText);
-        } finally {
-            enCours = false;
-            figerInterface(false);
+        // Envoie le nouveau chiffre de manière sécurisée
+        async function sauvegarderCompteur(nouvelleValeur) {
+            enCours = true;
+            figerInterface(true);
+            document.getElementById('status').innerText = "Envoi du clic...";
+            try {
+                await fetch(BIN_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ valeur: nouvelleValeur })
+                });
+                document.getElementById('status').innerText = "Pris en compte !";
+            } catch (erreur) {
+                document.getElementById('status').innerText = "Échec de l'envoi. Réessayez.";
+                // Annule le faux clic en cas de coupure de réseau mobile
+                valeurActuelle = parseInt(document.getElementById('nombre').innerText);
+            } finally {
+                enCours = false;
+                figerInterface(false);
+            }
         }
-    }
 
-    function changerCompteur(action) {
-        valeurActuelle += action;
-        document.getElementById('nombre').innerText = valeurActuelle;
-        sauvegarderCompteur(valeurActuelle);
-    }
+        function changerCompteur(action) {
+            valeurActuelle += action;
+            document.getElementById('nombre').innerText = valeurActuelle;
+            sauvegarderCompteur(valeurActuelle);
+        }
 
-    // Chargement initial au lancement de la page
-    recupererCompteur();
-</script>
+        // Chargement initial au lancement de la page
+        recupererCompteur();
+    </script>
 
 </body>
 
