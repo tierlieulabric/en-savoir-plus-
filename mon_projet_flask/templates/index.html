@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compteurs Partagés Simple</title>
+    <title>Compteurs</title>
     <!-- Chargement propre de Socket.io -->
     <script src="https://socket.io"></script>
     <style>
@@ -99,9 +99,8 @@
 </head>
 
 <body>
-
-    <h1>📊 Système de Vote Facile</h1>
-    <p>Cliquez sur + 1 pour voter. Tout se synchronise instantanément en 4G !</p>
+    
+    <p>Cliquez sur + 1 pour voter.</p>
 
     <div class="conteneur">
         <!-- Compteur 1 -->
@@ -109,7 +108,7 @@
             <input type="text" class="champ-nom" id="nom-compteur1" value="{{J'adore}}"
                 onchange="changerNom('compteur1')">
             <div class="chiffre" id="valeur-compteur1">0</div>
-            <button class="btn-plus" onclick="clicPlus('Jadore')">+ 1</button>
+            <button class="btn-plus" onclick="clicPlus('0')">+ 1</button>
         </div>
 
         <!-- Compteur 2 -->
@@ -117,7 +116,7 @@
             <input type="text" class="champ-nom" id="nom-compteur2" value="{{ J'aime}}"
                 onchange="changerNom('compteur2')">
             <div class="chiffre" id="valeur-compteur2">0</div>
-            <button class="btn-plus" onclick="clicPlus('Jaime')">+ 1</button>
+            <button class="btn-plus" onclick="clicPlus('0')">+ 1</button>
         </div>
 
         <!-- Compteur 3 -->
@@ -125,7 +124,7 @@
             <input type="text" class="champ-nom" id="nom-compteur3" value="{{J'aime pas}}"
                 onchange="changerNom('compteur3')">
             <div class="chiffre" id="valeur-compteur3">0</div>
-            <button class="btn-plus" onclick="clicPlus('Jaime pas')">+ 1</button>
+            <button class="btn-plus" onclick="clicPlus('0')">+ 1</button>
         </div>
     </div>
 
