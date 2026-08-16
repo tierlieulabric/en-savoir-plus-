@@ -3,113 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Compteurs Privés</title>
+    <title>Compteurs Partagés GitHub</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f9; padding: 20px; }
         .conteneur { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 30px; margin-bottom: 40px; }
         @media(min-width: 600px) { .conteneur { flex-direction: row; justify-content: center; } }
         .carte { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 180px; }
-        
-        .champ-nom { font-size: 1.2rem; font-weight: bold; color: #333; border: none; background: transparent; text-align: center; width: 100%; border-bottom: 2px dashed #ccc; padding: 5px 0; }
-        .champ-nom:focus { border-bottom: 2px solid #007bff; outline: none; background: #f0f7ff; }
-
+        .titre-fixe { font-size: 1.2rem; font-weight: bold; color: #333; margin-bottom: 10px; }
         .chiffre { font-size: 3.5rem; font-weight: bold; color: #333; margin: 15px 0; }
         button { border: none; padding: 12px; font-size: 1.2rem; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
-        
         .btn-plus { background-color: #007bff; color: white; }
         .btn-plus:active { background-color: #0056b3; }
-        
         .btn-reset { background-color: #dc3545; color: white; padding: 12px 30px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: auto; }
         .btn-reset:active { background-color: #bd2130; }
     </style>
 </head>
 <body>
 
-    <h1>📊 Mes Compteurs Modifiables</h1>
-    <p>Cliquez sur + 1. Tout est sauvegardé automatiquement dans l'appareil !</p>
+    <h1>📊 Système de Vote Partagé</h1>
+    <p>Hébergé sur GitHub. Les clics se synchronisent en direct partout sur la planète !</p>
 
     <div class="conteneur">
         <!-- Compteur 1 -->
         <div class="carte">
-            <input type="text" class="champ-nom" id="nom-compteur1" onchange="sauvegarderDonnees()">
-            <div class="chiffre" id="valeur-compteur1">0</div>
-            <button class="btn-plus" onclick="clicPlus('compteur1')">+ 1</button>
+            <div class="titre-fixe">Compteur A</div>
+            <div class="chiffre" id="valeur-1">0</div>
+            <button class="btn-plus" onclick="clicPlus('1')">+ 1</button>
         </div>
 
         <!-- Compteur 2 -->
         <div class="carte">
-            <input type="text" class="champ-nom" id="nom-compteur2" onchange="sauvegarderDonnees()">
-            <div class="chiffre" id="valeur-compteur2">0</div>
-            <button class="btn-plus" onclick="clicPlus('compteur2')">+ 1</button>
+            <div class="titre-fixe">Compteur B</div>
+            <div class="chiffre" id="valeur-2">0</div>
+            <button class="btn-plus" onclick="clicPlus('2')">+ 1</button>
         </div>
 
         <!-- Compteur 3 -->
         <div class="carte">
-            <input type="text" class="champ-nom" id="nom-compteur3" onchange="sauvegarderDonnees()">
-            <div class="chiffre" id="valeur-compteur3">0</div>
-            <button class="btn-plus" onclick="clicPlus('compteur3')">+ 1</button>
+            <div class="titre-fixe">Compteur C</div>
+            <div class="chiffre" id="valeur-3">0</div>
+            <button class="btn-plus" onclick="clicPlus('3')">+ 1</button>
         </div>
     </div>
 
-    <button class="btn-reset" onclick="clicReset()">🔄 Remettre tout à zéro</button>
+    <button class="btn-reset" onclick="clicReset()">🔄 Remettre à zéro</button>
 
     <script>
-        // Structure par défaut si aucune sauvegarde n'existe dans le téléphone/PC
-        let compteurs = {
-            compteur1: { nom: "Compteur A", valeur: 0 },
-            compteur2: { nom: "Compteur B", valeur: 0 },
-            compteur3: { nom: "Compteur C", valeur: 0 }
+        // 🚨 METTEZ UN NOM DE SALON UNIQUE ICI POUR NE PAS CORRESPONDRE AVEC UN AUTRE PROJET
+        // Exemple : "salon_vote_votre_prenom_99"
+        const NOM_SALON_SECRET = "salon_compteurs_github_perso_123456"; 
+
+        let valeurs = { "1": 0, "2": 0, "3": 0 };
+
+        // Connexion radio instantanée avec le réseau Ntfy
+        const source = new EventSource(`https://ntfy.sh{NOM_SALON_SECRET}/sse`);
+        source.onmessage = function (event) {
+            try {
+                const data = JSON.parse(event.data);
+                if (data.message) {
+                    valeurs = JSON.parse(data.message);
+                    mettreAJourAffichage();
+                }
+            } catch (e) {}
         };
 
-        // Charger les données à l'ouverture de la page
-        function chargerDonnees() {
-            const memoire = localStorage.getItem('mes_compteurs_online');
-            if (memoire) {
-                compteurs = JSON.parse(memoire);
-            }
-            afficherDonnees();
+        function mettreAJourAffichage() {
+            document.getElementById('valeur-1').innerText = valeurs["1"];
+            document.getElementById('valeur-2').innerText = valeurs["2"];
+            document.getElementById('valeur-3').innerText = valeurs["3"];
         }
 
-        // Sauvegarder automatiquement sur l'appareil
-        function sauvegarderDonnees() {
-            compteurs.compteur1.nom = document.getElementById('nom-compteur1').value;
-            compteurs.compteur2.nom = document.getElementById('nom-compteur2').value;
-            compteurs.compteur3.nom = document.getElementById('nom-compteur3').value;
-            localStorage.setItem('mes_compteurs_online', JSON.stringify(compteurs));
+        function envoyerAuCloud() {
+            fetch(`https://ntfy.sh{NOM_SALON_SECRET}`, {
+                method: 'POST',
+                body: JSON.stringify(valeurs)
+            });
         }
 
-        // Afficher les vrais chiffres sur l'écran
-        function afficherDonnees() {
-            document.getElementById('nom-compteur1').value = compteurs.compteur1.nom;
-            document.getElementById('valeur-compteur1').innerText = compteurs.compteur1.valeur;
-
-            document.getElementById('nom-compteur2').value = compteurs.compteur2.nom;
-            document.getElementById('valeur-compteur2').innerText = compteurs.compteur2.valeur;
-
-            document.getElementById('nom-compteur3').value = compteurs.compteur3.nom;
-            document.getElementById('valeur-compteur3').innerText = compteurs.compteur3.valeur;
-        }
-
-        // Action du bouton + 1
         function clicPlus(id) {
-            compteurs[id].valeur += 1;
-            sauvegarderDonnees();
-            afficherDonnees();
+            valeurs[id] += 1;
+            mettreAJourAffichage();
+            envoyerAuCloud();
         }
 
-        // Remettre à zéro
         function clicReset() {
-            if (confirm("Voulez-vous vraiment remettre à zéro ?")) {
-                compteurs.compteur1.valeur = 0;
-                compteurs.compteur2.valeur = 0;
-                compteurs.compteur3.valeur = 0;
-                sauvegarderDonnees();
-                afficherDonnees();
+            if (confirm("Remettre à zéro pour tout le monde ?")) {
+                valeurs = { "1": 0, "2": 0, "3": 0 };
+                mettreAJourAffichage();
+                envoyerAuCloud();
             }
         }
-
-        // Lancement automatique
-        chargerDonnees();
     </script>
 </body>
 </html>
