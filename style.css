@@ -88,7 +88,7 @@ h2 {
 }
 
 .marginleft8 {
-    margin-left: 450px;
+    margin-left: 40px;
 }
 
 .margin-bottom {
@@ -434,6 +434,10 @@ input {
     gap: 55px;
 }
 
+.gap4{
+    gap: 40px;
+}
+
 .btn3 {
     width: 50px;
     height: 50px;
@@ -451,4 +455,15 @@ input {
     /* Centre le texte à l'intérieur des éléments */
     width: 100%;
     /* Prend toute la largeur disponible */
+}
+
+.le-titre {
+  /* 1. Aligne les blocs enfants au centre (si parent Flexbox) */
+  justify-content: center; 
+  
+  /* 2. Centre le texte à l'intérieur du bloc */
+  text-align: center;      
+  
+  /* 3. Souligne le texte */
+  text-decoration: underline; 
 }
