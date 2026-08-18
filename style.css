@@ -222,7 +222,7 @@ header {
 /* section HERO*/
 
 .sectionhero {
-    background-image: url(asset/Banner.j);
+    background-image: url(asset/Banner.jpg);
 
     background-repeat: no-repeat;
 
@@ -323,7 +323,6 @@ h1 {
 .marginend {
     justify-content: flex-end;
 }
-
 
 .colorwhite {
     color: brown;
@@ -434,15 +433,15 @@ input {
     gap: 55px;
 }
 
-.gap4{
+.gap4 {
     gap: 40px;
 }
 
-.gap5{
+.gap5 {
     gap: 80px;
 }
 
-.gap6{
+.gap6 {
     gap: 80px;
 }
 
@@ -466,12 +465,12 @@ input {
 }
 
 .le-titre {
-  /* 1. Aligne les blocs enfants au centre (si parent Flexbox) */
-  justify-content: center; 
-  
-  /* 2. Centre le texte à l'intérieur du bloc */
-  text-align: center;      
-  
-  /* 3. Souligne le texte */
-  text-decoration: underline; 
+    /* 1. Aligne les blocs enfants au centre (si parent Flexbox) */
+    justify-content: center;
+
+    /* 2. Centre le texte à l'intérieur du bloc */
+    text-align: center;
+
+    /* 3. Souligne le texte */
+    text-decoration: underline;
 }

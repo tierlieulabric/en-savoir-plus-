@@ -109,9 +109,9 @@
 
     <!--1ER Paragraphe-->
 
-    <section class="flex backgroundcolor5 space-between">
+    <section class="flex backgroundcolor5">
 
-        <div class="margin-top-30 marginleft">
+        <div class="marginleft margin-top-30 margin-bottom">
 
             <h3>
                 Qu'est ce qu'un tiers lieu ?
@@ -122,14 +122,104 @@
                 <br>où les individus peuvent se réunir pour travailler,
                 <br>s'approprier des savoirs et/ou des compétences.
                 <br>Pour se rencontrer ou simplement échanger de façon informelle.
-                <br>C'est un lieu accueillant, une maison commune où l'on participe et crée du lien social.
+                <br>C'est un lieu accueillant, 
+                <br>une maison commune où l'on participe et crée du lien social.
             </p>
 
         </div>
 
-        <!--2EME Paragraphe-->
+        <div class="conteneur-texte">
+            <!-- Silhouette gauche : utilise la moitié droite de la forme de l'image -->
+            <div class="silhouette-gauche"></div>
 
-        <div class="margin-top-30 marginright marginleft">
+            <!-- Silhouette droite : utilise la moitié gauche de la forme de l'image -->
+            <div class="silhouette-droite"></div>
+
+            <!-- La vraie image affichée au centre -->
+            <img src="asset/economie_circulaire_vert-removebg.png" alt="photo d'économie circulaire" class="image-centree">
+
+        </div>
+
+        <style>
+            /* --- 1. CONFIGURATION SUR ORDINATEUR (GRAND ÉCRAN) --- */
+            .conteneur-texte {
+                max-width: 650px;
+                width: 200px;
+                text-align: justify;
+                position: relative;
+                font-family: sans-serif;
+                line-height: 1.6;
+                margin: 0 auto;
+            }
+
+            .silhouette-gauche {
+                float: left;
+                width: 50%;
+                height: 200px;
+                /* Ajustez la hauteur selon la taille de votre image */
+
+                /* IMPORTANT : Mettez exactement la même URL d'image ici */
+                shape-outside: url("asset/economie_circulaire_vert-removebg.png");
+
+                /* On décale la forme pour que le texte épouse le côté gauche du sujet */
+                shape-image-threshold: 0.1;
+                /* Détecte la transparence (0 = transparent, 1 = opaque) */
+                margin-right: 20px;
+            }
+
+            .silhouette-droite {
+                float: right;
+                width: 50%;
+                height: 200px;
+
+                /* IMPORTANT : Mettez exactement la même URL d'image ici */
+                shape-outside: url("asset/economie_circulaire_vert-removebg.png");
+
+                shape-image-threshold: 0.1;
+                margin-left: 20px;
+            }
+
+            .image-centree {
+                position: absolute;
+                left: 50px;
+                top: 70px;
+                transform: translateX(-50%);
+                width: auto;
+                height: 200px;
+                /* Doit être identique à la hauteur des silhouettes */
+                pointer-events: none;
+                /* Permet de survoler ou sélectionner le texte derrière si besoin */
+            }
+
+            /* --- 2. CONFIGURATION SUR MOBILE (ADAPTATIF) --- */
+            @media (max-width: 650px) {
+
+                .silhouette-gauche,
+                .silhouette-droite {
+                    display: none;
+                    /* On annule l'enrobage pour éviter que le texte soit écrasé */
+                }
+
+                .conteneur-texte {
+                    text-align: left;
+                    padding: 15px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .image-centree {
+                    position: static;
+                    transform: none;
+                    height: 50px;
+                    /* On réduit un peu l'image sur mobile */
+                    margin-bottom: 20px;
+                }
+            }
+        </style>
+
+
+        <div class=" margin-top-30 margin-bottom marginright">
 
             <h3>
                 Qu'est ce que l'économie circulaire ?
@@ -138,7 +228,8 @@
             <p>
                 L'Agence De l'Environnement et de la Maîtrise de L'Energie (ADEME)
                 <br>définit l'économie circulaire comme un systeme économique d'échange
-                <br>et de production. Qui, à tous les stades du cycle de vie des produits
+                <br>et de production. 
+                <br>Qui, à tous les stades du cycle de vie des produits
                 <br>vise à augmenter l'éfficacité de l'utilisation des ressources
                 <br>et à diminuer l'impact sur l'envirronement,
                 <br>tout en dévellopant le bien-être des individus.
@@ -148,39 +239,26 @@
 
     </section>
 
-    <!-- 3EME Paragraphe -->
+    <section class="flex backgroundcolor6 justify-center margin-top-30">
 
-    <section class="backgroundcolor5">
-
-        <div class="flex backgroundcolor5 justify-center">
-
-            <img class="" src="asset/economie_circulaire_vert-removebg.png"
-                alt="photo économie circulaire">
-
-        </div>
-
-        <div class="flex backgroundcolor5 margin-top-30 justify-center marginleft">
+        <div class="backgroundcolor5 margin-top-30 marginleft">
 
             <div class="">
 
-                <div class="">
+                <h3>
+                    Notre mission et notre vision
+                </h3>
 
-                    <h3>
-                        Notre mission et notre vision
-                    </h3>
+            </div>
 
-                </div>
+            <div class="">
 
-                <div class="">
-
-                    <p>
-                        L'association oeuvre pour le partage de savoir
-                        au service des habitants autour de l'économie circulaire.
-                        <br>Ce commun soucieux de l'environnement, crée des emplois adaptés et valorise des objets.
-                        <br>Elle s'inscrit dans une démarche Responsable Sociétale des Entreprises.(RSE)
-                    </p>
-
-                </div>
+                <p>
+                    L'association oeuvre pour le partage de savoir
+                    au service des habitants autour de l'économie circulaire.
+                    <br>Ce commun soucieux de l'environnement, crée des emplois adaptés et valorise des objets.
+                    <br>Elle s'inscrit dans une démarche Responsable Sociétale des Entreprises.(RSE)
+                </p>
 
             </div>
 
@@ -188,9 +266,7 @@
 
     </section>
 
-    <!-- Nos Evenements -->
-
-    <section class="flex backgroundcolor6 justify-center margin-top-30">
+    <section class="flex justify-center margin-top-30 marginleft">
 
         <div>
 
@@ -601,7 +677,8 @@
 
     <section class="flex backgroundcolor6 colorwhite2 space-around">
 
-        <img class="margin-top-30 marginleft" src="asset/homme qui travaille le bois.png" alt="homme qui travaille le bois">
+        <img class="margin-top-30 marginleft" src="asset/homme qui travaille le bois.png"
+            alt="homme qui travaille le bois">
 
         <div class="margin-top-30 marginright marginleft">
 
@@ -655,13 +732,15 @@
 
         </div>
 
-        <img class="marginright margin-top-30m margin-bottom" src="asset/conteneur_qui_déborde-removebg.png" alt="contenur qui déborde">
+        <img class="marginright margin-top-30m margin-bottom" src="asset/conteneur_qui_déborde-removebg.png"
+            alt="contenur qui déborde">
 
     </section>
 
     <section class="flex backgroundcolor6 colorwhite2 space-around margin-bottom">
 
-        <img class="margin-top-30 marginleft margin-bottom" src="asset/homme_a_tout_faire-removebg.png" alt="homme à tout faire">
+        <img class="margin-top-30 marginleft margin-bottom" src="asset/homme_a_tout_faire-removebg.png"
+            alt="homme à tout faire">
 
         <div class="margin-top-30 marginright margin-bottom">
 
@@ -722,8 +801,8 @@
                 <address>
                     <br>
 
-                    <i class="ph ph-envelope-simple"></i> <a
-                        href="mailto:association.bric.saint.chamond@gmail.com"></a> <br/>
+                    <i class="ph ph-envelope-simple"></i> <a href="mailto:association.bric.saint.chamond@gmail.com"></a>
+                    <br />
 
                 </address>
 
