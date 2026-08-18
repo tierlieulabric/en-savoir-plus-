@@ -438,6 +438,14 @@ input {
     gap: 40px;
 }
 
+.gap5{
+    gap: 80px;
+}
+
+.gap6{
+    gap: 80px;
+}
+
 .btn3 {
     width: 50px;
     height: 50px;
