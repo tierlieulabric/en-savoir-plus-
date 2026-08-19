@@ -421,7 +421,7 @@ input {
 }
 
 .gap2 {
-    gap: 50px;
+    gap: 20px;
 }
 
 .textadapter {
@@ -486,7 +486,7 @@ input {
 
 /* --- DESIGN POUR ORDINATEUR --- */
 .arc-container-inverse {
-  max-width: 950px;
+  max-width: 1050px;
   margin: 0 auto;
   padding: 20px;
   display: grid;
@@ -497,7 +497,7 @@ input {
 
 .arc-texte {
   text-align: justify;
-  line-height: 1.6;
+  line-height: 1.2;
 }
 
 .arc-texte p {
@@ -506,8 +506,8 @@ input {
 
 /* L'image au centre, alignée vers le bas du texte */
 .arc-image-bas {
-  width: 180px;
-  height: 180px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
   overflow: hidden;
   margin-top: 60px; /* Descend la photo pour la caler au fond du creux */
