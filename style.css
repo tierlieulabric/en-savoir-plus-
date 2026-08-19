@@ -477,94 +477,99 @@ input {
 
 
 
+/* --- texte en arc de cercle  --- */
 
 
 
-
-
-
-
-/* --- DESIGN POUR ORDINATEUR --- */
 .arc-container-inverse {
-  max-width: 1050px;
-  margin: 0 auto;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr; /* Gauche, Image, Droite */
-  align-items: start;
-  gap: 20px;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    /* Gauche, Image, Droite */
+    align-items: start;
+    gap: 20px;
 }
 
 .arc-texte {
-  text-align: justify;
-  line-height: 1.2;
+    text-align: justify;
+    line-height: 1.2;
 }
 
 .arc-texte p {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 /* L'image au centre, alignée vers le bas du texte */
 .arc-image-bas {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-top: 60px; /* Descend la photo pour la caler au fond du creux */
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 60px;
+    /* Descend la photo pour la caler au fond du creux */
 }
 
 .arc-image-bas img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Arc inversé pour le texte GAUCHE (creux vers le bas) */
 .shape-arc-bas-gauche {
-  float: right;
-  width: 160px;
-  height: 250px;
-  /* Plonge le cercle vers le bas (250px) pour créer le creux */
-  shape-outside: circle(180px at 180px 250px); 
-  margin-left: 15px;
+    float: right;
+    width: 160px;
+    height: 250px;
+    /* Plonge le cercle vers le bas (250px) pour créer le creux */
+    shape-outside: circle(180px at 180px 250px);
+    margin-left: 15px;
 }
 
 /* Arc inversé pour le texte DROITE (creux vers le bas) */
 .shape-arc-bas-droite {
-  float: left;
-  width: 160px;
-  height: 250px;
-  /* Version inversée pour le côté droit */
-  shape-outside: circle(180px at -20px 250px); 
-  margin-right: 15px;
+    float: left;
+    width: 160px;
+    height: 250px;
+    /* Version inversée pour le côté droit */
+    shape-outside: circle(180px at -20px 250px);
+    margin-right: 15px;
 }
 
 
 /* --- ADAPTATION MOBILE (TELEPHONE) --- */
 @media (max-width: 768px) {
-  .arc-container-inverse {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
+    .arc-container-inverse {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
 
-  .arc-texte {
-    text-align: left;
-    width: 100%;
-  }
+    .arc-texte {
+        text-align: left;
+        width: 100%;
+    }
 
-  /* Désactive les formes géométriques sur mobile pour garder le texte lisible */
-  .shape-arc-bas-gauche,
-  .shape-arc-bas-droite {
-    display: none;
-  }
+    /* Désactive les formes géométriques sur mobile pour garder le texte lisible */
+    .shape-arc-bas-gauche,
+    .shape-arc-bas-droite {
+        display: none;
+    }
 
-  .arc-image-bas {
-    margin: 20px auto;
-    order: 2; /* Remet proprement la photo au milieu sur téléphone */
-  }
+    .arc-image-bas {
+        margin: 20px auto;
+        order: 2;
+        /* Remet proprement la photo au milieu sur téléphone */
+    }
 
-  .texte-gauche { order: 1; }
-  .texte-droite { order: 3; }
+    .texte-gauche {
+        order: 1;
+    }
+
+    .texte-droite {
+        order: 3;
+    }
 }
+
