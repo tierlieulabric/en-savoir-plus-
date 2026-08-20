@@ -577,35 +577,3 @@ input {
     }
 }
 
-
-
-
-/* Tailles et couleurs dégressives pour un effet visuel harmonieux pour l'arc en bas*/
-
-.l-1 {
-    font-size: 20px;
-}
-
-.l-2 {
-    font-size: 18px;
-}
-
-.l-3 {
-    font-size: 17px;
-}
-
-.l-4 {
-    font-size: 16px;
-}
-
-.l-5 {
-    font-size: 15px;
-}
-
-.l-6 {
-    font-size: 14px;
-}
-
-.l-7 {
-    font-size: 13px;
-}
