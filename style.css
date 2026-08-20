@@ -445,7 +445,7 @@ input {
     gap: 80px;
 }
 
-.columngap{
+.columngap {
     column-gap: 20px;
 }
 
@@ -578,3 +578,69 @@ input {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.qr-card {
+    background: beige;
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+#btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+#btn:hover {
+    background-color: #0056b3;
+}
+
+/* Style de la boîte du QR Code devenu un lien cliquable */
+#qrcode-container {
+    margin: 0 auto;
+    display: block;
+    text-decoration: none;
+}
+
+/* Transforme le curseur en petite main au survol du QR code */
+#qrcode-container canvas,
+#qrcode-container img {
+    margin: 0 auto !important;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#qrcode-container canvas:hover,
+#qrcode-container img:hover {
+    transform: scale(1.03);
+    /* Léger effet de zoom au survol */
+}
+
+.qr-text {
+    margin-top: 12px;
+    font-size: 14px;
+    display: none;
+    /* Caché au début, s'affichera en même temps que le QR code */
+}
