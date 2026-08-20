@@ -175,8 +175,6 @@
 
         </div>
 
-
-
         <style>
             /* --- LE CSS --- */
             .arc-container-serre {
@@ -198,11 +196,28 @@
                 filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.12));
                 transition: fill 0.3s ease;
             }
-            
+
+            /* --- OPTIMISATION ÉCRANS MOBILES (Téléphones) --- */
+            @media (max-width: 480px) {
+                .arc-container-serre {
+                    /* On ajuste la marge du haut pour éviter les chevauchements sur mobile */
+                    margin-top: 0px;
+                }
+
+                .texte-arc-unique {
+                    /* On diminue la taille du texte pour qu'il ne déborde pas du cercle */
+                    font-size: 11.5px;
+                    /* On resserre légèrement les lettres */
+                    letter-spacing: 1px;
+                }
+            }
+
         </style>
 
         <!-- --- LE HTML --- -->
+
         <svg viewBox="0 0 650 190" class="arc-container-serre">
+
             <defs>
                 <!-- Les 7 lignes avec un écart strict de 25px (Y +25 et Rayon A -25) -->
                 <path id="l1" d="M 25,10 A 600,600 0 0,0 625,10" fill="none" />
@@ -212,51 +227,75 @@
                 <path id="l5" d="M 37,110 A 500,500 0 0,0 613,110" fill="none" />
                 <path id="l6" d="M 40,135 A 475,475 0 0,0 610,135" fill="none" />
                 <path id="l7" d="M 43,160 A 450,450 0 0,0 607,160" fill="none" />
+
             </defs>
 
             <!-- Remplacez simplement les textes d'exemple ci-dessous -->
+
             <text class="texte-arc-unique">
+
                 <textPath href="#l1" startOffset="50%" text-anchor="middle">
                     Notre mission et notre vision
+
                 </textPath>
+
             </text>
+
             <text class="texte-arc-unique">
+
                 <textPath href="#l2" startOffset="50%" text-anchor="middle">
                     L'association oeuvre pour le partage de savoir
+
                 </textPath>
+
             </text>
+
             <text class="texte-arc-unique">
+
                 <textPath href="#l3" startOffset="50%" text-anchor="middle">
                     au service des habitants autour de l'économie circulaire.
+
                 </textPath>
+
             </text>
+
             <text class="texte-arc-unique">
+
                 <textPath href="#l4" startOffset="50%" text-anchor="middle">
                     Ce commun soucieux de l'environnement,
+
                 </textPath>
+
             </text>
+
             <text class="texte-arc-unique">
+
                 <textPath href="#l5" startOffset="50%" text-anchor="middle">
                     crée des emplois adaptés et valorise des objets.
+
                 </textPath>
+
             </text>
+
             <text class="texte-arc-unique">
+
                 <textPath href="#l6" startOffset="50%" text-anchor="middle">
                     Elle s'inscrit dans une démarche
+
                 </textPath>
+
             </text>
+
             <text class="texte-arc-unique">
+
                 <textPath href="#l7" startOffset="50%" text-anchor="middle">
                     Responsable Sociétale des Entreprises.(RSE)
+
                 </textPath>
+
             </text>
+
         </svg>
-
-
-
-
-
-
 
     </section>
 
