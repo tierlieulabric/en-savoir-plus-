@@ -366,6 +366,13 @@ abbr {
     background-color: beige;
 }
 
+.mon-texte {
+    background-color: beige; /* La couleur de votre fond */
+    width: fit-content;        /* Force le bloc à s'adapter pile à la largeur du texte */
+    margin: 0;                 /* Supprime les marges extérieures par sécurité */
+    padding: 0;                /* Supprime le rembourrage pour coller au texte */
+}
+
 a[href^="mailto"]::before {
     content: "association.bric.saint.chamond@gmail.com";
 }
@@ -483,8 +490,6 @@ input {
 
 /* --- texte en arc de cercle  --- */
 
-
-
 .arc-container-inverse {
     max-width: 1050px;
     margin: 0 auto;
@@ -506,6 +511,7 @@ input {
 }
 
 /* L'image au centre, alignée vers le bas du texte */
+
 .arc-image-bas {
     width: 280px;
     height: 280px;
@@ -522,6 +528,7 @@ input {
 }
 
 /* Arc inversé pour le texte GAUCHE (creux vers le bas) */
+
 .shape-arc-bas-gauche {
     float: right;
     width: 160px;
@@ -532,6 +539,7 @@ input {
 }
 
 /* Arc inversé pour le texte DROITE (creux vers le bas) */
+
 .shape-arc-bas-droite {
     float: left;
     width: 160px;
