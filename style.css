@@ -196,8 +196,16 @@ h2 {
     height: 50px;
 }
 
+.height1 {
+    height: 50px;
+}
+
 .width {
     width: 235vh;
+}
+
+.width1 {
+    width: 50px;
 }
 
 .maxwidth {
@@ -697,6 +705,8 @@ input {
     margin: 0 auto !important;
     cursor: pointer;
     transition: transform 0.2s;
+    width: 80px;
+    height: 80px;
 }
 
 #qrcode-container canvas:hover,
