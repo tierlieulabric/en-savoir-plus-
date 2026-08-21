@@ -30,31 +30,31 @@
 <body>
 
     <div class="qr-card">
-        
+
         <button id="btn">Générer le QR Code</button>
 
         <a id="qrcode-container" href="#" target="_blank"></a>
-        
+
         <div id="qr-text" class="qr-text">👆 Cliquez sur le QRcode pour ouvrir le lien</div>
 
     </div>
 
     <script>
         document.getElementById('btn').addEventListener('click', createQRCode);
-        
+
         function createQRCode() {
             // Le site internet vers lequel le QR code doit renvoyer
-            const monLien = "https://tierlieulabric.github.io/en-savoir-plus-/"; 
-            
+            const monLien = "https://tierlieulabric.github.io/en-savoir-plus-/";
+
             const QRContainer = document.getElementById("qrcode-container");
             QRContainer.innerHTML = ""; // Vide la boîte
-            
+
             // 1. On donne la bonne adresse de destination au lien HTML
             QRContainer.href = monLien;
-            
+
             // 2. On génère visuellement le QR code
             new QRCode(QRContainer, monLien);
-            
+
             // 3. On affiche le petit texte explicatif en dessous
             document.getElementById("qr-text").style.display = "block";
         }

@@ -97,7 +97,9 @@
 
             <h2 class="margin-top-50 marginright3 margin-bottom marginleft1 colorwhite3">
 
-                Entraide, Lien Social, Solidarité
+                <u>
+                    Entraide Lien Social Solidarité
+                </u>
 
             </h2>
 
@@ -144,9 +146,47 @@
             <div class="arc-image-bas">
 
                 <img src="asset/economie_circulaire_vert-removebg.png" alt="photo économie circulaire"
-                    class="rotation-centre">
+                    class="rotatable-image">
 
             </div>
+
+            <script>
+
+                // 1. Sélection de l'image
+                const image = document.querySelector('.rotatable-image');
+
+                // Variable pour savoir si l'utilisateur a cliqué pour activer la rotation
+                let isActivated = false;
+
+                // 2. Création de l'Observer pour détecter la visibilité à l'écran
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        // Si l'image est activée par le clic ET qu'elle est visible à l'écran
+                        if (isActivated && entry.isIntersecting) {
+                            image.classList.add('is-spinning');
+                        } else {
+                            // Si elle sort de l'écran (ou pas activée), on stoppe l'animation
+                            image.classList.remove('is-spinning');
+                        }
+                    });
+                }, { threshold: 0.1 }); // S'active dès que 10% de l'image est visible
+
+                // 3. Lancement de l'observation sur notre image
+                observer.observe(image);
+
+                // 4. Gestion du clic pour démarrer ou arrêter définitivement l'effet
+                image.addEventListener('click', () => {
+                    isActivated = !isActivated; // Alterne entre vrai et faux
+
+                    // Si on vient de l'activer et qu'elle est bien visible, on lance la rotation
+                    if (isActivated) {
+                        image.classList.add('is-spinning');
+                    } else {
+                        image.classList.remove('is-spinning');
+                    }
+                });
+
+            </script>
 
             <!-- Colonne de droite (le texte contourne l'image à gauche) -->
             <div class="arc-texte texte-droite">
@@ -595,13 +635,13 @@
 
         <div class="margin-top-40 marginleft margin-bottom">
 
-            <h3 class="backgroundcolor5">
+            <h3 class="backgroundcolor3">
 
                 La Boutique sans argent <i class="ph ph-money"></i>
 
             </h3>
 
-            <p class="backgroundcolor5">
+            <p class="backgroundcolor3">
                 La boutique sans argent est un espace de don collaboratif.
                 <br>Elle permet de donner une seconde vie à des petit objets
                 <br>que l'on peut donner ou récuperer gratuitement
@@ -627,13 +667,13 @@
 
         <div class="margin-top-40 marginright marginleft">
 
-            <h3 class="backgroundcolor5">
+            <h3 class="backgroundcolor4">
 
                 La Fa'Bric <i class="ph ph-wrench"></i>
 
             </h3>
 
-            <p class="backgroundcolor5">
+            <p class="backgroundcolor4">
                 Un espace où les professionnels et participants
                 <br>peuvent amener du petit électroménager à réparer
                 <br>grâce aux outils et machines mis a leur disposition.
@@ -689,7 +729,7 @@
 
         <div class="margin-top-50 marginright margin-bottom">
 
-            <h3 class="backgroundcolor5">
+            <h3 class="backgroundcolor3">
 
                 <p>
                     Autres activités de la BRIC
@@ -697,7 +737,7 @@
 
             </h3>
 
-            <p class="backgroundcolor5">
+            <p class="backgroundcolor3">
 
                 <br>Nettoyage d'appartement
                 <br>avec des structures extérieures
@@ -735,7 +775,7 @@
             });
 
         });
-        
+
     </script>
 
     <section class="flex justify-center margin-top-30 marginleft">
@@ -828,12 +868,11 @@
 
         </section>
 
-        <section class="flex marginleft margin-bottom margin-top-30 justify-center">
+        <section class="flex marginleft margin-bottom margin-top-30 gap justify-center">
 
             <a href="https://www.facebook.com/profile.php?id=100093607410689&locale=fr_FR">
 
-                <img src="asset/facebook.png" alt="logo facebook"
-                    class="justify marginright margin-bottom margin-top-30">
+                <img src="asset/facebook.png" alt="logo facebook" class="marginright margin-bottom margin-top-30">
 
             </a>
 
@@ -936,6 +975,32 @@
         </div>
 
     </footer>
+
+    <script>
+        
+        // Crée une clé unique basée sur l'adresse de la page actuelle
+        const pageKey = 'scroll_' + window.location.pathname;
+
+        // 1. Au retour sur la page, on remet l'utilisateur à sa position exacte
+        window.addEventListener('load', () => {
+            const savedPosition = localStorage.getItem(pageKey);
+            if (savedPosition) {
+                // Le délai de 100ms permet au HTML et aux images de se charger avant de scroller
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: parseInt(savedPosition, 10),
+                        behavior: 'instant' // Positionnement immédiat sans animation
+                    });
+                }, 100);
+            }
+        });
+
+        // 2. Dès que l'utilisateur fait défiler la page, on enregistre sa position
+        window.addEventListener('scroll', () => {
+            localStorage.setItem(pageKey, window.scrollY);
+        });
+
+    </script>
 
 </body>
 

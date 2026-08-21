@@ -367,7 +367,7 @@ abbr {
 }
 
 .backgroundcolor4 {
-    background-color: rgba(0, 250, 62, 0.413);
+    background-color: gold;
 }
 
 .backgroundcolor5 {
@@ -417,7 +417,7 @@ input {
 }
 
 .backgroundcolor3 {
-    background-color: yellow;
+    background-color: greenyellow;
 }
 
 .colorwhite3 {
@@ -612,9 +612,26 @@ input {
     /* Optionnel : rend l'image ronde */
 
     /* L'animation qui fait tourner l'image sur son axe central */
-    animation: rotation-complete 5s linear infinite;
+    animation: rotation-complete 5s;
     transform-origin: center;
     /* Assure la rotation pile au centre */
+}
+
+/* Style de base de l'image */
+.rotatable-image {
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+/* Classe d'animation qui sera activée au clic ET si visible */
+.rotatable-image.is-spinning {
+  animation: spin 3s linear infinite;
+}
+
+/* L'effet de rotation à 360 degrés */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
 }
 
 
@@ -721,3 +738,4 @@ input {
     display: none;
     /* Caché au début, s'affichera en même temps que le QR code */
 }
+

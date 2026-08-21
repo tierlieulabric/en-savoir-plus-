@@ -35,13 +35,13 @@
 
     </div>
 
-    <nav>
+    <nav class="">
 
         <ul>
 
             <li>
 
-                <div>
+                <div class="flex gap">
 
                     <a href="https://www.facebook.com/profile.php?id=100093607410689&locale=fr_FR">
 
@@ -96,101 +96,131 @@
 
         </section>
 
-        <form action="mailto:association.bric.saint.chamond@gmail.com" method="POST" enctype="text/plain"
-            class="marginleft">
+        <section class="flex justify-center">
 
-            <input type="radio" name="title" id="r1" value="Mr"><label for="r1">Mr.</label>
+            <form action="mailto:association.bric.saint.chamond@gmail.com" method="POST" enctype="text/plain"
+                class="marginleft">
 
-            <br>
+                <input type="radio" name="title" id="r1" value="Mr"><label for="r1">Mr.</label>
 
-            <input type="radio" name="title" id="r2" value="Ms"><label for="r2">Mme.</label>
+                <br>
 
-            <br>
+                <input type="radio" name="title" id="r2" value="Ms"><label for="r2">Mme.</label>
 
-            <label for="Nom">Nom et Prénom:</label>
+                <br>
 
-            <input type="Nom" id="Nom" name="Nom">
+                <label for="Nom">Nom et Prénom:</label>
 
-            <br>
+                <input type="Nom" id="Nom" name="Nom">
 
-            <label for="Email">E-mail:</label>
+                <br>
 
-            <input type="Email" id="Email" name="Email">
+                <label for="Email">E-mail:</label>
 
-            <br>
+                <input type="Email" id="Email" name="Email">
 
-            <label for="Tel"> Téléphone:</label>
+                <br>
 
-            <input type="Tel" name="Tel" id="Tel">
+                <label for="Tel"> Téléphone:</label>
 
-            <br>
+                <input type="Tel" name="Tel" id="Tel">
 
-            <label for="Adresse">Adresse du Déménagement:</label>
+                <br>
 
-            <input type="Adresse" name="Adresse" id="Adresse" />
+                <label for="Adresse">Adresse du Déménagement:</label>
 
-            <br>
+                <input type="Adresse" name="Adresse" id="Adresse" />
 
-            <label for="Type">Type de logement:</label>
+                <br>
 
-            <select name="Type" id="Type">
+                <label for="Type">Type de logement:</label>
 
-                <option value="">--Veuillez choisir une option--</option>
-                <option value="maison">maison</option>
-                <option value="apartement">appartement</option>
-                <option value="studio">studio</option>
+                <select name="Type" id="Type">
 
-            </select>
+                    <option value="">--Veuillez choisir une option--</option>
+                    <option value="maison">maison</option>
+                    <option value="apartement">appartement</option>
+                    <option value="studio">studio</option>
 
-            <br>
-            <br>
+                </select>
 
-            <label for="Etage">Etage:</label>
+                <br>
+                <br>
 
-            <select name="Etage" id="Etage">
+                <label for="Etage">Etage:</label>
 
-                <option value="">--Veuillez choisir une option--</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="plus de six">Plus de six</option>
+                <select name="Etage" id="Etage">
 
-            </select>
+                    <option value="">--Veuillez choisir une option--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="plus de six">Plus de six</option>
 
-            <br>
-            <br>
+                </select>
 
-            <label for="Ascenseur">Il y a un Ascenseur:</label>
+                <br>
+                <br>
 
-            <select name="Ascenseur" id="Ascenseur">
+                <label for="Ascenseur">Il y a un Ascenseur:</label>
 
-                <option value="">--Veuillez choisir une option--</option>
-                <option value="oui">oui</option>
-                <option value="non">non</option>
+                <select name="Ascenseur" id="Ascenseur">
 
-            </select>
+                    <option value="">--Veuillez choisir une option--</option>
+                    <option value="oui">oui</option>
+                    <option value="non">non</option>
 
-            <br>
-            <br>
+                </select>
 
-            <label for="Date">Date du Déménagement:</label>
+                <br>
+                <br>
 
-            <input type="Date" id="start" name="Date" value="" min="0000-00-00" max="" />
+                <label for="Date">Date du Déménagement:</label>
 
-            <br>
-            <br>
+                <input type="Date" id="start" name="Date" value="" min="0000-00-00" max="" />
 
-            <button type="submit">Envoyer le Formulaire</button>
+                <br>
+                <br>
 
-            <br>
-            <br>
+                <button type="submit">Envoyer le Formulaire</button>
 
-        </form>
+                <br>
+                <br>
+
+            </form>
+
+        </section>
 
     </main>
+
+    <script>
+
+        // Crée une clé unique basée sur l'adresse de la page actuelle
+        const pageKey = 'scroll_' + window.location.pathname;
+
+        // 1. Au retour sur la page, on remet l'utilisateur à sa position exacte
+        window.addEventListener('load', () => {
+            const savedPosition = localStorage.getItem(pageKey);
+            if (savedPosition) {
+                // Le délai de 100ms permet au HTML et aux images de se charger avant de scroller
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: parseInt(savedPosition, 10),
+                        behavior: 'instant' // Positionnement immédiat sans animation
+                    });
+                }, 100);
+            }
+        });
+
+        // 2. Dès que l'utilisateur fait défiler la page, on enregistre sa position
+        window.addEventListener('scroll', () => {
+            localStorage.setItem(pageKey, window.scrollY);
+        });
+
+    </script>
 
 </body>
 
