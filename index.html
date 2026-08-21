@@ -10,6 +10,7 @@
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+    <link rel="stylesheet" href="java script.js">
     <script src="script.js"></script>
 
 </head>
@@ -89,7 +90,7 @@
 
     <section class="flex space-between">
 
-        <img class="margin-bottom margin-top-30 marginright4 marginleft4" src="asset/entraide.jpg"
+        <img class="margin-bottom margin-top-30 marginright4 marginleft4 image-spirale" src="asset/entraide.jpg"
             alt="photo d'entraide">
 
         <div class="flex">
@@ -102,7 +103,7 @@
 
         </div>
 
-        <img class="margin-top-30 margin-bottom marginright2 marginleft2" src="asset/solidarité.jpg"
+        <img class="margin-top-30 margin-bottom marginright2 marginleft2 image-spirale" src="asset/solidarité.jpg"
             alt="photo de solidarité">
 
     </section>
@@ -142,7 +143,8 @@
             <!-- Conteneur central de l'image -->
             <div class="arc-image-bas">
 
-                <img src="asset/economie_circulaire_vert-removebg.png" alt="photo économie circulaire">
+                <img src="asset/economie_circulaire_vert-removebg.png" alt="photo économie circulaire"
+                    class="rotation-centre">
 
             </div>
 
@@ -195,7 +197,8 @@
 
                 <p>
 
-                    L'association oeuvre pour le partage de savoir au service des habitants autour de l'économie circulaire.
+                    L'association oeuvre pour le partage de savoir au service des habitants autour de l'économie
+                    circulaire.
                     <br>Ce commun soucieux de l'environnement, crée des emplois adaptés et valorise des objets.
                     <br>Elle s'inscrit dans une démarche Responsable Sociétale des Entreprises.(RSE)
                 </p>
@@ -212,7 +215,7 @@
 
             <h2>
 
-                <p class="backgroundcolor5">
+                <p class="">
 
                     <u class="">
 
@@ -572,7 +575,7 @@
 
             <h2>
 
-                <p class="backgroundcolor5">
+                <p class="">
 
                     <u class="">
 
@@ -611,14 +614,16 @@
 
         </div>
 
-        <img class="marginright margin-top-30" src="asset/" alt="">
+        <img class="marginright margin-top-30 image-spirale" src="asset/" alt="">
 
     </section>
 
-    <section class="flex backgroundcolor6 colorwhite2 space-around">
+    <section class="flex backgroundcolor6 colorwhite2 space-around conteneur-spirale">
 
-        <img class="margin-top-30 marginleft" src="asset/homme qui travaille le bois.png"
+        <img class="margin-top-30 marginleft image-spirale" src="asset/homme qui travaille le bois.png"
             alt="homme qui travaille le bois">
+
+
 
         <div class="margin-top-40 marginright marginleft">
 
@@ -672,14 +677,14 @@
 
         </div>
 
-        <img class="marginright  margin-bottom margin-bottom"
+        <img class="marginright  margin-bottom margin-bottom image-spirale"
             src="asset/nettoyeurs-entretiens-removebg.png" alt="nettoyeur-entretiens">
 
     </section>
 
     <section class="flex backgroundcolor6 colorwhite2 space-around margin-bottom">
 
-        <img class="margin-top-30 marginleft margin-bottom" src="asset/homme_a_tout_faire-removebg.png"
+        <img class="margin-top-30 marginleft margin-bottom image-spirale" src="asset/homme_a_tout_faire-removebg.png"
             alt="homme à tout faire">
 
         <div class="margin-top-50 marginright margin-bottom">
@@ -702,6 +707,36 @@
         </div>
 
     </section>
+
+    <script>
+
+        // Sélectionne toutes les images de la galerie
+        const toutesLesImages = document.querySelectorAll('.image-spirale');
+
+        // Applique le comportement indépendant sur chaque image
+        toutesLesImages.forEach((img) => {
+
+            // Déclenche la spirale au clic
+            img.addEventListener('click', () => {
+                img.classList.add('anime-depart');
+            });
+
+            // Gère la transition entre disparition et retour
+            img.addEventListener('animationend', (e) => {
+                if (e.animationName === 'spirale-disparait') {
+                    setTimeout(() => {
+                        img.classList.remove('anime-depart');
+                        img.classList.add('anime-retour');
+                    }, 1000); // Reste caché pendant 1 seconde
+                }
+                else if (e.animationName === 'spirale-revient') {
+                    img.classList.remove('anime-retour'); // Supprime la classe pour pouvoir recliquer !
+                }
+            });
+
+        });
+        
+    </script>
 
     <section class="flex justify-center margin-top-30 marginleft">
 

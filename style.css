@@ -583,6 +583,73 @@ input {
 
 
 
+@keyframes rotation-complete {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+.rotation-centre {
+    width: 150px;
+    /* Définissez la taille de votre choix */
+    aspect-ratio: 1 / 1;
+    /* Force l'image à être un carré parfait */
+    object-fit: cover;
+    /* Évite de déformer l'image dans le carré */
+    border-radius: 50%;
+    /* Optionnel : rend l'image ronde */
+
+    /* L'animation qui fait tourner l'image sur son axe central */
+    animation: rotation-complete 5s linear infinite;
+    transform-origin: center;
+    /* Assure la rotation pile au centre */
+}
+
+
+
+
+
+
+
+
+ /* Zone pour afficher les 4 photos proprement */
+    .galerie-spirale {
+      display: flex;
+      flex-wrap: wrap;  /* Permet de passer à la ligne sur petit écran */
+      padding: 50px;
+    }
+
+    /* Style de base des 4 photos */
+    .image-spirale {
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    /* 1. Animation de disparition au clic */
+    .anime-depart {
+      animation: spirale-disparait 2s ease-in-out forwards;
+      pointer-events: none; /* Bloque le clic pendant l'animation */
+    }
+
+    /* 2. Animation de retour automatique */
+    .anime-retour {
+      animation: spirale-revient 2s ease-in-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes spirale-disparait {
+      0% { transform: rotate(0deg) scale(1); opacity: 1; }
+      100% { transform: rotate(1440deg) scale(0); opacity: 1; }
+    }
+
+    @keyframes spirale-revient {
+      0% { transform: rotate(1440deg) scale(0); opacity: 1; }
+      100% { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
 
 
 
