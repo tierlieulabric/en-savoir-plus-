@@ -603,7 +603,7 @@ input {
 }
 
 #btn {
-    background-color: #007bff;
+    background-color: black;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -614,7 +614,7 @@ input {
 }
 
 #btn:hover {
-    background-color: #0056b3;
+    background-color: black;
 }
 
 /* Style de la boîte du QR Code devenu un lien cliquable */
