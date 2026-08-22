@@ -619,19 +619,24 @@ input {
 
 /* Style de base de l'image */
 .rotatable-image {
-  transition: transform 0.3s;
-  cursor: pointer;
+    transition: transform 0.3s;
+    cursor: pointer;
 }
 
 /* Classe d'animation qui sera activée au clic ET si visible */
 .rotatable-image.is-spinning {
-  animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
 }
 
 /* L'effet de rotation à 360 degrés */
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
 }
 
 
@@ -641,40 +646,56 @@ input {
 
 
 
- /* Zone pour afficher les 4 photos proprement */
-    .galerie-spirale {
-      display: flex;
-      flex-wrap: wrap;  /* Permet de passer à la ligne sur petit écran */
-      padding: 50px;
+/* Zone pour afficher les 4 photos proprement */
+.galerie-spirale {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permet de passer à la ligne sur petit écran */
+    padding: 50px;
+}
+
+/* Style de base des 4 photos */
+.image-spirale {
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* 1. Animation de disparition au clic */
+.anime-depart {
+    animation: spirale-disparait 2s ease-in-out forwards;
+    pointer-events: none;
+    /* Bloque le clic pendant l'animation */
+}
+
+/* 2. Animation de retour automatique */
+.anime-retour {
+    animation: spirale-revient 2s ease-in-out forwards;
+    pointer-events: none;
+}
+
+@keyframes spirale-disparait {
+    0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
     }
 
-    /* Style de base des 4 photos */
-    .image-spirale {
-      object-fit: cover;
-      cursor: pointer;
+    100% {
+        transform: rotate(1440deg) scale(0);
+        opacity: 1;
+    }
+}
+
+@keyframes spirale-revient {
+    0% {
+        transform: rotate(1440deg) scale(0);
+        opacity: 1;
     }
 
-    /* 1. Animation de disparition au clic */
-    .anime-depart {
-      animation: spirale-disparait 2s ease-in-out forwards;
-      pointer-events: none; /* Bloque le clic pendant l'animation */
+    100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
     }
-
-    /* 2. Animation de retour automatique */
-    .anime-retour {
-      animation: spirale-revient 2s ease-in-out forwards;
-      pointer-events: none;
-    }
-
-    @keyframes spirale-disparait {
-      0% { transform: rotate(0deg) scale(1); opacity: 1; }
-      100% { transform: rotate(1440deg) scale(0); opacity: 1; }
-    }
-
-    @keyframes spirale-revient {
-      0% { transform: rotate(1440deg) scale(0); opacity: 1; }
-      100% { transform: rotate(0deg) scale(1); opacity: 1; }
-    }
+}
 
 
 
@@ -739,3 +760,226 @@ input {
     /* Caché au début, s'affichera en même temps que le QR code */
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 1. Le conteneur de la photo */
+.photo-container {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.photo-container img {
+    width: auto;
+    height: auto;
+}
+
+/* 2. Création de la flèche en CSS */
+.arrow-marker {
+    position: absolute;
+    width: 20px;
+    height: 40px;
+    /* Hauteur totale de la flèche */
+    cursor: pointer;
+
+    /* Aligne la pointe exacte de la flèche sur vos coordonnées */
+    transform: translate(-50%, -100%);
+    transition: transform 0.2s ease;
+}
+
+/* Le corps (la ligne verticale) */
+.arrow-marker::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 7px;
+    /* Centré par rapport aux 20px de largeur */
+    width: 6px;
+    height: 25px;
+    background-color: #ff3b30;
+    /* Rouge */
+    border-radius: 3px 3px 0 0;
+    transition: background-color 0.2s;
+}
+
+/* La pointe (le triangle du bas) */
+.arrow-marker::after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    /* Démarre là où le corps s'arrête */
+    left: 0;
+    width: 0;
+    height: 0;
+    /* Astuce CSS pour créer un triangle pointant vers le bas */
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 15px solid #ff3b30;
+    /* Rouge */
+    transition: border-top-color 0.2s;
+}
+
+/* 3. Interactivité au survol de la flèche */
+.arrow-marker:hover {
+    /* Effet de rebond : la flèche descend un peu pour pointer */
+    transform: translate(-50%, -95%) scale(1.1);
+}
+
+/* Change la couleur de la flèche en bleu au survol */
+.arrow-marker:hover::before {
+    background-color: #007aff;
+}
+
+.arrow-marker:hover::after {
+    border-top-color: #007aff;
+}
+
+/* 4. Style de l'infobulle (identique au précédent) */
+.tooltip {
+    position: absolute;
+    bottom: 45px;
+    /* Placé au-dessus de la flèche */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-family: sans-serif;
+    font-size: 14px;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Affichage de l'infobulle au survol */
+.arrow-marker:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+/* 1. Le conteneur principal (il reste fixe sur la page) */
+.photo-container {
+    max-width: 90%;
+    width: 600px;
+}
+
+/* 2. La boîte magique (c'est elle qui va TOURNER avec l'image ET les flèches) */
+.photo-wrapper {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    /* Permet une rotation fluide en 3D */
+    transform-origin: center center;
+    transition: transform 0.1s linear;
+}
+
+.photo-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* --- CLASSE CSS AJOUTÉE PAR LE JAVASCRIPT AU CLIC --- */
+.photo-wrapper.tourner {
+    animation: spirale-effet 2s ease-in-out;
+}
+
+/* Le scénario de la spirale (rétrécit, fait 3 tours, revient) */
+@keyframes spirale-effet {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(0.2) rotate(540deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(1080deg);
+    }
+}
+
+/* 3. Style des flèches */
+.arrow-marker {
+    position: absolute;
+    width: 20px;
+    height: 40px;
+    transform: translate(-50%, -100%);
+    transition: transform 0.2s ease;
+}
+
+/* Corps de la flèche */
+.arrow-marker::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 7px;
+    width: 6px;
+    height: 25px;
+    background-color: #ff3b30;
+    border-radius: 3px 3px 0 0;
+}
+
+/* Pointe de la flèche */
+.arrow-marker::after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 15px solid #ff3b30;
+}
+
+/* Animation de la flèche au survol */
+.arrow-marker:hover {
+    transform: translate(-50%, -95%) scale(1.1);
+}
+
+/* 4. Style de l'infobulle */
+.tooltip {
+    position: absolute;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.arrow-marker:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
