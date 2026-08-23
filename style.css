@@ -84,7 +84,7 @@ h2 {
 }
 
 .marginleft7 {
-    margin-left: 50px;
+    margin-left: 100px;
 }
 
 .marginleft8 {
@@ -120,7 +120,7 @@ h2 {
 }
 
 .marginright5 {
-    margin-right: 80px;
+    margin-right: 160px;
 }
 
 /*FLEX BOT*/
@@ -778,13 +778,6 @@ input {
 
 
 
-
-
-
-
-
-
-
 /* --- les fleche de l'équipe et son image --- */
 
 /* 1. Le conteneur principal (il reste fixe sur la page) */
@@ -889,3 +882,4 @@ input {
 }
 
 /* --- les fleche de l'équipe et son image --- */
+
