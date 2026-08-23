@@ -318,10 +318,7 @@ h1 {
 }
 
 .backgroundcolor2 {
-    background-color: #F4F0EC;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
+    background-color: beige;
 }
 
 .border-raduiscall {
@@ -366,12 +363,25 @@ abbr {
     color: brown;
 }
 
+.backgroundcolor3 {
+    background-color: greenyellow;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 90px;
+}
+
 .backgroundcolor4 {
     background-color: gold;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 50px;
 }
 
 .backgroundcolor5 {
     background-color: beige;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 90px;
 }
 
 a[href^="mailto"]::before {
@@ -414,10 +424,6 @@ input {
 
 .colorwhite2 {
     color: black;
-}
-
-.backgroundcolor3 {
-    background-color: greenyellow;
 }
 
 .colorwhite3 {
@@ -486,6 +492,9 @@ input {
     /* 3. Souligne le texte */
     text-decoration: underline;
 }
+
+
+
 
 
 
@@ -586,10 +595,12 @@ input {
     }
 }
 
+/* --- texte en arc de cercle  --- */
 
 
 
 
+/* --- économie circulaire qui tourne  --- */
 
 @keyframes rotation-complete {
     from {
@@ -639,12 +650,14 @@ input {
     }
 }
 
+/* --- économie circulaire qui tourne  --- */
 
 
 
 
 
 
+/* --- les 4 photo en spirale --- */
 
 /* Zone pour afficher les 4 photos proprement */
 .galerie-spirale {
@@ -697,6 +710,7 @@ input {
     }
 }
 
+/* --- les 4 photo en spirale --- */
 
 
 
@@ -704,9 +718,7 @@ input {
 
 
 
-
-
-
+/* --- QR code --- */
 
 .qr-card {
     background: beige;
@@ -760,6 +772,7 @@ input {
     /* Caché au début, s'affichera en même temps que le QR code */
 }
 
+/* --- QR code --- */
 
 
 
@@ -772,117 +785,13 @@ input {
 
 
 
-
-/* 1. Le conteneur de la photo */
-.photo-container {
-    position: relative;
-    display: inline-block;
-    max-width: 100%;
-}
-
-.photo-container img {
-    width: auto;
-    height: auto;
-}
-
-/* 2. Création de la flèche en CSS */
-.arrow-marker {
-    position: absolute;
-    width: 20px;
-    height: 40px;
-    /* Hauteur totale de la flèche */
-    cursor: pointer;
-
-    /* Aligne la pointe exacte de la flèche sur vos coordonnées */
-    transform: translate(-50%, -100%);
-    transition: transform 0.2s ease;
-}
-
-/* Le corps (la ligne verticale) */
-.arrow-marker::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 7px;
-    /* Centré par rapport aux 20px de largeur */
-    width: 6px;
-    height: 25px;
-    background-color: #ff3b30;
-    /* Rouge */
-    border-radius: 3px 3px 0 0;
-    transition: background-color 0.2s;
-}
-
-/* La pointe (le triangle du bas) */
-.arrow-marker::after {
-    content: "";
-    position: absolute;
-    top: 25px;
-    /* Démarre là où le corps s'arrête */
-    left: 0;
-    width: 0;
-    height: 0;
-    /* Astuce CSS pour créer un triangle pointant vers le bas */
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 15px solid #ff3b30;
-    /* Rouge */
-    transition: border-top-color 0.2s;
-}
-
-/* 3. Interactivité au survol de la flèche */
-.arrow-marker:hover {
-    /* Effet de rebond : la flèche descend un peu pour pointer */
-    transform: translate(-50%, -95%) scale(1.1);
-}
-
-/* Change la couleur de la flèche en bleu au survol */
-.arrow-marker:hover::before {
-    background-color: #007aff;
-}
-
-.arrow-marker:hover::after {
-    border-top-color: #007aff;
-}
-
-/* 4. Style de l'infobulle (identique au précédent) */
-.tooltip {
-    position: absolute;
-    bottom: 45px;
-    /* Placé au-dessus de la flèche */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-family: sans-serif;
-    font-size: 14px;
-    white-space: nowrap;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Affichage de l'infobulle au survol */
-.arrow-marker:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-}
-
-
-
-
-
-
-
-
+/* --- les fleche de l'équipe et son image --- */
 
 /* 1. Le conteneur principal (il reste fixe sur la page) */
 .photo-container {
-    max-width: 90%;
-    width: 600px;
+    max-width: 100%;
+    width: 300px;
+    height: auto;
 }
 
 /* 2. La boîte magique (c'est elle qui va TOURNER avec l'image ET les flèches) */
@@ -900,7 +809,6 @@ input {
     width: 100%;
     height: auto;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 /* --- CLASSE CSS AJOUTÉE PAR LE JAVASCRIPT AU CLIC --- */
@@ -914,12 +822,8 @@ input {
         transform: scale(1) rotate(0deg);
     }
 
-    50% {
-        transform: scale(0.2) rotate(540deg);
-    }
-
     100% {
-        transform: scale(1) rotate(1080deg);
+        transform: scale(0) rotate(1440deg);
     }
 }
 
@@ -983,3 +887,5 @@ input {
     visibility: visible;
     opacity: 1;
 }
+
+/* --- les fleche de l'équipe et son image --- */
