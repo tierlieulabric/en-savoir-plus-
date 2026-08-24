@@ -671,6 +671,7 @@ input {
 .image-spirale {
     object-fit: cover;
     cursor: pointer;
+    display: block;
 }
 
 /* 1. Animation de disparition au clic */
