@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        body {
+
+        .body {
             font-family: sans-serif;
             text-align: center;
             padding: 20px;
+            color: black;
         }
 
         .compteur-container {
@@ -19,10 +21,11 @@
             justify-content: center;
             gap: 30px;
             margin-top: 30px;
+            color: black;
         }
 
         .compteur-box {
-            border: 2px solid #ccc;
+            border: 2px solid black;
             padding: 20px;
             border-radius: 8px;
             width: 120px;
@@ -39,7 +42,6 @@
             width: 40px;
             height: 40px;
             cursor: pointer;
-            transition: transform 0.1s, opacity 0.2s;
             margin: 5px;
         }
 
@@ -53,16 +55,15 @@
 
         /* Classe ajoutée par JavaScript quand l'interface est figée */
         .btn-clic.desactive {
-            opacity: 0.3;
             cursor: not-allowed;
             pointer-events: none;
             /* Bloque complètement le clic */
         }
 
-        #status {
-            font-style: italic;
-            color: #666;
+        .status {
+            color: black;
             margin-top: 15px;
+            opacity: 0.5;
         }
 
         .btn-refresh {
@@ -71,6 +72,7 @@
             vertical-align: middle;
             margin-left: 10px;
         }
+        
     </style>
 
 </head>
@@ -92,14 +94,14 @@
         <!-- Compteur 2 -->
         <div class="compteur-box">
             <!-- Image +1 -->
-            <img src="https://icons8.com" alt="+1" class="btn-clic" onclick="changerCompteur('compteur2', 1)">
+            <img src="asset/emoji_jaune-removebg.png" alt="+1" class="btn-clic" onclick="changerCompteur('compteur2', 1)">
            
         </div>
 
         <!-- Compteur 3 -->
         <div class="compteur-box">
             <!-- Image +1 -->
-            <img src="https://icons8.com" alt="+1" class="btn-clic" onclick="changerCompteur('compteur3', 1)">
+            <img src="asset/emoji_rouge-removebg.png" alt="+1" class="btn-clic" onclick="changerCompteur('compteur3', 1)">
            
         </div>
 
