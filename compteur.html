@@ -8,89 +8,68 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-
         body {
-            font-family: Arial, sans-serif;
+            font-family: sans-serif;
             text-align: center;
-            background-color: #121212;
-            color: #ffffff;
             padding: 20px;
         }
 
-        .container {
-            max-width: 500px;
-            margin: 20px auto;
-            background: #1e1e1e;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        .compteur-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
         }
 
-        .compteur-bloc {
-            background: #2a2a2a;
-            margin: 15px 0;
-            padding: 15px;
-            border-radius: 12px;
-            border-left: 5px solid #00ff88;
-            border-right: 5px solid #00ff88;
-        }
-
-        h2 {
-            margin: 0 0 10px 0;
-            font-size: 20px;
+        .compteur-box {
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            width: 120px;
         }
 
         .valeur {
-            font-size: 50px;
+            font-size: 2rem;
             font-weight: bold;
-            color: #00ff88;
             margin: 10px 0;
         }
 
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        button {
-            font-size: 24px;
-            width: 55px;
-            height: 55px;
-            border: none;
-            border-radius: 50%;
-            background-color: #00ff88;
-            color: #121212;
+        /* Style pour vos images-boutons */
+        .btn-clic {
+            width: 40px;
+            height: 40px;
             cursor: pointer;
-            font-weight: bold;
+            transition: transform 0.1s, opacity 0.2s;
+            margin: 5px;
         }
 
-        button:disabled {
+        .btn-clic:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-clic:active {
+            transform: scale(0.95);
+        }
+
+        /* Classe ajoutée par JavaScript quand l'interface est figée */
+        .btn-clic.desactive {
             opacity: 0.3;
             cursor: not-allowed;
+            pointer-events: none;
+            /* Bloque complètement le clic */
         }
 
-        button.moins {
-            background-color: #ff3b30;
-            color: white;
+        #status {
+            font-style: italic;
+            color: #666;
+            margin-top: 15px;
         }
 
         .btn-refresh {
-            width: 100%;
-            margin-top: 15px;
-            background-color: #333;
-            color: #fff;
-            padding: 12px;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .status {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #aaa;
+            width: 25px;
+            height: 25px;
+            vertical-align: middle;
+            margin-left: 10px;
         }
     </style>
 
@@ -98,19 +77,33 @@
 
 <body class="body">
 
-    <div class="container">
+    <div class="compteur-container">
 
-        <h1>Compteur de la BRIC</h1>
+        <!-- Compteur 1 -->
 
-        <!-- COMPTEUR 1 -->
-        
+        <div class="compteur-box">
+            <!-- Image +1 -->
+            <img src="asset/emoji_vert_-removebg.png" alt="+1" class="btn-clic" onclick="changerCompteur('compteur1', 1)">
+            <!-- Image -1 -->
+            <img src="https://icons8.com" alt="-1" class="btn-clic" onclick="changerCompteur('compteur1', -1)">
 
-        <!-- COMPTEUR 2 -->
-        
+        </div>
 
-        <!-- COMPTEUR 3 -->
-        
-        <div class="status" id="status">Connexion...</div>
+        <!-- Compteur 2 -->
+        <div class="compteur-box">
+            <!-- Image +1 -->
+            <img src="https://icons8.com" alt="+1" class="btn-clic" onclick="changerCompteur('compteur2', 1)">
+           
+        </div>
+
+        <!-- Compteur 3 -->
+        <div class="compteur-box">
+            <!-- Image +1 -->
+            <img src="https://icons8.com" alt="+1" class="btn-clic" onclick="changerCompteur('compteur3', 1)">
+           
+        </div>
+
+        <div id="status">Initialisation...</div>
 
     </div>
 
@@ -122,9 +115,16 @@
         let scores = { compteur1: 0, compteur2: 0, compteur3: 0 };
         let enCours = false;
 
+        // Version adaptée pour gérer la désactivation visuelle et technique des images
         function figerInterface(etat) {
             const boutons = document.querySelectorAll('.btn-clic');
-            boutons.forEach(b => b.disabled = etat);
+            boutons.forEach(b => {
+                if (etat) {
+                    b.classList.add('desactive');
+                } else {
+                    b.classList.remove('desactive');
+                }
+            });
         }
 
         // Récupère les 3 scores en ligne d’un coup
