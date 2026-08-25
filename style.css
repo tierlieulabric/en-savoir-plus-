@@ -900,16 +900,15 @@ input {
     body {
         display: flex;
         flex-direction: column;
-        width: 100% !important;
     }
 
     p {
-        font-size: 2rem !important;
+        font-size: 3rem !important;
         /* Lecture confortable (16px) */
     }
 
     a {
-        font-size: 2rem;
+        font-size: 3rem;
         /* Un poil plus grand sur mobile pour être lisible */
         text-decoration: none;
         color: #0066cc;
