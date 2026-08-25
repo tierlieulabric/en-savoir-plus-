@@ -384,6 +384,10 @@ abbr {
     margin: 90px;
 }
 
+.backgroundcolor6 {
+    background-color: beige;
+}
+
 a[href^="mailto"]::before {
     content: "association.bric.saint.chamond@gmail.com";
 }

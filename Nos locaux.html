@@ -5,10 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nos locaux</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+    <header class="flex space-between align-center margin">
+
+        <div class="flex marginright">
+
+            <a href="index.html">
+
+                <img src="asset/fleche a gauche.jpg" alt="fleche a gauche">
+
+            </a>
+
+        </div>
+
+        <nav class="">
+
+            <ul>
+
+                <li>
+
+                    <div class="flex gap">
+
+                        <a href="https://www.facebook.com/profile.php?id=100093607410689&locale=fr_FR">
+
+                            <img src="asset/facebook.png" alt="logo" class="marginright">
+
+                        </a>
+
+
+                        <a href="https://www.instagram.com/tierslieubric/">
+
+                            <img src="asset/rkinqdib 3.png" alt="logo" class="marginleft">
+
+                        </a>
+
+                    </div>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
 
     <section class="flex justify-center margin-bottom margin-top-30">
 
@@ -44,14 +91,13 @@
 
         </div>
 
+        <div>
+
+            <img src="asset/concierge_FR.png" alt="le centre">
+
+        </div>
+
     </section>
-
-
-
-
-
-
-
 
     <section class="flex justify-center margin-top-30 marginbottom">
 
@@ -67,106 +113,106 @@
 
     </section>
 
-    <section class="flex justify-center image-spirale">
+    <section class="flex justify-center margin-top-30 marginbottom">
 
-        <div class="photo-container">
+        <div class="photo-container ">
             <!-- C'est ce bloc "wrapper" qui va écouter le clic et tourner -->
             <div class="photo-wrapper" id="cibleClic">
 
-                <img src="asset/nettoyeurs-entretiens.jpg" alt="Groupe d'amis">
+                <img class="image-spirale" src="asset/nettoyeurs-entretiens.jpg" alt="Groupe d'amis">
 
                 <!-- Flèche 1 -->
-                <div class="arrow-marker" style="top: 38%; left: 25%;">
-                    <span class="tooltip">Thomas </span>
+                <div class="arrow-marker" style="top: 20%; left: 60%;">
+                    <span class="tooltip"></span>
                 </div>
 
                 <!-- Flèche 2 -->
-                <div class="arrow-marker" style="top: 33%; left: 65%;">
-                    <span class="tooltip">Sarah </span>
+                <div class="arrow-marker" style="top: 20%; left: 70%;">
+                    <span class="tooltip"></span>
                 </div>
 
                 <!-- Flèche 3 -->
                 <div class="arrow-marker" style="top: 20%; left: 80%;">
-                    <span class="tooltip">fabienne</span>
+                    <span class="tooltip"></span>
                 </div>
 
                 <!-- Flèche 4 -->
-                <div class="arrow-marker" style="top: 10%; left: 90%;">
-                    <span class="tooltip">fabienne</span>
+                <div class="arrow-marker" style="top: 20%; left: 90%;">
+                    <span class="tooltip"></span>
                 </div>
 
                 <!-- Flèche 5 -->
-                <div class="arrow-marker" style="top: 0%; left: 100%;">
-                    <span class="tooltip">fabienne</span>
+                <div class="arrow-marker" style="top: 20%; left: 100%;">
+                    <span class="tooltip"></span>
                 </div>
 
                 <!-- Flèche 6 -->
-                <div class="arrow-marker" style="top: 100%; left: 0%;">
-                    <span class="tooltip">fabienne</span>
+                <div class="arrow-marker" style="top: 20%; left: 0%;">
+                    <span class="tooltip"></span>
                 </div>
 
                 <!-- Flèche 7 -->
-                <div class="arrow-marker" style="top: 90%; left: 10%;">
-                    <span class="tooltip">fabienne</span>
+                <div class="arrow-marker" style="top: 20%; left: 10%;">
+                    <span class="tooltip"></span>
                 </div>
 
-                
+
                 <!-- Flèche 8 -->
-                <div class="arrow-marker" style="top: 80%; left: 20%;">
-                    <span class="tooltip">fabienne</span>
+                <div class="arrow-marker" style="top: 20%; left: 20%;">
+                    <span class="tooltip"></span>
                 </div>
 
-                
+
                 <!-- Flèche 9 -->
-                <div class="arrow-marker" style="top: 70%; left: 30%;">
-                    <span class="tooltip">fabienne</span>
+                <div class="arrow-marker" style="top: 20%; left: 30%;">
+                    <span class="tooltip"></span>
                 </div>
 
-                
+
                 <!-- Flèche 10 -->
-                <div class="arrow-marker" style="top: 60%; left: 40%;">
-                    <span class="tooltip">fabienne</span>
+                <div class="arrow-marker" style="top: 20%; left: 40%;">
+                    <span class="tooltip"></span>
                 </div>
 
             </div>
 
             <script>
 
-                const cible = document.getElementById('cibleClic');
+                // Sélectionne toutes les images de la galerie
+                const toutesLesImages = document.querySelectorAll('.image-spirale');
 
-                cible.addEventListener('click', function () {
-                    // Évite de relancer si l'animation tourne déjà
-                    if (cible.classList.contains('tourner')) return;
+                // Applique le comportement indépendant sur chaque image
+                toutesLesImages.forEach((img) => {
 
-                    // Ajoute la classe pour activer l'animation `@keyframes`
-                    cible.classList.add('tourner');
+                    // Déclenche la spirale au clic
+                    img.addEventListener('click', () => {
+                        img.classList.add('anime-depart');
+                    });
+
+                    // Gère la transition entre disparition et retour
+                    img.addEventListener('animationend', (e) => {
+                        if (e.animationName === 'spirale-disparait') {
+                            setTimeout(() => {
+                                img.classList.remove('anime-depart');
+                                img.classList.add('anime-retour');
+                            }, 1000); // Reste caché pendant 1 seconde
+                        }
+                        else if (e.animationName === 'spirale-revient') {
+                            img.classList.remove('anime-retour'); // Supprime la classe pour pouvoir recliquer !
+                        }
+                    });
+
                 });
 
-                // Nettoie la classe une fois que la rotation est finie
-                cible.addEventListener('animationend', function () {
-                    cible.classList.remove('tourner');
-                });
-                
             </script>
 
         </div>
 
     </section>
 
+    <footer class="backgroundcolor6">
 
-
-
-
-
-
-
-
-
-
-
-    <footer class="backgroundcolor5">
-
-        <section class="flex gap5 margin-top-30 backgroundcolor5 justify-center">
+        <section class="flex gap5 margin-top-30 backgroundcolor6 justify-center">
 
             <div class="marginleft margin-top-30 ">
 
@@ -194,8 +240,6 @@
 
                 </p>
 
-                <!--<a class="flex margin-top-20" href="Communiquer avec QR Code.html">Communiquer avec QR Code</a>-->
-
             </div>
 
             <div>
@@ -219,11 +263,12 @@
 
         </section>
 
-        <section class="flex margin-top-30 justify-center">
 
-            <div class="">
+        <section class="flex justify-center margin-top-30">
 
-                <a class="" href="compteur.html"> Voulez vous évaluez notre site </a>
+            <div>
+
+                <a href="compteur.html">Voulez vous évaluez notre site</a>
 
             </div>
 
