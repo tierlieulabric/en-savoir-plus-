@@ -884,3 +884,56 @@ input {
 
 /* --- les fleche de l'équipe et son image --- */
 
+
+
+
+
+
+
+/* pour tous les telephone*/
+
+@media screen and (max-width: 767px) {
+
+    /* 1. Force les éléments à s'empiler verticalement */
+    body {
+        display: flex;
+        flex-direction: column;
+        width: 100% !important;
+    }
+
+    /* 2. Empêche les images de déborder de l'écran */
+    img {
+        width: 100% !important;
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* 3. Adapte la taille du texte pour les petits écrans */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 1.8rem !important;
+        /* Titre plus compact */
+    }
+
+    p {
+        font-size: 1rem !important;
+        /* Lecture confortable (16px) */
+    }
+
+    a {
+        display: inline-block;
+        /* Permet d'appliquer des marges internes (padding) */
+        padding: 12px 20px;
+        /* Crée une large zone invisible mais cliquable tout autour */
+        font-size: 1.1rem;
+        /* Un poil plus grand sur mobile pour être lisible */
+        text-decoration: none;
+        color: #0066cc;
+    }
+}
+
+/* pour tous les telephone*/
