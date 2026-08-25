@@ -7,13 +7,58 @@
     <title>Mes 3 Compteurs</title>
     <link rel="stylesheet" href="style.css">
 
-    <style>
+</head>
 
+<header class="flex space-between align-center">
+
+    <div class="flex marginright">
+
+        <a href="index.html">
+
+            <img src="asset/fleche a gauche.jpg" alt="fleche a gauche">
+
+        </a>
+
+    </div>
+
+     <nav class="">
+
+        <ul>
+
+            <li>
+
+                <div class="flex gap">
+
+                    <a href="https://www.facebook.com/profile.php?id=100093607410689&locale=fr_FR">
+
+                        <img src="asset/facebook.png" alt="logo" class="marginright">
+
+                    </a>
+
+
+                    <a href="https://www.instagram.com/tierslieubric/">
+
+                        <img src="asset/rkinqdib 3.png" alt="logo" class="marginleft">
+
+                    </a>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<body class="body">
+
+    <style>
         .body {
             font-family: sans-serif;
             text-align: center;
             padding: 20px;
-            color: black;
         }
 
         .compteur-container {
@@ -21,7 +66,6 @@
             justify-content: center;
             gap: 30px;
             margin-top: 30px;
-            color: black;
         }
 
         .compteur-box {
@@ -60,10 +104,10 @@
             /* Bloque complètement le clic */
         }
 
-        .status {
+        #status {
             color: black;
             margin-top: 15px;
-            opacity: 0.5;
+            opacity: 0.1;
         }
 
         .btn-refresh {
@@ -72,12 +116,7 @@
             vertical-align: middle;
             margin-left: 10px;
         }
-        
     </style>
-
-</head>
-
-<body class="body">
 
     <div class="compteur-container">
 
@@ -85,29 +124,36 @@
 
         <div class="compteur-box">
             <!-- Image +1 -->
-            <img src="asset/emoji_vert_-removebg.png" alt="+1" class="btn-clic" onclick="changerCompteur('compteur1', 1)">
+            <img src="asset/emoji_vert_-removebg.png" alt="+1" class="btn-clic"
+                onclick="changerCompteur('compteur1', 1)">
             <!-- Image -1 -->
-            <img src="https://icons8.com" alt="-1" class="btn-clic" onclick="changerCompteur('compteur1', -1)">
+            <!--<img src="https://icons8.com" alt="-1" class="btn-clic" onclick="changerCompteur('compteur1', -1)">-->
 
         </div>
 
         <!-- Compteur 2 -->
         <div class="compteur-box">
             <!-- Image +1 -->
-            <img src="asset/emoji_jaune-removebg.png" alt="+1" class="btn-clic" onclick="changerCompteur('compteur2', 1)">
-           
+            <img src="asset/emoji_jaune-removebg.png" alt="+1" class="btn-clic"
+                onclick="changerCompteur('compteur2', 1)">
+
         </div>
 
         <!-- Compteur 3 -->
         <div class="compteur-box">
             <!-- Image +1 -->
-            <img src="asset/emoji_rouge-removebg.png" alt="+1" class="btn-clic" onclick="changerCompteur('compteur3', 1)">
-           
+            <img src="asset/emoji_rouge-removebg.png" alt="+1" class="btn-clic"
+                onclick="changerCompteur('compteur3', 1)">
+
         </div>
+
+    </div>
+
+    <section class="flex justify-center">
 
         <div id="status">Initialisation...</div>
 
-    </div>
+    </section>
 
     <script>
 
