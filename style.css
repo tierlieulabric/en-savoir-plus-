@@ -884,35 +884,3 @@ input {
 
 /* --- les fleche de l'équipe et son image --- */
 
-
-
-
-
-
-
-
-
-/* pour tous les telephone*/
-
-@media screen and (max-width: 767px) {
-
-    /* 1. Force les éléments à s'empiler verticalement */
-    body {
-        display: flex;
-        flex-direction: column;
-    }
-
-    p {
-        font-size: 3rem !important;
-        /* Lecture confortable (16px) */
-    }
-
-    a {
-        font-size: 3rem;
-        /* Un poil plus grand sur mobile pour être lisible */
-        text-decoration: none;
-        color: #0066cc;
-    }
-}
-
-/* pour tous les telephone*/
