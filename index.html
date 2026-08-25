@@ -991,31 +991,54 @@
 
     </footer>
 
-    <!--<script>
+    <script>
         
-        // Crée une clé unique basée sur l'adresse de la page actuelle
-        const pageKey = 'scroll_' + window.location.pathname;
+        // 1. Sauvegarder la position du scroll quand on quitte la page
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('scrollPosition_' + window.location.pathname, window.scrollY);
+        });
 
-        // 1. Au retour sur la page, on remet l'utilisateur à sa position exacte
-        window.addEventListener('load', () => {
-            const savedPosition = localStorage.getItem(pageKey);
+        // 2. Restaurer la position intelligemment
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedPosition = sessionStorage.getItem('scrollPosition_' + window.location.pathname);
+
             if (savedPosition) {
-                // Le délai de 100ms permet au HTML et aux images de se charger avant de scroller
-                setTimeout(() => {
-                    window.scrollTo({
-                        top: parseInt(savedPosition, 10),
-                        behavior: 'instant' // Positionnement immédiat sans animation
+                const targetScroll = parseInt(savedPosition, 10);
+
+                // Fonction qui vérifie si la page est assez grande pour accueillir le scroll
+                const tryScroll = () => {
+                    // Si la hauteur totale disponible est supérieure ou égale à la position cible + la hauteur de l'écran
+                    if (document.documentElement.scrollHeight >= targetScroll + window.innerHeight) {
+                        window.scrollTo({ top: targetScroll, behavior: 'instant' });
+                        sessionStorage.removeItem('scrollPosition_' + window.location.pathname);
+                        return true; // Le scroll a réussi
+                    }
+                    return false; // La page est encore trop petite, les images chargent
+                };
+
+                // Premier essai immédiat dès que le HTML de base est là
+                if (!tryScroll()) {
+                    // Si la page est trop petite, on réessaie en boucle toutes les 50ms (pendant max 3 secondes)
+                    let attempts = 0;
+                    const interval = setInterval(() => {
+                        attempts++;
+                        if (tryScroll() || attempts > 60) {
+                            clearInterval(interval);
+                            // Si après 3s les images traînent, on force quand même le scroll
+                            window.scrollTo({ top: targetScroll, behavior: 'instant' });
+                        }
+                    }, 50);
+
+                    // Sécurité supplémentaire : on valide dès que TOUTES les images ont fini de charger
+                    window.addEventListener('load', () => {
+                        clearInterval(interval);
+                        window.scrollTo({ top: targetScroll, behavior: 'instant' });
                     });
-                }, 100);
+                }
             }
         });
 
-        // 2. Dès que l'utilisateur fait défiler la page, on enregistre sa position
-        window.addEventListener('scroll', () => {
-            localStorage.setItem(pageKey, window.scrollY);
-        });
-
-    </script>-->
+    </script>
 
 </body>
 
