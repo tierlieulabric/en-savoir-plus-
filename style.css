@@ -901,45 +901,6 @@ input {
         width: 100% !important;
     }
 
-    /* 2. Empêche les images de déborder de l'écran */
-    img {
-        width: 100% !important;
-        max-width: 100%;
-        height: auto;
-    }
-
-    /* 3. Adapte la taille du texte pour les petits écrans */
-    h1 {
-        font-size: 1.8rem !important;
-        /* Titre plus compact */
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    h3 {
-        font-size: 1.25rem;
-        /* Équivalent ~20px sur Mobile */
-    }
-
-    h4 {
-        font-size: 1.15rem;
-        /* Équivalent ~18px sur Mobile */
-    }
-
-    h5 {
-        font-size: 1.00rem;
-        /* Équivalent ~16px (Même taille que le texte normal) */
-    }
-
-    h6 {
-        font-size: 0.85rem;
-        /* Équivalent ~13.5px (Plus petit mais reste lisible) */
-        text-transform: uppercase;
-        /* Optionnel : en majuscule pour qu'il ressorte mieux */
-    }
-
     p {
         font-size: 1rem !important;
         /* Lecture confortable (16px) */
