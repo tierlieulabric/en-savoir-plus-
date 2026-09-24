@@ -80,140 +80,37 @@
 
     </section>
 
-    <section class="flex space-between margin-bottom margin-top-30 marginleft marginright ">
+    <section class="flex margin-bottom margin-top-30 marginleft marginright ">
 
         <div>
 
-            <img src="asset/concierge_FR.png" alt="entree">
+            <img src="asset/ustensile cuisine.jpg" alt="">
+
+            <img src="asset/couvert et autre.jpg" alt="">
+
+            <img src="asset/tasse.jpg" alt="">
+
+            <img src="asset/verre.jpg" alt="">
+
+            <img src="asset/nouveautés.jpg" alt="">
 
         </div>
 
         <div>
 
-            <img src="asset/concierge_FR.png" alt="vaiselle">
+            <img src="asset/" alt="">
 
         </div>
 
         <div>
 
-            <img src="asset/concierge_FR.png" alt="puericulture">
+            <img src="asset/" alt="">
 
         </div>
 
         <div>
 
-            <img src="asset/concierge_FR.png" alt="le centre">
-
-        </div>
-
-    </section>
-
-    <section class="flex justify-center margin-top-30 marginbottom">
-
-        <div>
-
-            <h2>
-
-                Notre Equipe
-
-            </h2>
-
-        </div>
-
-    </section>
-
-    <section class="flex justify-center margin-top-30 marginbottom">
-
-        <div class="photo-container ">
-            <!-- C'est ce bloc "wrapper" qui va écouter le clic et tourner -->
-            <div class="photo-wrapper" id="cibleClic">
-
-                <img class="image-spirale" src="asset/nettoyeurs-entretiens.jpg" alt="Groupe d'amis">
-
-                <!-- Flèche 1 -->
-                <div class="arrow-marker" style="top: 20%; left: 60%;">
-                    <span class="tooltip"></span>
-                </div>
-
-                <!-- Flèche 2 -->
-                <div class="arrow-marker" style="top: 20%; left: 70%;">
-                    <span class="tooltip"></span>
-                </div>
-
-                <!-- Flèche 3 -->
-                <div class="arrow-marker" style="top: 20%; left: 80%;">
-                    <span class="tooltip"></span>
-                </div>
-
-                <!-- Flèche 4 -->
-                <div class="arrow-marker" style="top: 20%; left: 90%;">
-                    <span class="tooltip"></span>
-                </div>
-
-                <!-- Flèche 5 -->
-                <div class="arrow-marker" style="top: 20%; left: 100%;">
-                    <span class="tooltip"></span>
-                </div>
-
-                <!-- Flèche 6 -->
-                <div class="arrow-marker" style="top: 20%; left: 0%;">
-                    <span class="tooltip"></span>
-                </div>
-
-                <!-- Flèche 7 -->
-                <div class="arrow-marker" style="top: 20%; left: 10%;">
-                    <span class="tooltip"></span>
-                </div>
-
-
-                <!-- Flèche 8 -->
-                <div class="arrow-marker" style="top: 20%; left: 20%;">
-                    <span class="tooltip"></span>
-                </div>
-
-
-                <!-- Flèche 9 -->
-                <div class="arrow-marker" style="top: 20%; left: 30%;">
-                    <span class="tooltip"></span>
-                </div>
-
-
-                <!-- Flèche 10 -->
-                <div class="arrow-marker" style="top: 20%; left: 40%;">
-                    <span class="tooltip"></span>
-                </div>
-
-            </div>
-
-            <script>
-
-                // Sélectionne toutes les images de la galerie
-                const toutesLesImages = document.querySelectorAll('.image-spirale');
-
-                // Applique le comportement indépendant sur chaque image
-                toutesLesImages.forEach((img) => {
-
-                    // Déclenche la spirale au clic
-                    img.addEventListener('click', () => {
-                        img.classList.add('anime-depart');
-                    });
-
-                    // Gère la transition entre disparition et retour
-                    img.addEventListener('animationend', (e) => {
-                        if (e.animationName === 'spirale-disparait') {
-                            setTimeout(() => {
-                                img.classList.remove('anime-depart');
-                                img.classList.add('anime-retour');
-                            }, 1000); // Reste caché pendant 1 seconde
-                        }
-                        else if (e.animationName === 'spirale-revient') {
-                            img.classList.remove('anime-retour'); // Supprime la classe pour pouvoir recliquer !
-                        }
-                    });
-
-                });
-
-            </script>
+            <img src="asset/" alt="">
 
         </div>
 
