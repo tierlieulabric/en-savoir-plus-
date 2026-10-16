@@ -57,6 +57,10 @@ h2 {
     margin-top: 120px;
 }
 
+.margin-top-60 {
+    margin-top: 60px;
+}
+
 .marginleft {
     margin-left: 20px;
 }
@@ -373,7 +377,7 @@ abbr {
 .backgroundcolor4 {
     background-color: gold;
     border-radius: 20px;
-    padding: 20px;
+    padding: 5px;
     margin: 50px;
 }
 
@@ -502,6 +506,8 @@ header{
     /* 3. Souligne le texte */
     text-decoration: underline;
 }
+
+
 
 
 
@@ -784,113 +790,4 @@ header{
 }
 
 /* --- QR code --- */
-
-
-
-
-
-/* --- les fleche de l'équipe et son image --- */
-
-/* 1. Le conteneur principal (il reste fixe sur la page) */
-.photo-container {
-    max-width: 100%;
-    width: 300px;
-    height: auto;
-}
-
-/* 2. La boîte magique (c'est elle qui va TOURNER avec l'image ET les flèches) */
-.photo-wrapper {
-    position: relative;
-    width: 100%;
-    cursor: pointer;
-    /* Permet une rotation fluide en 3D */
-    transform-origin: center center;
-    transition: transform 0.1s linear;
-}
-
-.photo-wrapper img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-}
-
-/* --- CLASSE CSS AJOUTÉE PAR LE JAVASCRIPT AU CLIC --- */
-.photo-wrapper.tourner {
-    animation: spirale-effet 2s ease-in-out;
-}
-
-/* Le scénario de la spirale (rétrécit, fait 3 tours, revient) */
-@keyframes spirale-effet {
-    0% {
-        transform: scale(1) rotate(0deg);
-    }
-
-    100% {
-        transform: scale(0) rotate(1440deg);
-    }
-}
-
-/* 3. Style des flèches */
-.arrow-marker {
-    position: absolute;
-    width: 20px;
-    height: 40px;
-    transform: translate(-50%, -100%);
-    transition: transform 0.2s ease;
-}
-
-/* Corps de la flèche */
-.arrow-marker::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 7px;
-    width: 6px;
-    height: 25px;
-    background-color: #ff3b30;
-    border-radius: 3px 3px 0 0;
-}
-
-/* Pointe de la flèche */
-.arrow-marker::after {
-    content: "";
-    position: absolute;
-    top: 25px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 15px solid #ff3b30;
-}
-
-/* Animation de la flèche au survol */
-.arrow-marker:hover {
-    transform: translate(-50%, -95%) scale(1.1);
-}
-
-/* 4. Style de l'infobulle */
-.tooltip {
-    position: absolute;
-    bottom: 45px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    white-space: nowrap;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.arrow-marker:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* --- les fleche de l'équipe et son image --- */
 
