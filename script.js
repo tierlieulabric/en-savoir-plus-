@@ -14,7 +14,7 @@ boutons.forEach(bouton => {
 
              // --- CODE DE LA NOTIFICATION ---
             // Remplacez 'mes-reservations-xyz' par le nom choisi dans votre application
-            fetch('https://ntfy.sh'/Topolite42400, {
+            fetch('https://ntfy.sh', {
                 method: 'POST',
                 body: 'Quelqu\'un a cliqué sur Enregistrer !', // Le message de la notification
                 headers: {
