@@ -22,6 +22,16 @@ h2 {
     margin-top: 10px;
 }
 
+.btn2 {
+    background-color: greenyellow;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
 .btn-primary {
     font-size: 25px;
 }
