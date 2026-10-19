@@ -492,6 +492,7 @@ header{
     position: sticky;
     top: 0px;
     background-color: white;
+    z-index: 100;
 }
 
 .layout-centre {
@@ -517,6 +518,80 @@ header{
     /* 3. Souligne le texte */
     text-decoration: underline;
 }
+
+
+
+
+/*le carrousel*/
+
+/* Conteneur d'images principal */
+.carousel-container {
+    max-width: 250px;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none; 
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-item {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+.carousel-item img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Zone des boutons positionnée de manière naturelle dans le flux de la page */
+.carousel-dots {
+    display: flex;
+    justify-content: center; /* Centre les ronds horizontalement */
+    gap: 12px;              /* Espace entre les points */
+    margin-top: 20px;       /* Pousse les ronds 20px en dessous de l'image */
+}
+
+/* Style des petits boutons ronds */
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: #ccc; 
+    border: none;
+    border-radius: 50%;     
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+/* Style du bouton actif */
+.dot.active {
+    background-color: #333; 
+    transform: scale(1.2);     
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
