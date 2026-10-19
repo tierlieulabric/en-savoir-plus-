@@ -7,22 +7,22 @@ boutons.forEach(bouton => {
     bouton.addEventListener('click', (e) => {
         // e.target représente le bouton précis qui vient d'être cliqué
         const boutonClique = e.target;
-        
+
         // 4. On vérifie son texte actuel pour faire la bascule
         if (boutonClique.textContent.trim() === "Enregistrer") {
             boutonClique.textContent = "Réserver";
 
-             // --- CODE DE LA NOTIFICATION ---
+            // --- CODE DE LA NOTIFICATION ---
             // Remplacez 'mes-reservations-xyz' par le nom choisi dans votre application
-            fetch('https://ntfy.sh', {
+            fetch('https://ntfy.sh/topolite42400', {
                 method: 'POST',
                 body: 'Quelqu\'un a cliqué sur Enregistrer !', // Le message de la notification
                 headers: {
                     'Title': 'Nouvelle Réservation 🎉' // Le titre de la notification
                 }
             })
-            .then(response => console.log('Notification envoyée !'))
-            .catch(error => console.error('Erreur:', error));
+                .then(response => console.log('Notification envoyée !'))
+                .catch(error => console.error('Erreur:', error));
             // --------------------------------
 
         } else {

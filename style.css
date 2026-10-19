@@ -33,7 +33,8 @@ h2 {
 }
 
 .btn-primary {
-    font-size: 25px;
+    font-size: 14px;
+    background-color: greenyellow;
 }
 
 .btn-secondary {
