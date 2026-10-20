@@ -522,62 +522,49 @@ header{
 
 
 
+
+
 /*le carrousel*/
 
-/* Conteneur d'images principal */
-.carousel-container {
-    max-width: 250px;
-    overflow: hidden;
+.custom-carousel {
+    position: relative;
 }
-
-.carousel {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none; 
-}
-
-.carousel::-webkit-scrollbar {
+.carousel-slide {
     display: none;
+    
 }
-
-.carousel-item {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-}
-
-.carousel-item img {
-    width: 100%;
+.carousel-slide.active {
     display: block;
-    object-fit: cover;
 }
 
-/* Zone des boutons positionnée de manière naturelle dans le flux de la page */
+/* Conteneur des points ronds */
 .carousel-dots {
-    display: flex;
-    justify-content: center; /* Centre les ronds horizontalement */
-    gap: 12px;              /* Espace entre les points */
-    margin-top: 20px;       /* Pousse les ronds 20px en dessous de l'image */
+    text-align: center;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    z-index: 10;
 }
 
-/* Style des petits boutons ronds */
+/* Style d'un point rond individuel */
 .dot {
-    width: 12px;
-    height: 12px;
-    background-color: #ccc; 
-    border: none;
-    border-radius: 50%;     
     cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0;
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: rgba(255, 255, 255, 0.5); /* Blanc semi-transparent */
+    border-radius: 50%; /* Rend le point parfaitement rond */
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-/* Style du bouton actif */
+/* Style du point rond correspondant à l'image affichée */
 .dot.active {
-    background-color: #333; 
-    transform: scale(1.2);     
+    background-color: #ffffff; /* Blanc opaque */
+    transform: scale(1.2); /* Légèrement plus grand */
 }
+
 
 
 
